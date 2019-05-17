@@ -5,10 +5,9 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, NavLink } from "react-router-dom";
 
-const HeaderNav = () => {
+const HeaderNav = props => {
   const [backlogs, setBacklogs] = useState([]);
-
-  useEffect(() => {
+   useEffect(() => {
     const fetchData = async () => {
       const backlogs = await axios("/api/backlogs");
       setBacklogs(backlogs.data);
@@ -17,11 +16,13 @@ const HeaderNav = () => {
     fetchData();
   }, []);
 
-
   return (
     <Navbar bg="dark" expand="sm" variant="dark">
       <Link className="navbar-brand" to="/">
         home
+      </Link>
+      <Link className="navbar-brand" to="/login">
+        Login
       </Link>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">

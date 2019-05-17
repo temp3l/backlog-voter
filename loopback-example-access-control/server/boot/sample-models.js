@@ -30,9 +30,9 @@ module.exports = function(app) {
   ]);
 
   User.create([
-    {username: 'John', email: 'john@doe.com', password: 'opensesame'},
-    {username: 'Jane', email: 'jane@doe.com', password: 'opensesame'},
-    {username: 'Bob', email: 'bob@projects.com', password: 'opensesame'}
+    {username: 'John', email: 'john@doe.com', password: 'xxx'},
+    {username: 'Jane', email: 'jane@doe.com', password: 'xxx'},
+    {username: 'Bob', email: 'bob@projects.com', password: 'xxx'}
   ], function(err, users) {
     if (err) throw err;
 
