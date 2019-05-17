@@ -1,0 +1,57 @@
+{
+  "ids": {
+    "User": 1,
+    "AccessToken": 1,
+    "ACL": 1,
+    "RoleMapping": 2,
+    "Role": 2,
+    "user": 4,
+    "team": 4,
+    "project": 3,
+    "ReportItem": 10,
+    "Backlog": 4,
+    "Report": 1
+  },
+  "models": {
+    "User": {},
+    "AccessToken": {},
+    "ACL": {},
+    "RoleMapping": {
+      "1": "{\"principalType\":\"USER\",\"principalId\":\"3\",\"roleId\":1,\"id\":1}"
+    },
+    "Role": {
+      "1": "{\"name\":\"admin\",\"created\":\"2019-05-17T19:03:02.404Z\",\"modified\":\"2019-05-17T19:03:02.404Z\",\"id\":1}"
+    },
+    "user": {
+      "1": "{\"username\":\"John\",\"password\":\"$2a$10$m4i5uqB/j8hlI5hj7r2REOmHNRt3FQmLNZDyp7rz/j1nAAOfH.pl.\",\"email\":\"john@doe.com\",\"id\":1}",
+      "2": "{\"username\":\"Jane\",\"password\":\"$2a$10$iH5uZ8DaxGWAQoaUYwKGfuKFkUScZSMdM2kgMKlXKjk94uv4goEza\",\"email\":\"jane@doe.com\",\"id\":2}",
+      "3": "{\"username\":\"Bob\",\"password\":\"$2a$10$z10E1FGPQuNWpkGTYF1IEuAKrBD5yVkUOoiAv9LpOORaCpKL.mIw6\",\"email\":\"bob@projects.com\",\"id\":3}"
+    },
+    "team": {
+      "1": "{\"ownerId\":1,\"memberId\":\"1\",\"id\":1}",
+      "2": "{\"ownerId\":1,\"memberId\":\"2\",\"id\":2}",
+      "3": "{\"ownerId\":2,\"memberId\":\"2\",\"id\":3}"
+    },
+    "project": {
+      "1": "{\"name\":\"project1\",\"balance\":100,\"ownerId\":1,\"id\":1}",
+      "2": "{\"name\":\"project2\",\"balance\":100,\"ownerId\":2,\"id\":2}"
+    },
+    "ReportItem": {
+      "1": "{\"name\":\"winnings\",\"desc\":\"estimate winnings\",\"id\":1}",
+      "2": "{\"name\":\"potential\",\"desc\":\"estimate potential\",\"id\":2}",
+      "3": "{\"name\":\"dependence\",\"desc\":\"estimate dependence\",\"id\":3}",
+      "4": "{\"name\":\"image\",\"desc\":\"estimate image\",\"id\":4}",
+      "5": "{\"name\":\"employeeSatisfaction\",\"desc\":\"estimate employeeSatisfaction\",\"id\":5}",
+      "6": "{\"name\":\"customerSatisfaction\",\"desc\":\"estimate customerSatisfaction\",\"id\":6}",
+      "7": "{\"name\":\"partnerSatisfaction\",\"desc\":\"estimate partnerSatisfaction\",\"id\":7}",
+      "8": "{\"name\":\"eco\",\"desc\":\"estimate eco\",\"id\":8}",
+      "9": "{\"name\":\"roi\",\"desc\":\"estimate roi\",\"id\":9}"
+    },
+    "Backlog": {
+      "1": "{\"name\":\"First Backlog\",\"desc\":\"This backlog is about usefull stuff!\",\"date\":\"2019-05-17T19:03:02.034Z\",\"id\":1}",
+      "2": "{\"name\":\"Second Backlog\",\"desc\":\"Please report on this very tricky stuff!\",\"date\":\"2019-05-17T19:03:02.035Z\",\"id\":2}",
+      "3": "{\"name\":\"Third Backlog\",\"desc\":\"This backlog is about less tricky stuff\",\"date\":\"2019-05-17T19:03:02.035Z\",\"id\":3}"
+    },
+    "Report": {}
+  }
+}
