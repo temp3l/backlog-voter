@@ -1,15 +1,15 @@
-# Features
 
-## Backend
+# Backend
 
 - **No Mocks!!!** => PostgresQL 
 - Token based Auth
 - **Dynamic RBAC**: [ $owner, $authenticated, $everyone ]
-- static roles: [ admin, teamMember, Assona_admin ]
+- static roles: [ admin, teamMember, ... **Assona_admin** ]
+- custom role-resolver (checks if user is a member of **assona-team** for ressource)
 - GraphQL, OpenAPI.spec, SwaggerUI+token
 - login/register/auth -users
 
-## Frontend
+# Frontend
 
 - keine deps auf material-ui/bootstrap/antd ...just css classes!
 - speichert aktives Token im localStorage
@@ -25,15 +25,18 @@
 - \$authenticated ALLOW CREATE on [ ReportItems, Backlog ]
 - all users limited to `their` items
 
-# Sample ACL (UserModel)
+# ACLs
+
+## Sample ACL (UserModel)
 
 ```json
-[,{
+[{
   "accessType": "*",
   "principalType": "ROLE",
   "principalId": "$everyone",
   "permission": "DENY"
-},{
+},
+{
   "principalType": "ROLE",
   "principalId": "$owner",
   "permission": "ALLOW",
@@ -43,16 +46,17 @@
     "__destroyById__accessTokens",
     "getRolesById",
     "__get__getSomeAssonaSpecialStuffFromElseWhere"]
-},{
+},
+{
   "accessType": "EXECUTE",
   "principalType": "ROLE",
   "principalId": "$authenticated",
   "permission": "ALLOW",
   "property": "__get__getSomeAssonaSpecialStuffFromElseWhere"
-},]
+}]
 ```
 
-# fine-grained Programmatic ACLs
+## fine-grained Programmatic ACLs
 
 ```js
 MyUser.disableRemoteMethod("create", true);
@@ -71,25 +75,7 @@ MyUser.disableRemoteMethod('__updateById__accessTokens', false);
 MyUser.disableRemoteMethod('__get__getSomeAssonaSpecialStuffFromElseWhere', false);
 ```
 
-
-# App-Setup
-
-1. Admin creates ReportItems
-2. Admin creates Backlogs
-
-# APP-Flow
-
-1. User fetches /backlogs
-2. User fetches /reportItems
-3. User creates Reports that belongTo one Backlog
-4. A report provides a numeric value for every ReportItem
-
-# Models involved
-
-- ReportItem
-- Backlog
-- Report
-- User
+## Access control concepts
 
 
 First Header  | Second Header | Responsibility  | Example 
@@ -100,7 +86,29 @@ RoleMapping	  | Assign principals to roles	    | Statically assigns principals t
 ACL           |	Access control list	            | Controls if a principal can perform a certain operation against a model.	| Deny everyone to access the project model. <br>Allow ‘admin’ role to execute find() method on the project model.
 
 
+* https://loopback.io/doc/en/lb2/Controlling-data-access.html
 
+
+# Backlog-Voter
+
+## App-Setup
+
+1. Admin creates ReportItems
+2. Admin creates Backlogs
+
+## APP-Flow
+
+1. User fetches /backlogs
+2. User fetches /reportItems
+3. User creates Reports that belongTo one Backlog
+4. A report provides a numeric value for every ReportItem
+
+## Models involved
+
+- ReportItem
+- Backlog
+- Report
+- User
 
 ## Endpoints Spec
 
