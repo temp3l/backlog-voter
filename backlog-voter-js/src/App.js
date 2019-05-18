@@ -62,7 +62,11 @@ function App() {
         <div className="container-fluid Content">
           <ProtectedRoute exact path="/" component={Home} />
           <ProtectedRoute exact path="/backlogs" component={Backlogs} />
-          <ProtectedRoute path="/backlogs/:id" component={Reporter} />
+          
+          <ProtectedRoute path="/backlogs/:id" component={Reporter} exact/>
+          <ProtectedRoute path="/backlogs/:id/report/:reportId" component={Reporter} />
+
+
           <Route path="/login/" component={Login} />
           <ProtectedRoute path="/reports/" component={Reports} />
           <ProtectedRoute path="/reporter/" component={Reporter} />

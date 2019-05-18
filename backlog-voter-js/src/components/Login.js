@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import api from "../services/api"
 import "./Login.css";
 import {
   setSession,
@@ -8,10 +9,6 @@ import {
   isAlive
 } from "../services/auth2";
 
-const graphiQL =
-  "http://" +
-  window.location.hostname +
-  ":5000/graphiql?query=%7B%0A%20%20allBacklogs%20%7B%0A%20%20%20%20edges%20%7B%0A%20%20%20%20%20%20node%20%7B%0A%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%20%20desc%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D";
 
 const sampleUsers = [
   {
@@ -70,6 +67,8 @@ function Login(props) {
     setResponse(null);
     removeSession();
     setNewSession(null);
+    api.delete("/users/1/AccessTokens/" + session.id);
+
   };
 
   return (
@@ -116,15 +115,11 @@ function Login(props) {
             </button>
             &nbsp;&nbsp;
             <button onClick={destroy} className="btn btn-danger">
-              Destroy
+              Logout
             </button>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <i>
-              ...check:{" "}
-              <a href={graphiQL} target="_blank" rel="noopener noreferrer">
-                graphiql
-              </a>
-            </i>
+           
+
           </div>
         </form>
 

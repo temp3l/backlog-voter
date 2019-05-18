@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./Reporter.css";
 import api from "../services/api";
+import { getSession } from "../services/auth2";
 
 function Reporter({ match }) {
   const [reportItems, setReportItems] = useState([]);
   const [backlog, setBacklog] = useState({});
-  const [me, setMe] = useState({});
+
 
   const backlogId = match.params.id;
 
@@ -13,8 +14,7 @@ function Reporter({ match }) {
     const fetchData = async () => {
       const reportItems = await api("/reportItems");
       const backlog = await api("/backlogs/" + backlogId);
-      const meData = await api("/users/me");
-      setMe(meData.data);
+
       setBacklog(backlog.data);
       setReportItems(
         reportItems.data.map(item => Object.assign(item, { value: 0 }))
@@ -37,7 +37,7 @@ function Reporter({ match }) {
     console.log(report);
 
     api
-      .post("/users/" + me.id + "/reports", report)
+      .post("/users/" + getSession().id + "/reports", report)
       .then(function(response) {
         console.log(response);
       })

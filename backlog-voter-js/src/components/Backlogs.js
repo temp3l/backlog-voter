@@ -3,7 +3,6 @@ import api from "../services/api";
 import Moment from "react-moment";
 import "./Backlogs.css";
 
-
 const HeaderNav = props => {
   const [backlogs, setBacklogs] = useState([]);
   useEffect(() => {
@@ -19,6 +18,7 @@ const HeaderNav = props => {
     props.history.push('/backlogs/'+id)
   };
 
+  //{"where": { "backlogId":1 } }
   return (
     <div className="container backlogs">
       {backlogs.map((backlog, i) => {

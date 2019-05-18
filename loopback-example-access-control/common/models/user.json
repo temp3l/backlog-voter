@@ -38,9 +38,8 @@
       "property": [
         "__create__reports",
         "__get__reports",
-        "log",
-        "getRolesById",
-        "getInfo"
+        "__destroyById__accessTokens",
+        "getRolesById"
       ]
     }
   ],
