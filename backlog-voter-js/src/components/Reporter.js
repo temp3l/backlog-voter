@@ -37,7 +37,7 @@ function Reporter({ match }) {
     console.log(report);
 
     api
-      .post("/users/" + getSession().id + "/reports", report)
+      .post("/users/" + getSession().userId + "/reports", report)
       .then(function(response) {
         console.log(response);
       })

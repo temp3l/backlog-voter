@@ -1,3 +1,15 @@
 .box{
     border: 1px solid red;
 }
+.LoginBox {
+    border: 1px solid green;
+    border-radius:.25rem!important;
+    padding:5px;
+}
+
+
+.RegisterBox {
+    border: 1px solid blue;
+    border-radius:.25rem!important;
+    padding:5px;
+}

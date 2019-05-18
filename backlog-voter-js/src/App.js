@@ -4,12 +4,22 @@ import Reporter from "./components/Reporter";
 import Navbar2 from "./components/Navbar2";
 import Login from "./components/Login";
 import Backlogs from "./components/Backlogs";
-import Home from "./components/Home";
+//import Home from "./components/Home";
 import { isAuthenticated } from "./services/auth2";
 import api from "./services/api";
 import "./App.css";
 
 
+function Home(){
+  return (
+    <div className='container-fluid'>
+       <div className='row'>
+         <div className='col-md-6'>col-md-6</div>
+         <div className='col-md-6'>col-md-6</div>
+       </div>
+    </div>
+  )
+}
 
 function Reports() {
   const [reports, setReports] = useState([]);

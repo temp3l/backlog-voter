@@ -20,17 +20,16 @@ export const isAuthenticated = () => localStorage.getItem(SESSION_KEY) !== null;
 
 export const isAlive = async () => {
     const session = getSession();
-    console.log(session)
     if(!session) return null;
     const res = await api('/users/getRolesById?id='+session.userId);
     const { payload } = res.data;
     if(payload && payload.roles) {
         let ext = Object.assign({}, session, {roles: payload.roles, tokens: payload.tokens} );
         setSession(ext);
-        console.log('check alive, ', ext);
+       // console.log('check alive, ', ext);
         return ext;
     }
-    console.log('session is dead')
+   // console.log('session is dead')
     return null
 
 }

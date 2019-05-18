@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import Moment from "react-moment";
-import { isAlive } from "../services/auth2";
+import { isAlive, getSession, removeSession } from "../services/auth2";
 import api from "../services/api";
 
 const graphiQL =
@@ -11,7 +11,7 @@ const graphiQL =
 const swagger =
   "http://" + window.location.hostname + ":5000/explorer/swagger.json";
 
-function Home() {
+function Home(props) {
   const [session, setNewSession] = useState(null);
   const [tokens, setTokens] = useState([]);
 
@@ -31,16 +31,40 @@ function Home() {
     tok.splice(idx, 1);
     setTokens(tok);
   };
+
+  const destroy = event => {
+    event.preventDefault();
+    //let tmpSession = getSession();
+    //if( tmpSession && tmpSession.id) api.delete("/users/1/AccessTokens/" + tmpSession.id + "?access_token="+tmpSession.id);
+    removeSession();
+    setNewSession(null);
+      window.location.replace(window.location.href);
+      //"https://"+window.location.hostname+"/login"
+
+    };
+
   return (
     <div className="container">
       <h2>Session Details</h2>
-
-      <pre> {JSON.stringify(_.omit(session, ["tokens"]), undefined, 3)}</pre>
+      <br/>
+      <div className="row">
+        <div className="col-md-6">
+          <button onClick={destroy} className="btn btn-danger">
+            Logout
+          </button>
+        </div>
+      </div>
+      <br/><br/>
+      <ul className="list-group">
+        <li className="list-group-item">
+            <pre> {JSON.stringify(_.omit(session, ["tokens"]), undefined, 3)}</pre>
+        </li>
+      </ul>
       <br/><br/>
 
       {session && session.tokens && (
         <div className="container-fluid">
-          <p>tokens: {tokens.length}</p>
+          <h3>My Tokens: {tokens.length}</h3>
           <table className="table">
             <thead>
               <tr>
@@ -58,7 +82,7 @@ function Home() {
                     <td>{i}</td>
                     <td>
                       <button
-                        className="btn btn-danger"
+                        className="btn btn-warning"
                         onClick={e => removeToken(token, i)}
                       >
                         <i className="fas fa-trash" />

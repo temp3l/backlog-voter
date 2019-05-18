@@ -1,19 +1,20 @@
 # Features
 
-- token based Auth
-- Role based access Control
-- Dynamic Roles: [ admin, $owner, teamMember, $authenticated, $everyone ]
+- Token based Auth
+- Dynamic RBAC: [ admin, $owner, teamMember, $authenticated, $everyone ]
+- No Mocks! PostgresQL ready
 
 # Permissions
 
 - admin ALLOW any on [ ReportItems, Report, Backlog ]
 - \$everybody DENY WRITE on [ ReportItems, Backlog ]
 - \$authenticated ALLOW READ on [ ReportItems, Backlog ]
+- \$authenticated ALLOW CREATE on [ ReportItems, Backlog ]
 - \$authenticated limited to HIS items
 
-# Sample ACl
+# Sample ACl (UserModel)
 
-```js
+```json
 {
       "principalType": "ROLE",
       "principalId": "$owner",
@@ -38,7 +39,6 @@
 2. User fetches /reportItems
 3. User creates Reports that belongTo one Backlog
 4. A report provides a numeric value for every ReportItem
-
 
 # Models involved
 
@@ -75,4 +75,3 @@
 ```js
     { id: 1, name: "user1", reports: reportID_1, reportID_2 },
 ```
-
