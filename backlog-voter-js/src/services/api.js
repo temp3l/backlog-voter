@@ -14,6 +14,8 @@ api.interceptors.request.use(async config => {
   const session = readToken();
   if (session && session.id) {
     //config.headers.Authorization = `Bearer ${token}`;
+
+    console.log("\n\n ############ " , session)
     config.headers.Authorization = `${session.id}`;
   }
   return config;

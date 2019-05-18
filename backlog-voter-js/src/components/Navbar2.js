@@ -3,13 +3,11 @@ import { Link } from "react-router-dom";
 import { reset } from "../services/auth2";
 
 const HeaderNav = props => {
-  const {token,userId} = props;
-
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark  bg-dark">
         <Link className="navbar-brand" to="/">
-          Home {userId}
+          Home
         </Link>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul className="navbar-nav">
@@ -36,11 +34,9 @@ const HeaderNav = props => {
             </li>
           </ul>
         </div>
-        {token &&
         <button className="btn btn-outline-danger" onClick={reset}>
           <i className="fas fa-bolt" />
         </button>
-      }
       </nav>
     </div>
   );

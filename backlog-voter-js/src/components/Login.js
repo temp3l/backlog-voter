@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./Login.css";
 import { readToken, clearToken, saveToken } from "../services/auth2";
 import Register from "./Register";
-import api from "../services/api";
+//import history from '../services/history';
 
 const sampleUsers = [
   {
@@ -29,23 +29,29 @@ const sampleUsers = [
 function Login(props) {
   const [user, setUser] = useState(sampleUsers[0]);
   const [error, setError] = useState(null);
-  const [token, setToken] = useState( readToken() );
+  const [token] = useState(null);
+  //const [token, setToken] = useState( readToken() );
+  const { setToken } = props;
 
   const handleSubmit = async event => {
     event.preventDefault();
-    axios.post("/api/users/login", user, { handlerEnabled: false })
+    axios
+      .post("/api/users/login", user, { handlerEnabled: false })
       .then(data => {
         saveToken(data);
         setToken(data);
-        props.history.push('/account')
+        
+        props.history.push("/account");
+       // history.push('/account');
+
       })
       .catch(err => {
-        clearToken()
-        if(err.response && err.response.data) return setError(err.response.data);
-        setError(err)
+        clearToken();
+        if (err.response && err.response.data)
+          return setError(err.response.data);
+        setError(err);
       });
   };
-
 
   const onChange = (name, evt) => {
     setUser(Object.assign({}, user, { [name]: evt.target.value.trim() }));
@@ -101,12 +107,16 @@ function Login(props) {
                   <div className="row">
                     <div className="col-md-12">
                       <br />
-                      { error && <pre className="error">{JSON.stringify(error, undefined,4)}</pre> }
+                      {error && (
+                        <pre className="error">
+                          {JSON.stringify(error, undefined, 4)}
+                        </pre>
+                      )}
                     </div>
                   </div>
                 </form>
               </div>
-              <div className="col-md-1"></div>
+              <div className="col-md-1" />
               <div className="col-md-5 RegisterBox">
                 <Register />
               </div>
@@ -139,7 +149,6 @@ function Login(props) {
           </div>
         )}
       </div>
-      
     </div>
   );
 }

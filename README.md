@@ -16,16 +16,16 @@
 
 ```json
 {
-      "principalType": "ROLE",
-      "principalId": "$owner",
-      "permission": "ALLOW",
-      "property": [
-        "__create__reports",
-        "__get__reports",
-        "__destroyById__accessTokens",
-        "getRolesById"
-      ]
-    }
+  "principalType": "ROLE",
+  "principalId": "$owner",
+  "permission": "ALLOW",
+  "property": [
+    "__create__reports",
+    "__get__reports",
+    "__destroyById__accessTokens",
+    "getRolesById"
+  ]
+}
 ```
 
 # App-Setup
@@ -74,4 +74,19 @@
 
 ```js
     { id: 1, name: "user1", reports: reportID_1, reportID_2 },
+```
+
+## State Management
+
+- https://stackoverflow.com/questions/49938568/how-to-share-application-state-between-react-router-v4-routes/49939152
+
+```js
+You could manage data without redux if either of the scenarios matched your arrangement of components:
+
+Parent to child relationship: Using Props
+Child to parent relationship: Using callbacks
+Siblings with a common parent.
+But neither of the relationships satisfies your arrangement of the components since the two components are new root components.
+
+When the components can't communicate between any sort of parent-child relationship, the documentation recommends setting up a global event system.
 ```

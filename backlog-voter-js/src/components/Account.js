@@ -1,63 +1,59 @@
-import React, { useState, useEffect } from "react";
-import _ from "lodash";
+import React from "react";
 import Moment from "react-moment";
-import {  readToken, clearToken } from "../services/auth2";
-import api from "../services/api";
+import {reset} from "../services/auth2";
 
-const graphiQL =
-  "http://" +
-  window.location.hostname +
-  ":5000/graphiql?query=%7B%0A%20%20allBacklogs%20%7B%0A%20%20%20%20edges%20%7B%0A%20%20%20%20%20%20node%20%7B%0A%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%20%20desc%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D";
-const swagger =
-  "http://" + window.location.hostname + ":5000/explorer/swagger.json";
+function Account(props) {
+  const { session, tokens, roles, teams, removeToken } = props;
+  const graphiQL = "http://" + window.location.hostname + ":5000/graphiql?query=%7B%0A%20%20allBacklogs%20%7B%0A%20%20%20%20edges%20%7B%0A%20%20%20%20%20%20node%20%7B%0A%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%20%20desc%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D";
+  const swagger ="http://" + window.location.hostname + ":5000/explorer/swagger.json";
+  const explorer ="http://" + window.location.hostname + ":5000/explorer";
+  //const remove = id => removeToken('1NV1MX932OADgDUzFCZPXGDup3EyDTGsd8opFYuKpR4qGhPISCPFKUYkZQU7w6q7');
+ 
 
+  if(!session || !tokens || !roles || !teams) return (<div>Loading</div>)
 
-function Logout(event){
-  event.preventDefault();
-  clearToken();
-  window.location.replace(window.location.href);
-}
-
-function Home(props) {
-  
-  const [token, setToken] = useState( readToken() );
-  const [store, setStore] = useState(null);
-  // const [teams, setTeams] = useState([]);
-  const [accessTokens, setAccessTokens] = useState([]);
-  const [roles, setRoles] = useState([]);
-
-  const removeToken = (_token, idx) => {
-    if (_token.id === token.id) return alert("darn stupid!");
-    api.delete("/users/1/AccessTokens/" + token.id);
-    let tok = accessTokens.slice();
-    tok.splice(idx, 1);
-    setAccessTokens(tok);
-  };
-
-
-  if (!store) return <p>loadig</p>;
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row">
-        <div className="col-md-6">
-          <button onClick={Logout} className="btn btn-danger">
-            Logout &nbsp;&nbsp;&nbsp; {store.email}
-          </button>
+        <div className="col-md-5">
+          <h4>Session</h4>
+          <button onClick={reset} className="btn btn-danger">
+          Logout &nbsp;&nbsp;&nbsp; {session.email}
+        </button>
+          <pre>{JSON.stringify(session, undefined, 3)}</pre>
+        </div>
+        <div className="col-md-4">
+          <h4>roles</h4>
+          <pre>{JSON.stringify(roles, undefined, 3)}</pre>
+        </div>
+        <div className="col-md-3">
+          <h4>Teams</h4>
+          <pre>{JSON.stringify(teams, undefined, 3)}</pre>
         </div>
       </div>
-      <br />
-      <br />
-      <ul className="list-group">
-        <li className="list-group-item">
-          <pre className="scrollPre">{JSON.stringify(_.omit(store, ["tokens"]), undefined, 7)}</pre>
-        </li>
-      </ul>
-      <br />
-      <br />
 
-      {accessTokens && (
-        <div className="container-fluid">
-          <h3>My Tokens: {accessTokens.length}</h3>
+      <div className="container">
+        <h4>Backend</h4>
+        <ul className="list-group">
+          <li className="list-group-item">
+            <a href={graphiQL} target="_blank" rel="noopener noreferrer">
+              /graphiql
+            </a>
+          </li>
+          <li className="list-group-item">
+          <a href={explorer} target="_blank" rel="noopener noreferrer">
+              /explorer
+            </a>
+          </li>
+          <li className="list-group-item">
+            <a href={swagger} target="_blank" rel="noopener noreferrer">
+              /swagger.json
+            </a>
+          </li>
+        </ul>
+      </div>
+      <br/><br/>
+      <div className="container">
           <table className="table">
             <thead>
               <tr>
@@ -69,51 +65,30 @@ function Home(props) {
               </tr>
             </thead>
             <tbody>
-              {accessTokens.map((token, i) => {
+              {tokens.map((token, i) => {
                 return (
                   <tr key={token.id}>
-                    <td>{i}</td>
-                    <td>
-                      <button
-                        className="btn btn-warning"
-                        onClick={e => removeToken(token, i)}
-                      >
-                        <i className="fas fa-trash" />
-                      </button>
-                    </td>
-                    <td>{token.ttl}</td>
-                    <td>
-                      <Moment format="DD.MM.YYYY HH:MM">{token.created}</Moment>
-                    </td>
-                    <td>{token.id}</td>
-                  </tr>
+                  <td>{i}</td>
+                  <td>
+                    <button
+                      className="btn btn-danger btn-sm"
+                      onClick={e => removeToken(token, i)}
+                    >
+                      <i className="fas fa-trash" />
+                    </button>
+                  </td>
+                  <td>{token.ttl}</td>
+                  <td>
+                    <Moment format="DD.MM.YYYY HH:MM">{token.created}</Moment>
+                  </td>
+                  <td>{token.id}</td>
+                </tr>
                 );
               })}
             </tbody>
           </table>
-        </div>
-      )}
-
-      <br />
-      <br />
-      <br />
-      <br />
-      <div className="container">
-        <ul className="list-group">
-          <li className="list-group-item">
-            <a href={graphiQL} target="_blank" rel="noopener noreferrer">
-              graphiql
-            </a>
-          </li>
-          <li className="list-group-item">
-            {" "}
-            <a href={swagger} target="_blank" rel="noopener noreferrer">
-              swagger.json
-            </a>
-          </li>
-        </ul>
       </div>
     </div>
   );
 }
-export default Home;
+export default Account

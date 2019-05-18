@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import {
+  Router,
+  Route,
+  Redirect,
+  Switch
+} from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Reporter from "./components/Reporter";
 import Navbar2 from "./components/Navbar2";
@@ -8,17 +13,8 @@ import Users from "./components/Users";
 import Account from "./components/Account";
 import { isAuthenticated, readToken } from "./services/auth2";
 import api from "./services/api";
+import history from './services/history';
 
-function Home() {
-  return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-6">col-md-6</div>
-        <div className="col-md-6">col-md-6</div>
-      </div>
-    </div>
-  );
-}
 
 function Reports() {
   const [reports, setReports] = useState([]);
@@ -64,47 +60,96 @@ const ProtectedRoute = ({ component: Component, ...attrs }) => {
   );
 };
 
-function App() {
-  const [state, setState] = useState({ errors: null, data: null });
-  const [token, setToken] = useState(readToken());
+function Root() {
+  const [session, setSession] = useState(null); //its basically read-only
+  const [tokens, setTokens] = useState([]); //pass to Account
+  const [token, setToken] = useState(readToken())
+  const [roles, setRoles] = useState([]); //pass to Account
+  const [teams, setTeams] = useState(null); //pass to Account
+  
+  const removeToken = token => {
+    api.delete("/users/1/AccessTokens/" + token.id);
+    setTokens(tokens.filter(x => x.id !== token.id));
+  };
+  
+
+  const pushHistory = path => {
+    ///props.history.push('/test')
+  }
 
   useEffect(() => {
+    console.log('Root-Effects');
     const fetchData = async () => {
       try {
-        const { response } = await api("/users/info?id=" + token.userId);
-        setState({ errors:null, data: response.data });
-      } 
-      catch (err) {
-        if (err.response && err.response.data) {
-          setState({ errors: err.response.data, data: null });
-        } else {
-          setState({ errors: err, data: null });
-        }
+        const { data } = await api("/users/info?id=" + token.userId);
+        const { payload } = data;
+        const { username, email, id } = payload;
+        setSession({ username, email, id, token: readToken() });
+        setTokens(payload.accessTokens);
+        setRoles(payload.roles);
+        setTeams(payload.teams);
+      } catch (err) {
+        throw err;
       }
     };
-    fetchData();
+    if(token && token.userId){
+        fetchData();
+    }
   }, [token]);
 
   return (
+    <div>
+      <Router history={history}>
+        <div className="router">
+          <Switch>
+            <Route path="/login/" render={props => (
+              <Login {...props} setToken={setToken} pushHistory={pushHistory}/>
+            )} />
+
+
+            <Route path="/account"
+              render={props => isAuthenticated() ? (
+                <Account {...props} tokens={tokens} removeToken={removeToken} session={session} roles={roles} teams={teams}/>
+              ) : ( <Redirect  to={{ pathname: "/login", state: { from: props.location } }}  /> )}
+            />
+
+
+            <Route render={props => <NotFound {...props} />} />
+          </Switch>
+        </div>
+      </Router>
+    </div>
+  );
+}
+function App() {
+  return (
     <Router>
       <div>
-        <Navbar2 token={token}/>
+        <Navbar2 />
+
         <div className="container-fluid Content">
-          <Route path="/login/" component={Login} token={token}/>
-          <ProtectedRoute exact path="/" component={Home} />
+          <Route path="/login/" component={Login} />
+          <ProtectedRoute exact path="/" component={Account} />
 
           <ProtectedRoute exact path="/backlogs" component={Backlogs} />
           <ProtectedRoute path="/backlogs/:id" component={Reporter} exact />
-          <ProtectedRoute path="/backlogs/:id/report/:reportId" component={Reporter} />
-          
+          <ProtectedRoute
+            path="/backlogs/:id/report/:reportId"
+            component={Reporter}
+          />
+
           <ProtectedRoute path="/account/" component={Account} />
           <ProtectedRoute path="/users/" component={Users} />
           <ProtectedRoute path="/reports/" component={Reports} />
           <ProtectedRoute path="/reporter/" component={Reporter} />
+          <Route render={() => <NotFound />} />
         </div>
       </div>
     </Router>
   );
 }
 
-export default App;
+function NotFound() {
+  return <p>404</p>;
+}
+export default Root;
