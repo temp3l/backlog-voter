@@ -11,10 +11,11 @@ function Login(props) {
     api
       .post("/users", user, { handlerEnabled: false })
       .then(response => {
-        props.history.push("/login");
+        setResponse(response.data);
       })
       .catch(error => {
         const { response } = error;
+        if(!response || !response.data) return setResponse(response)
         const { data } = response;
         setResponse(data);
       });
@@ -43,8 +44,8 @@ function Login(props) {
             <input
               onChange={e => onChange("email", e)}
               type="text"
-              name="email"
-              id="email"
+              name="remail"
+              id="remail"
               className="form-control"
               value={user.email}
               placeholder="username"
@@ -59,8 +60,8 @@ function Login(props) {
             <input
               onChange={e => onChange("password", e)}
               type="password"
-              name="password"
-              id="password"
+              name="rpassword"
+              id="rpassword"
               className="form-control"
               value={user.password}
               placeholder="password"

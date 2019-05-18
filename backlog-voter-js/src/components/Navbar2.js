@@ -19,6 +19,9 @@ const HeaderNav = props => {
         <li className="nav-item">
           <Link className="nav-link" to="/backlogs">Backlogs</Link>
         </li>
+        <li className="nav-item">
+        <Link className="nav-link" to="/users">Users</Link>
+      </li>
       </ul>
     </nav>
   </div>

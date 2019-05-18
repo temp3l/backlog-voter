@@ -55,7 +55,7 @@ function Reporter({ match }) {
           <li key={item.id}>
             <div className="container-fluid">
               <div className="row">
-                <div className="col col-md-2">{item.name}</div>
+                <div className="col col-md-2"><b>{item.name}</b></div>
 
                 <div className="col col-md-9">
                   <input
@@ -67,7 +67,7 @@ function Reporter({ match }) {
                     onChange={e => onChange(idx, e.target.value)}
                   />
                 </div>
-                <div className="col col-md-1">{item.value}</div>
+                <div className="col col-md-1"><b>{item.value}</b></div>
               </div>
             </div>
           </li>

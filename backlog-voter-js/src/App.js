@@ -4,7 +4,7 @@ import Reporter from "./components/Reporter";
 import Navbar2 from "./components/Navbar2";
 import Login from "./components/Login";
 import Backlogs from "./components/Backlogs";
-//import Home from "./components/Home";
+import Users from "./components/Users";
 import { isAuthenticated } from "./services/auth2";
 import api from "./services/api";
 import "./App.css";
@@ -78,6 +78,9 @@ function App() {
 
 
           <Route path="/login/" component={Login} />
+
+          <Route path="/users/" component={Users} />
+
           <ProtectedRoute path="/reports/" component={Reports} />
           <ProtectedRoute path="/reporter/" component={Reporter} />
         </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import Moment from "react-moment";
-import { isAlive, getSession, removeSession } from "../services/auth2";
+import { isAlive, removeSession } from "../services/auth2";
 import api from "../services/api";
 
 const graphiQL =
@@ -38,29 +38,28 @@ function Home(props) {
     //if( tmpSession && tmpSession.id) api.delete("/users/1/AccessTokens/" + tmpSession.id + "?access_token="+tmpSession.id);
     removeSession();
     setNewSession(null);
-      window.location.replace(window.location.href);
-      //"https://"+window.location.hostname+"/login"
+    window.location.replace(window.location.href);
+  };
 
-    };
-
+  if (!session) return <p>loadig</p>;
   return (
     <div className="container">
-      <h2>Session Details</h2>
-      <br/>
       <div className="row">
         <div className="col-md-6">
           <button onClick={destroy} className="btn btn-danger">
-            Logout
+            Logout &nbsp;&nbsp;&nbsp; {session.email}
           </button>
         </div>
       </div>
-      <br/><br/>
+      <br />
+      <br />
       <ul className="list-group">
         <li className="list-group-item">
-            <pre> {JSON.stringify(_.omit(session, ["tokens"]), undefined, 3)}</pre>
+          <pre>{JSON.stringify(_.omit(session, ["tokens"]), undefined, 7)}</pre>
         </li>
       </ul>
-      <br/><br/>
+      <br />
+      <br />
 
       {session && session.tokens && (
         <div className="container-fluid">
@@ -101,7 +100,10 @@ function Home(props) {
         </div>
       )}
 
-      <br/><br/><br/><br/>
+      <br />
+      <br />
+      <br />
+      <br />
       <div className="container">
         <ul className="list-group">
           <li className="list-group-item">

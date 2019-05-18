@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import api from "../services/api";
 import "./Login.css";
 import {
   setSession,
@@ -33,8 +32,13 @@ const sampleUsers = [
   }
 ];
 
+const getStoredUser = function(){
+  let res = JSON.parse( localStorage.getItem('credentials') );
+  return res || sampleUsers[0];
+}
+
 function Login(props) {
-  const [user, setUser] = useState(sampleUsers[0]);
+  const [user, setUser] = useState(getStoredUser());
   const [response, setResponse] = useState(null);
   const [session, setNewSession] = useState(getSession());
 
@@ -46,12 +50,14 @@ function Login(props) {
         let session = Object.assign({}, response.data, { email: user.email });
         setSession(session);
         setNewSession(session)
-        //props.history.push("/");
+        
+        localStorage.setItem('credentials', JSON.stringify(user))
       })
       .catch(error => {
         setResponse(error.response.data);
         removeSession();
         setNewSession(null);
+        localStorage.removeItem('credentials')
       });
   };
 

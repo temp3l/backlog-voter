@@ -5,19 +5,6 @@ var LoopBackContext = require('loopback-context');
 module.exports = function(User) {
 
 
-  // User.observe('access', function(ctx, next) {
-  //   const token = ctx.options && ctx.options.accessToken;
-  //   const userId = token && token.userId;
-  //   const user = userId ? 'user#' + userId : '<anonymous>';
-
-  //   const modelName = ctx.Model.modelName;
-  //   const scope = ctx.where ? JSON.stringify(ctx.where) : '<all records>';
-  //   console.log('%s: %s accessed %s:%s', user, modelName, scope);
-    
-  //   next();
-  // });
-
-
   User.getRolesById = function(id, next) {
 
     User.getApp(function(err, app) {
