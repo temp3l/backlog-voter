@@ -18,7 +18,7 @@
     "reports": {
       "type": "hasMany",
       "model": "Report",
-      "foreignKey": "",
+      "foreignKey": "ownerId",
       "options": {
         "nestRemoting": true
       }
@@ -29,14 +29,19 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "ALLOW"
+      "permission": "DENY"
     },
     {
-      "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "withdraw"
+      "property": [
+        "__create__reports",
+        "__get__reports",
+        "log",
+        "getRolesById",
+        "getInfo"
+      ]
     }
   ],
   "methods": {}

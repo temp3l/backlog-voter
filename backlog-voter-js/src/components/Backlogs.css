@@ -1,0 +1,12 @@
+.backlogRow {
+    cursor: pointer;
+    
+}
+.backlogRow:hover {
+    text-decoration: underline;
+}
+
+.backlogRow {
+    line-height: 2em;
+}
+

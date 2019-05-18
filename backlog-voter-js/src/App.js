@@ -3,31 +3,40 @@ import React, { useState, useEffect } from "react";
 import Reporter from "./components/Reporter";
 import Navbar2 from "./components/Navbar2";
 import Login from "./components/Login";
-import { isAuthenticated } from "./services/auth";
+import Backlogs from "./components/Backlogs";
+import Home from "./components/Home";
+import { isAuthenticated } from "./services/auth2";
 import api from "./services/api";
-
 import "./App.css";
 
-function Index() {
-  return <h2>Home</h2>;
-}
 
-function Users() {
-  const [users,setUsers] = useState(null);
+
+function Reports() {
+  const [reports, setReports] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      let response = await api.get("/users");
-      setUsers(response.data)
+      let response = await api.get("/users/me/reports");
+      setReports(response.data);
     };
 
     fetchData();
   }, []);
 
-  
-  return <div>
-    <pre>{JSON.stringify(users,undefined,4)}</pre>
-  </div>;
+  return (
+    <div>
+      <ul>
+        {reports.map(report => {
+          return (
+            <li key={report.id}>
+              id: {report.id} backlogId: {report.backlogId} userId:{" "}
+              {report.ownerId}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 }
 
 const ProtectedRoute = ({ component: Component, ...attrs }) => (
@@ -51,10 +60,11 @@ function App() {
       <div>
         <Navbar2 />
         <div className="container-fluid Content">
-          <ProtectedRoute exact path="/" component={Index} />
+          <ProtectedRoute exact path="/" component={Home} />
+          <ProtectedRoute exact path="/backlogs" component={Backlogs} />
           <ProtectedRoute path="/backlogs/:id" component={Reporter} />
           <Route path="/login/" component={Login} />
-          <ProtectedRoute path="/users/" component={Users} />
+          <ProtectedRoute path="/reports/" component={Reports} />
           <ProtectedRoute path="/reporter/" component={Reporter} />
         </div>
       </div>

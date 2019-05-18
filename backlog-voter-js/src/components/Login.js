@@ -1,55 +1,81 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./Login.css";
+import {
+  setSession,
+  getSession,
+  removeSession,
+  isAlive
+} from "../services/auth2";
 
-// import api from "../services/api";
+const graphiQL =
+  "http://" +
+  window.location.hostname +
+  ":5000/graphiql?query=%7B%0A%20%20allBacklogs%20%7B%0A%20%20%20%20edges%20%7B%0A%20%20%20%20%20%20node%20%7B%0A%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%20%20desc%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D";
 
-import { authenticateUser, destroySession } from "../services/auth";
+const sampleUsers = [
+  {
+    username: "John",
+    email: "john@doe.com",
+    password: "xxx",
+    role: "$owner, teamMember, $authenticated, $everyone"
+  },
+  {
+    username: "Jane",
+    email: "jane@doe.com",
+    password: "xxx",
+    role: "teamMember, $authenticated, $everyone"
+  },
+  {
+    username: "Bob",
+    email: "bob@projects.com",
+    password: "xxx",
+    role: "admin, $authenticated, $everyone"
+  }
+];
 
 function Login(props) {
-  const [user, setUser] = useState({
-    email: "bob@projects.com",
-    password: "opensesame"
-  });
+  const [user, setUser] = useState(sampleUsers[0]);
   const [response, setResponse] = useState(null);
-  
-  useEffect(() => {
-    const fetchData = async () => {};
-    fetchData();
-  }, []);
-
-  const onChange = (name, evt) => {
-    setUser(Object.assign({}, user, { [name]: evt.target.value }));
-  };
-
-  const destroy = event => {
-    event.preventDefault();
-    destroySession();
-    setResponse(null);
-  };
+  const [session, setNewSession] = useState(getSession());
 
   const handleSubmit = async event => {
     event.preventDefault();
     axios
-      .post("/api/users/login", user)
+      .post("/api/users/login", user, { handlerEnabled: false })
       .then(response => {
-        authenticateUser(JSON.stringify(response.data, undefined, 4));
-        setResponse(response.data);
+        let session = Object.assign({}, response.data, { email: user.email });
+        setSession(session);
+        props.history.push("/");
       })
       .catch(error => {
         setResponse(error.response.data);
-        destroySession();
+        removeSession();
+        setNewSession(null);
       });
   };
 
-  let sampleUsers = [
-    { username: "John", email: "john@doe.com", password: "xxx" },
-    { username: "Jane", email: "jane@doe.com", password: "xxx" },
-    { username: "Bob", email: "bob@projects.com", password: "xxx" }
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      let sess = await isAlive();
+      setNewSession(sess);
+    };
+    fetchData();
+  }, []);
+  const onChange = (name, evt) => {
+    setUser(Object.assign({}, user, { [name]: evt.target.value.trim() }));
+  };
+  const destroy = event => {
+    event.preventDefault();
+    setResponse(null);
+    removeSession();
+    setNewSession(null);
+  };
 
   return (
     <div>
       <div className="container-fluid">
+        {session && <p>Stored session: {session.id}</p>}
         <form onSubmit={handleSubmit}>
           <div className="input-group col-md-3">
             <div className="input-group-append">
@@ -92,6 +118,13 @@ function Login(props) {
             <button onClick={destroy} className="btn btn-danger">
               Destroy
             </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <i>
+              ...check:{" "}
+              <a href={graphiQL} target="_blank" rel="noopener noreferrer">
+                graphiql
+              </a>
+            </i>
           </div>
         </form>
 
@@ -101,12 +134,14 @@ function Login(props) {
         <br />
         <br />
         <br />
+
         <div className="container">
           <table className="table">
             <thead>
               <tr>
                 <th>email</th>
                 <th>password</th>
+                <th>role</th>
               </tr>
             </thead>
             <tbody>
@@ -116,6 +151,7 @@ function Login(props) {
                     <td>{user.email}</td>
                     <td>{user.password}</td>
                     <td>{user.name}</td>
+                    <td>{user.role}</td>
                   </tr>
                 );
               })}

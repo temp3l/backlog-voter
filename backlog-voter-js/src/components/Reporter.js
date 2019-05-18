@@ -1,40 +1,43 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./Reporter.css";
+import api from "../services/api";
 
 function Reporter({ match }) {
   const [reportItems, setReportItems] = useState([]);
   const [backlog, setBacklog] = useState({});
-  const [value, setValue] = useState({});
+  const [me, setMe] = useState({});
+
   const backlogId = match.params.id;
 
   useEffect(() => {
     const fetchData = async () => {
-      const reportItems = await axios("/api/reportItems");
-      const backlog = await axios("/api/backlogs/" + backlogId);
+      const reportItems = await api("/reportItems");
+      const backlog = await api("/backlogs/" + backlogId);
+      const meData = await api("/users/me");
+      setMe(meData.data);
       setBacklog(backlog.data);
-      setReportItems(reportItems.data);
-
-      let foo = {};
-      reportItems.data.forEach(item => {
-        foo = Object.assign({}, foo, { [item.name]: 0 });
-      });
-      setValue(foo);
+      setReportItems(
+        reportItems.data.map(item => Object.assign(item, { value: 0 }))
+      );
     };
     fetchData();
   }, [backlogId]);
 
-  const onChange = (name, evt) => {
-    setValue(Object.assign({}, value, { [name]: evt.target.value }));
+  const onChange = (idx, evt) => {
+    let obj = reportItems.slice();
+    obj[idx].value = evt;
+    setReportItems(obj);
   };
 
   const submitReport = () => {
-    //?access_token=zucJloKbFKFqI1LETY8vG5T4zkpS0qPE8eTogxO4HnpYCGzmROWeNCQiX6oGBmP0
-    let report = Object.assign({ backlogId: backlog.id }, {data: value });
+    let report = Object.assign(
+      { backlogId: backlog.id },
+      { data: reportItems }
+    );
     console.log(report);
 
-    axios
-      .post("/api/users/1/reports", report)
+    api
+      .post("/users/" + me.id + "/reports", report)
       .then(function(response) {
         console.log(response);
       })
@@ -47,9 +50,8 @@ function Reporter({ match }) {
     <div className="container-fluid">
       <h3>Create a report for: {backlog.name} </h3>
       <p className="description">{backlog.desc}</p>
-      <pre>{JSON.stringify(value)}</pre>
       <ul className="PollBox">
-        {reportItems.map(item => (
+        {reportItems.map((item, idx) => (
           <li key={item.id}>
             <div className="container-fluid">
               <div className="row">
@@ -61,11 +63,11 @@ function Reporter({ match }) {
                     type="range"
                     min="0"
                     max="100"
-                    value={value[item.name]}
-                    onChange={e => onChange(item.name, e)}
+                    value={item.value}
+                    onChange={e => onChange(idx, e.target.value)}
                   />
                 </div>
-                <div className="col col-md-1">{value[item.name]}</div>
+                <div className="col col-md-1">{item.value}</div>
               </div>
             </div>
           </li>
@@ -78,5 +80,5 @@ function Reporter({ match }) {
     </div>
   );
 }
+//onChange={e => onChange(item.name, e)}
 export default Reporter;
-

@@ -13,6 +13,7 @@
     "cors": "^2.8.1",
     "loopback": "^3.0.0",
     "loopback-boot": "^2.4.0",
+    "loopback-context": "^3.4.0",
     "loopback-graphql": "^0.13.0",
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^3.2.0",

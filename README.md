@@ -1,3 +1,26 @@
+
+# Features
+
+* token based Auth
+* Role based access Control
+* fine grained permissions
+* 
+
+## Sample Access Control for UserModel
+```js 
+{
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": [
+        "__create__reports",
+        "__get__reports",
+        "log",
+        "getRolesById"
+      ]
+    }
+```
+
 # Models involved
 
 * ReportItem
@@ -45,3 +68,5 @@
 2. User fetches /reportItems
 3. User creates exactly one Report for every Backlog
 4. A report provides a numeric value for every ReportItem
+
+
