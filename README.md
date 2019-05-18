@@ -1,21 +1,39 @@
 # Features
 
+## Backend
+
+- **No Mocks!!!** => PostgresQL 
 - Token based Auth
-- Dynamic RBAC: [ admin, $owner, teamMember, $authenticated, $everyone ]
-- No Mocks! PostgresQL ready
+- **Dynamic RBAC**: [ $owner, $authenticated, $everyone ]
+- static roles: [ admin, teamMember, Assona_admin ]
+- GraphQL, OpenAPI.spec, SwaggerUI+token
+- login/register/auth -users
+
+## Frontend
+
+- keine deps auf material-ui/bootstrap/antd ...just css classes!
+- speichert aktives Token im localStorage
+- benutzt simple REST-Calls (kein graphQL, kein redux)
+- no error-handling yet
 
 # Permissions
 
-- admin ALLOW any on [ ReportItems, Report, Backlog ]
+- admin ALLOW any on [ /users, /accessTokens, /roles, /roleMapping  ]
+- $owner ALLOW \* on `own`-ressources [ ..., AccessTokens ]
 - \$everybody DENY WRITE on [ ReportItems, Backlog ]
 - \$authenticated ALLOW READ on [ ReportItems, Backlog ]
 - \$authenticated ALLOW CREATE on [ ReportItems, Backlog ]
-- \$authenticated limited to HIS items
+- all users limited to `their` items
 
-# Sample ACl (UserModel)
+# Sample ACL (UserModel)
 
 ```json
-{
+[,{
+  "accessType": "*",
+  "principalType": "ROLE",
+  "principalId": "$everyone",
+  "permission": "DENY"
+},{
   "principalType": "ROLE",
   "principalId": "$owner",
   "permission": "ALLOW",
@@ -23,10 +41,36 @@
     "__create__reports",
     "__get__reports",
     "__destroyById__accessTokens",
-    "getRolesById"
-  ]
-}
+    "getRolesById",
+    "__get__getSomeAssonaSpecialStuffFromElseWhere"]
+},{
+  "accessType": "EXECUTE",
+  "principalType": "ROLE",
+  "principalId": "$authenticated",
+  "permission": "ALLOW",
+  "property": "__get__getSomeAssonaSpecialStuffFromElseWhere"
+},]
 ```
+
+# fine-grained Programmatic ACLs
+
+```js
+MyUser.disableRemoteMethod("create", true);
+MyUser.disableRemoteMethod("upsert", true);
+MyUser.disableRemoteMethod("updateAll", true);
+MyUser.disableRemoteMethod("updateAttributes", false);
+//...
+MyUser.disableRemoteMethod('__count__accessTokens', false);
+MyUser.disableRemoteMethod('__create__accessTokens', false);
+MyUser.disableRemoteMethod('__delete__accessTokens', false);
+MyUser.disableRemoteMethod('__destroyById__accessTokens', false);
+MyUser.disableRemoteMethod('__findById__accessTokens', false);
+MyUser.disableRemoteMethod('__get__accessTokens', false);
+MyUser.disableRemoteMethod('__updateById__accessTokens', false);
+//...
+MyUser.disableRemoteMethod('__get__getSomeAssonaSpecialStuffFromElseWhere', false);
+```
+
 
 # App-Setup
 
@@ -46,6 +90,17 @@
 - Backlog
 - Report
 - User
+
+
+First Header  | Second Header | Responsibility  | Example 
+------------  | ------------- | -------------   | ------------- 
+Principal	    | An entity that can be identified or authenticated. | Represents identities of a request to protected resources. | A user <br> An application <br> A role (please note a role is also a principal)
+Role	        | A group of principals with the same permissions. |	Organizes principals into groups so they can be used.	 | **Dynamic role**: <br>$everyone (for all users)<br>$unauthenticated (unauthenticated users)<br>$owner (the principal is owner of the model instance), which can be: <br>* A simple property called userId<br>* A simple property called owner<br>◦ A relation to a model that extends User.<br>**Static role**: admin (a defined role for administrators)  |
+RoleMapping	  | Assign principals to roles	    | Statically assigns principals to roles.	  | Assign user with id 1 to role 1 <br>Assign role ‘admin’ to role 1 |
+ACL           |	Access control list	            | Controls if a principal can perform a certain operation against a model.	| Deny everyone to access the project model. <br>Allow ‘admin’ role to execute find() method on the project model.
+
+
+
 
 ## Endpoints Spec
 
@@ -74,19 +129,4 @@
 
 ```js
     { id: 1, name: "user1", reports: reportID_1, reportID_2 },
-```
-
-## State Management
-
-- https://stackoverflow.com/questions/49938568/how-to-share-application-state-between-react-router-v4-routes/49939152
-
-```js
-You could manage data without redux if either of the scenarios matched your arrangement of components:
-
-Parent to child relationship: Using Props
-Child to parent relationship: Using callbacks
-Siblings with a common parent.
-But neither of the relationships satisfies your arrangement of the components since the two components are new root components.
-
-When the components can't communicate between any sort of parent-child relationship, the documentation recommends setting up a global event system.
 ```

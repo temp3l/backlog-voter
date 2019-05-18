@@ -5,24 +5,22 @@ import { reset } from "../services/auth2";
 const HeaderNav = props => {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark  bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <Link className="navbar-brand" to="/">
           Home
         </Link>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul className="navbar-nav">
-          <li className="nav-item">
-       
-          <Link className="nav-link" to="/account">
-            Account
-          </Link>
-        </li>
             <li className="nav-item">
               <Link className="nav-link" to="/account">
+                Account
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/reports">
                 Reports
               </Link>
             </li>
-
             <li className="nav-item">
               <Link className="nav-link" to="/login">
                 Login

@@ -113,13 +113,17 @@ function Root() {
                 <Login {...props} setToken={setToken} pushHistory={pushHistory}/>
               )} />
 
-
               <Route path="/account"
                 render={props => isAuthenticated() ? (
                   <Account {...props} tokens={tokens} removeToken={removeToken} session={session} roles={roles} teams={teams}/>
                 ) : ( <Redirect  to={{ pathname: "/login", state: { from: props.location } }}  /> )}
               />
 
+              <Route path="/account"
+                render={props => isAuthenticated() ? (
+                  <Account {...props} tokens={tokens} removeToken={removeToken} session={session} roles={roles} teams={teams}/>
+                ) : ( <Redirect  to={{ pathname: "/login", state: { from: props.location } }}  /> )}
+              />
 
               <Route render={props => <NotFound {...props} />} />
             </Switch>
@@ -146,7 +150,6 @@ function App() {
             component={Reporter}
           />
 
-          <ProtectedRoute path="/account/" component={Account} />
           <ProtectedRoute path="/users/" component={Users} />
           <ProtectedRoute path="/reports/" component={Reports} />
           <ProtectedRoute path="/reporter/" component={Reporter} />
@@ -160,4 +163,23 @@ function App() {
 function NotFound() {
   return <p>404</p>;
 }
+
+
+
+/*
+## State Management
+
+- https://stackoverflow.com/questions/49938568/how-to-share-application-state-between-react-router-v4-routes/49939152
+
+```js
+You could manage data without redux if either of the scenarios matched your arrangement of components:
+
+Parent to child relationship: Using Props
+Child to parent relationship: Using callbacks
+Siblings with a common parent.
+But neither of the relationships satisfies your arrangement of the components since the two components are new root components.
+
+When the components can't communicate between any sort of parent-child relationship, the documentation recommends setting up a global event system.
+```
+*/
 export default Root;

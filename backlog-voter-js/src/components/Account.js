@@ -7,8 +7,6 @@ function Account(props) {
   const graphiQL = "http://" + window.location.hostname + ":5000/graphiql?query=%7B%0A%20%20allBacklogs%20%7B%0A%20%20%20%20edges%20%7B%0A%20%20%20%20%20%20node%20%7B%0A%20%20%20%20%20%20%20%20id%0A%20%20%20%20%20%20%20%20desc%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D";
   const swagger ="http://" + window.location.hostname + ":5000/explorer/swagger.json";
   const explorer ="http://" + window.location.hostname + ":5000/explorer";
-  //const remove = id => removeToken('1NV1MX932OADgDUzFCZPXGDup3EyDTGsd8opFYuKpR4qGhPISCPFKUYkZQU7w6q7');
- 
 
   if(!session || !tokens || !roles || !teams) return (<div>Loading</div>)
 
@@ -53,9 +51,13 @@ function Account(props) {
             </li>
           </ul>
         </div>
+
         <br/><br/>
+        <br/><br/>
+
         <div className="container">
-            <table className="table">
+          <h4>Access Tokens</h4>
+          <table className="table">
               <thead>
                 <tr>
                   <th>#</th>
