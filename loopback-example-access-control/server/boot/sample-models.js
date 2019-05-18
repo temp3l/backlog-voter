@@ -36,69 +36,70 @@ module.exports = function(app) {
     User.create([
       {username: 'John', email: 'john@doe.com', password: 'xxx'},
       {username: 'Jane', email: 'jane@doe.com', password: 'xxx'},
-      {username: 'Bob', email: 'bob@projects.com', password: 'xxx'}
+      {username: 'Bob', email: 'bob@doe.com', password: 'xxx'},
+      {username: 'mult', email: 'mult@doe.com', password: 'xxx'},
     ], function(err, users) {
       if (err) throw err;
       console.log('Created users:', users);
 
       // create project 1 and make john the owner
-      users[0].projects.create({
-        name: 'project1',
-        balance: 100
-      }, function(err, project) {
+      users[0].projects.create({ name: 'project1', balance: 100}, (err, project) =>  {
         if (err) throw err;
-
         console.log('Created project:', project);
 
         // add team members
         Team.create([
-          {ownerId: project.ownerId, memberId: users[0].id},
-          {ownerId: project.ownerId, memberId: users[1].id}
-        ], function(err, team) {
+          {name: "SNT", ownerId: project.ownerId, memberId: users[0].id},
+          {name: "SMB", ownerId: project.ownerId, memberId: users[1].id}], (err, team) => {
           if (err) throw err;
-
           console.log('Created team:', team);
         });
       });
 
       //create project 2 and make jane the owner
-      users[1].projects.create({
-        name: 'project2',
-        balance: 100
-      }, function(err, project) {
+      users[1].projects.create({ name: 'project2', balance: 100 }, (err, project) => {
         if (err) throw err;
-
         console.log('Created project:', project);
 
         //add team members
-        Team.create({
-          ownerId: project.ownerId,
-          memberId: users[1].id
-        }, function(err, team) {
+        Team.create({name: "Aassona", ownerId: project.ownerId, memberId: users[1].id}, (err, team) =>{
           if (err) throw err;
-
           console.log('Created team:', team);
         });
       });
 
-      //create the admin role
-      Role.create({
-        name: 'admin'
-      }, function(err, role) {
+      Role.create({ name: 'admin'}, (err, role) => {
         if (err) throw err;
-
         console.log('Created role:', role);
-
-        //make bob an admin
-        role.principals.create({
-          principalType: RoleMapping.USER,
-          principalId: users[2].id
-        }, function(err, principal) {
+        role.principals.create({ principalType: RoleMapping.USER, principalId: users[2].id}, (err, principal) => {
           if (err) throw err;
-
+          console.log('Created principal:', principal);
+        });
+      
+        // make mult an admin
+        role.principals.create({ principalType: RoleMapping.USER, principalId: users[3].id}, (err, principal) => {
+          if (err) throw err;
           console.log('Created principal:', principal);
         });
       });
+
+      //make john SNT-admin
+      Role.create({ name: 'SNT-admin'}, (err, role) => {
+        if (err) throw err;
+        console.log('Created role:', role);
+        role.principals.create({ principalType: RoleMapping.USER, principalId: users[0].id}, (err, principal) => {
+          if (err) throw err;
+          console.log('Created principal:', principal);
+        });
+
+        // make mult an SNT-admin
+        role.principals.create({ principalType: RoleMapping.USER, principalId: users[3].id}, (err, principal) => {
+          if (err) throw err;
+          console.log('Created principal:', principal);
+        });
+        
+      });
+
     });
   })
 };

@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.Content {
+  margin-top: 20px
+}
+
+pre.scrollPre{
+  max-height: 300px;
+  overflow-y: scroll
+}
+
+.error {
+  color: red;
+}
+.success {
+  color: green;
+}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import Moment from "react-moment";
-import { isAlive, removeSession } from "../services/auth2";
+import {  readToken, clearToken } from "../services/auth2";
 import api from "../services/api";
 
 const graphiQL =
@@ -11,43 +11,37 @@ const graphiQL =
 const swagger =
   "http://" + window.location.hostname + ":5000/explorer/swagger.json";
 
+
+function Logout(event){
+  event.preventDefault();
+  clearToken();
+  window.location.replace(window.location.href);
+}
+
 function Home(props) {
-  const [session, setNewSession] = useState(null);
-  const [tokens, setTokens] = useState([]);
+  
+  const [token, setToken] = useState( readToken() );
+  const [store, setStore] = useState(null);
+  // const [teams, setTeams] = useState([]);
+  const [accessTokens, setAccessTokens] = useState([]);
+  const [roles, setRoles] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      let sess = await isAlive();
-      setNewSession(sess);
-      setTokens(sess.tokens.reverse());
-    };
-    fetchData();
-  }, []);
-
-  const removeToken = (token, idx) => {
-    if (token.id === session.id) return alert("darn stupid!");
+  const removeToken = (_token, idx) => {
+    if (_token.id === token.id) return alert("darn stupid!");
     api.delete("/users/1/AccessTokens/" + token.id);
-    let tok = tokens.slice();
+    let tok = accessTokens.slice();
     tok.splice(idx, 1);
-    setTokens(tok);
+    setAccessTokens(tok);
   };
 
-  const destroy = event => {
-    event.preventDefault();
-    //let tmpSession = getSession();
-    //if( tmpSession && tmpSession.id) api.delete("/users/1/AccessTokens/" + tmpSession.id + "?access_token="+tmpSession.id);
-    removeSession();
-    setNewSession(null);
-    window.location.replace(window.location.href);
-  };
 
-  if (!session) return <p>loadig</p>;
+  if (!store) return <p>loadig</p>;
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6">
-          <button onClick={destroy} className="btn btn-danger">
-            Logout &nbsp;&nbsp;&nbsp; {session.email}
+          <button onClick={Logout} className="btn btn-danger">
+            Logout &nbsp;&nbsp;&nbsp; {store.email}
           </button>
         </div>
       </div>
@@ -55,15 +49,15 @@ function Home(props) {
       <br />
       <ul className="list-group">
         <li className="list-group-item">
-          <pre>{JSON.stringify(_.omit(session, ["tokens"]), undefined, 7)}</pre>
+          <pre className="scrollPre">{JSON.stringify(_.omit(store, ["tokens"]), undefined, 7)}</pre>
         </li>
       </ul>
       <br />
       <br />
 
-      {session && session.tokens && (
+      {accessTokens && (
         <div className="container-fluid">
-          <h3>My Tokens: {tokens.length}</h3>
+          <h3>My Tokens: {accessTokens.length}</h3>
           <table className="table">
             <thead>
               <tr>
@@ -75,7 +69,7 @@ function Home(props) {
               </tr>
             </thead>
             <tbody>
-              {tokens.map((token, i) => {
+              {accessTokens.map((token, i) => {
                 return (
                   <tr key={token.id}>
                     <td>{i}</td>

@@ -15,10 +15,18 @@
       "model": "team",
       "foreignKey": "ownerId"
     },
-    "reports": {
+    "reports": { 
       "type": "hasMany",
       "model": "Report",
       "foreignKey": "ownerId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "accessTokens": {
+      "type": "hasMany",
+      "model": "AccessToken",
+      "foreignKey": "userId",
       "options": {
         "nestRemoting": true
       }
@@ -47,7 +55,8 @@
         "__create__reports",
         "__get__reports",
         "__destroyById__accessTokens",
-        "getRolesById"
+        "getRolesById",
+        "info"
       ]
     }
   ],

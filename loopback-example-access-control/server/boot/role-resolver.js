@@ -30,10 +30,7 @@ module.exports = function(app) {
         return reject();
 
       var Team = app.models.Team;
-      Team.count({
-        ownerId: project.ownerId,
-        memberId: userId
-      }, function(err, count) {
+      Team.count({ ownerId: project.ownerId, memberId: userId }, function(err, count) {
         if (err) {
           console.log(err);
           return cb(null, false);

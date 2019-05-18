@@ -5,20 +5,19 @@ import Navbar2 from "./components/Navbar2";
 import Login from "./components/Login";
 import Backlogs from "./components/Backlogs";
 import Users from "./components/Users";
-import { isAuthenticated } from "./services/auth2";
+import Account from "./components/Account";
+import { isAuthenticated, readToken } from "./services/auth2";
 import api from "./services/api";
-import "./App.css";
 
-
-function Home(){
+function Home() {
   return (
-    <div className='container-fluid'>
-       <div className='row'>
-         <div className='col-md-6'>col-md-6</div>
-         <div className='col-md-6'>col-md-6</div>
-       </div>
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-6">col-md-6</div>
+        <div className="col-md-6">col-md-6</div>
+      </div>
     </div>
-  )
+  );
 }
 
 function Reports() {
@@ -48,39 +47,58 @@ function Reports() {
     </div>
   );
 }
-
-const ProtectedRoute = ({ component: Component, ...attrs }) => (
-  <Route
-    {...attrs}
-    render={props =>
-      isAuthenticated() ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{ pathname: "/login", state: { from: props.location } }}
-        />
-      )
-    }
-  />
-);
+const ProtectedRoute = ({ component: Component, ...attrs }) => {
+  return (
+    <Route
+      {...attrs}
+      render={props =>
+        isAuthenticated() ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{ pathname: "/login", state: { from: props.location } }}
+          />
+        )
+      }
+    />
+  );
+};
 
 function App() {
+  const [state, setState] = useState({ errors: null, data: null });
+  const [token, setToken] = useState(readToken());
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { response } = await api("/users/info?id=" + token.userId);
+        setState({ errors:null, data: response.data });
+      } 
+      catch (err) {
+        if (err.response && err.response.data) {
+          setState({ errors: err.response.data, data: null });
+        } else {
+          setState({ errors: err, data: null });
+        }
+      }
+    };
+    fetchData();
+  }, [token]);
+
   return (
     <Router>
       <div>
-        <Navbar2 />
+        <Navbar2 token={token}/>
         <div className="container-fluid Content">
+          <Route path="/login/" component={Login} token={token}/>
           <ProtectedRoute exact path="/" component={Home} />
+
           <ProtectedRoute exact path="/backlogs" component={Backlogs} />
-          
-          <ProtectedRoute path="/backlogs/:id" component={Reporter} exact/>
+          <ProtectedRoute path="/backlogs/:id" component={Reporter} exact />
           <ProtectedRoute path="/backlogs/:id/report/:reportId" component={Reporter} />
-
-
-          <Route path="/login/" component={Login} />
-
-          <Route path="/users/" component={Users} />
-
+          
+          <ProtectedRoute path="/account/" component={Account} />
+          <ProtectedRoute path="/users/" component={Users} />
           <ProtectedRoute path="/reports/" component={Reports} />
           <ProtectedRoute path="/reporter/" component={Reporter} />
         </div>

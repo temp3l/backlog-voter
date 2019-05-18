@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Reporter.css";
 import api from "../services/api";
-import { getSession } from "../services/auth2";
+import { readToken } from "../services/auth2";
 
 function Reporter({ match }) {
   const [reportItems, setReportItems] = useState([]);
@@ -37,7 +37,7 @@ function Reporter({ match }) {
     console.log(report);
 
     api
-      .post("/users/" + getSession().userId + "/reports", report)
+      .post("/users/" + readToken().userId + "/reports", report)
       .then(function(response) {
         console.log(response);
       })

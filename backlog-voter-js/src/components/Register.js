@@ -1,30 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import api from "../services/api";
 import "./Login.css";
 
 function Login(props) {
-  const [user, setUser] = useState({ email: "", password: "" });
+  const [user, setUser] = useState({ email: "", password: "", username: "" });
   const [response, setResponse] = useState(null);
 
   const handleSubmit = async event => {
     event.preventDefault();
     api
       .post("/users", user, { handlerEnabled: false })
-      .then(response => {
-        setResponse(response.data);
-      })
-      .catch(error => {
-        const { response } = error;
-        if(!response || !response.data) return setResponse(response)
-        const { data } = response;
-        setResponse(data);
-      });
+      .then(response => setResponse(response.data))
+      .catch(error => setResponse(error.response.data));
   };
-
-  useEffect(() => {
-    const fetchData = async () => {};
-    fetchData();
-  }, []);
 
   const onChange = (name, evt) => {
     setUser(Object.assign({}, user, { [name]: evt.target.value.trim() }));
@@ -35,7 +23,7 @@ function Login(props) {
       <h3>Register</h3>
       <form onSubmit={handleSubmit}>
         <div className="row">
-          <div className="input-group col-md-6">
+          <div className="input-group col-md-8">
             <div className="input-group-append">
               <span className="input-group-text">
                 <i className="fas fa-user" />
@@ -51,7 +39,24 @@ function Login(props) {
               placeholder="username"
             />
           </div>
-          <div className="input-group col-md-6">
+
+          <div className="input-group col-md-8">
+            <div className="input-group-append">
+              <span className="input-group-text">
+                <i className="fas fa-user" />
+              </span>
+            </div>
+            <input
+              onChange={e => onChange("username", e)}
+              type="text"
+              name="username"
+              id="username"
+              className="form-control"
+              value={user.username}
+              placeholder="username"
+            />
+          </div>
+          <div className="input-group col-md-8">
             <div className="input-group-append">
               <span className="input-group-text">
                 <i className="fas fa-key" />
@@ -75,7 +80,9 @@ function Login(props) {
         <div className="row">
           <div className="col-md-12">
             <br />
-            <pre>{response && JSON.stringify(response, undefined, 4)}</pre>
+            <pre className="error">
+              {response && JSON.stringify(response, undefined, 4)}
+            </pre>
           </div>
         </div>
       </form>

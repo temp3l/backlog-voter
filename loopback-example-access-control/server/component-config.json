@@ -4,6 +4,6 @@
   },
   "loopback-graphql": {
     "path": "/graphql",
-    "graphiqlPath":"/graphiql"
+    "graphiqlPath": "/graphiql"
   }
 }
