@@ -11,8 +11,14 @@ const HeaderNav = props => {
         </Link>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul className="navbar-nav">
+          <li className="nav-item">
+       
+          <Link className="nav-link" to="/account">
+            Account
+          </Link>
+        </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/reports">
+              <Link className="nav-link" to="/account">
                 Reports
               </Link>
             </li>

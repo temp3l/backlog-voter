@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Login.css";
-import { readToken, clearToken, saveToken } from "../services/auth2";
+import { clearToken, saveToken } from "../services/auth2";
 import Register from "./Register";
 //import history from '../services/history';
 
@@ -30,7 +30,6 @@ function Login(props) {
   const [user, setUser] = useState(sampleUsers[0]);
   const [error, setError] = useState(null);
   const [token] = useState(null);
-  //const [token, setToken] = useState( readToken() );
   const { setToken } = props;
 
   const handleSubmit = async event => {
@@ -40,10 +39,7 @@ function Login(props) {
       .then(data => {
         saveToken(data);
         setToken(data);
-        
         props.history.push("/account");
-       // history.push('/account');
-
       })
       .catch(err => {
         clearToken();

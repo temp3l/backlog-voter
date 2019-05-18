@@ -67,9 +67,13 @@ function Root() {
   const [roles, setRoles] = useState([]); //pass to Account
   const [teams, setTeams] = useState(null); //pass to Account
   
-  const removeToken = token => {
-    api.delete("/users/1/AccessTokens/" + token.id);
-    setTokens(tokens.filter(x => x.id !== token.id));
+  const removeToken = _token => {
+    if(_token.id === session.token.id) {
+      // eslint(no-restricted-globals)
+      if( window.confirm('darn stupid, u enjoy?') === false) return false
+    }
+    api.delete("/users/1/AccessTokens/" + _token.id);
+    setTokens(tokens.filter(x => x.id !== _token.id));
   };
   
 
@@ -101,21 +105,25 @@ function Root() {
     <div>
       <Router history={history}>
         <div className="router">
-          <Switch>
-            <Route path="/login/" render={props => (
-              <Login {...props} setToken={setToken} pushHistory={pushHistory}/>
-            )} />
+          <Navbar2 />
+          <div className="Content container-fluid">
+
+            <Switch>
+              <Route path="/login/" render={props => (
+                <Login {...props} setToken={setToken} pushHistory={pushHistory}/>
+              )} />
 
 
-            <Route path="/account"
-              render={props => isAuthenticated() ? (
-                <Account {...props} tokens={tokens} removeToken={removeToken} session={session} roles={roles} teams={teams}/>
-              ) : ( <Redirect  to={{ pathname: "/login", state: { from: props.location } }}  /> )}
-            />
+              <Route path="/account"
+                render={props => isAuthenticated() ? (
+                  <Account {...props} tokens={tokens} removeToken={removeToken} session={session} roles={roles} teams={teams}/>
+                ) : ( <Redirect  to={{ pathname: "/login", state: { from: props.location } }}  /> )}
+              />
 
 
-            <Route render={props => <NotFound {...props} />} />
-          </Switch>
+              <Route render={props => <NotFound {...props} />} />
+            </Switch>
+          </div>
         </div>
       </Router>
     </div>

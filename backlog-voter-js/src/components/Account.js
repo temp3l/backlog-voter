@@ -15,14 +15,16 @@ function Account(props) {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-5">
+        <div className="col-md-3">
           <h4>Session</h4>
+        
           <button onClick={reset} className="btn btn-danger">
-          Logout &nbsp;&nbsp;&nbsp; {session.email}
-        </button>
+            Logout &nbsp;&nbsp;&nbsp; {session.email}
+          </button>
           <pre>{JSON.stringify(session, undefined, 3)}</pre>
         </div>
-        <div className="col-md-4">
+
+        <div className="col-md-3">
           <h4>roles</h4>
           <pre>{JSON.stringify(roles, undefined, 3)}</pre>
         </div>
@@ -30,63 +32,63 @@ function Account(props) {
           <h4>Teams</h4>
           <pre>{JSON.stringify(teams, undefined, 3)}</pre>
         </div>
-      </div>
 
-      <div className="container">
-        <h4>Backend</h4>
-        <ul className="list-group">
-          <li className="list-group-item">
-            <a href={graphiQL} target="_blank" rel="noopener noreferrer">
-              /graphiql
-            </a>
-          </li>
-          <li className="list-group-item">
-          <a href={explorer} target="_blank" rel="noopener noreferrer">
-              /explorer
-            </a>
-          </li>
-          <li className="list-group-item">
-            <a href={swagger} target="_blank" rel="noopener noreferrer">
-              /swagger.json
-            </a>
-          </li>
-        </ul>
-      </div>
-      <br/><br/>
-      <div className="container">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>del</th>
-                <th>TTL</th>
-                <th>created</th>
-                <th>token</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tokens.map((token, i) => {
-                return (
-                  <tr key={token.id}>
-                  <td>{i}</td>
-                  <td>
-                    <button
-                      className="btn btn-danger btn-sm"
-                      onClick={e => removeToken(token, i)}
-                    >
-                      <i className="fas fa-trash" />
-                    </button>
-                  </td>
-                  <td>{token.ttl}</td>
-                  <td>
-                    <Moment format="DD.MM.YYYY HH:MM">{token.created}</Moment>
-                  </td>
-                  <td>{token.id}</td>
+        <div className="col-md-3">
+          <h4>Backend</h4>
+          <ul className="list-group">
+            <li className="list-group-item">
+              <a href={graphiQL} target="_blank" rel="noopener noreferrer">
+                /graphiql
+              </a>
+            </li>
+            <li className="list-group-item">
+            <a href={explorer} target="_blank" rel="noopener noreferrer">
+                /explorer
+              </a>
+            </li>
+            <li className="list-group-item">
+              <a href={swagger} target="_blank" rel="noopener noreferrer">
+                /swagger.json
+              </a>
+            </li>
+          </ul>
+        </div>
+        <br/><br/>
+        <div className="container">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>del</th>
+                  <th>TTL</th>
+                  <th>created</th>
+                  <th>token</th>
                 </tr>
-                );
-              })}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {tokens.map((token, i) => {
+                  return (
+                    <tr key={token.id}>
+                    <td>{i}</td>
+                    <td>
+                      <button
+                        className="btn btn-danger btn-sm"
+                        onClick={e => removeToken(token, i)}
+                      >
+                        <i className="fas fa-trash" />
+                      </button>
+                    </td>
+                    <td>{token.ttl}</td>
+                    <td>
+                      <Moment format="DD.MM.YYYY HH:MM">{token.created}</Moment>
+                    </td>
+                    <td>{token.id}</td>
+                  </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+        </div>
       </div>
     </div>
   );
