@@ -1,0 +1,25 @@
+{
+  "name": "Group",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "descr": {
+      "type": "string",
+      "default": "describe"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "users": {
+      "type": "hasAndBelongsToMany",
+      "model": "User",
+      "foreignKey": "userId",
+      "through": "UserGroup"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

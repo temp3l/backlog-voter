@@ -35,7 +35,7 @@ const CreateReportItemForm = props => {
         />
         <input
           type="text"
-          className="form-control mb-2 mr-sm-8"
+          className="form-control mb-2 mr-sm-2"
           id="pwd2"
           placeholder="Description"
           value={state.desc}

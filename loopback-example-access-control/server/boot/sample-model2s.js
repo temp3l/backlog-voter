@@ -1,61 +1,16 @@
-var faker = require("faker");
-var _ = require("lodash");
-
-// Creates project 1, sets John as the owner, and adds John and Jane as team members;
-// Create permission1, sets ADMIN as the owner, and ADD JOhn + jane as team members;
-
-/*
-  DIE ACLs sind meine Permissions!!!  [ ALLOW, DENY ] => für REST Resources
-    loopback:security:acl [GraphQL] Permission for Book.id is ALLOW +0ms
-    loopback:security:acl permission ALLOW +0ms
-
-    [ ALLOW, DENY ] => für REST Resources
-    [ Roles ] sind Gruppen mit gemeinsamer Permission
-     The system grants permissions to principals (users or applications, that can be grouped into roles)
-
-
-
-    Es gibt nur 2 Permissions: [ ALLOW, DENY ]
-    Es gibt nur 2 AccessTypes: [ READ, WRITE ]
-    Es gibt Verben / actions : [ [ GET, HEAD, OPTIONS ], [ POST, PUT, PATCH, DELETE ]
-    Es gibt Properties       : [ find, exists, count, ], [  create, upsert, deleteById, replaceOrCreate ]
-    Es gibt Endpoints...     : [ /model(s), /model/:id,  /model/:id/relation, ... ] 
-
-https://loopback.io/doc/en/lb3/Controlling-data-access.html
-https://loopback.io/doc/en/lb3/Authentication-authorization-and-permissions.html
-  loopback:security:acl ---ACL--- +0ms
-  loopback:security:acl model user +1ms
-  loopback:security:acl property * +0ms
-  loopback:security:acl principalType ROLE +0ms
-  loopback:security:acl principalId $everyone +0ms
-  loopback:security:acl accessType * +0ms
-  loopback:security:acl permission DENY +0ms
-  loopback:security:acl with score: 7495 +0ms
-  loopback:security:acl ---Resolved--- +0ms
-
-
-    {
-      "principalType": "ROLE",
-      "principalId": "$owner",
-      "permission": "ALLOW",
-      "property": [
-        "__create__reports",
-        "__get__reports",
-        "__destroyById__accessTokens",
-        "getRolesById",
-        "info"
-      ]
-    }
-
-*/
-
 module.exports = function(app) {
+  console.log('no mocking users');
+  
+
   var User = app.models.user;
   var Role = app.models.Role;
   var RoleMapping = app.models.RoleMapping;
   var Team = app.models.Team;
   var Backlog = app.models.Backlog;
   var ReportItem = app.models.ReportItem;
+
+  var faker = require("faker");
+  var _ = require("lodash");
 
   User.count({}, (err, c) => console.log("user: ", c));
   Role.count({}, (err, c) => console.log("roles: ", c));

@@ -3,19 +3,6 @@
     "name": "db",
     "connector": "memory",
     "file": "data/data.json"
-  },
-  "redisDS": {
-    "name": "redisDS",
-    "connector": "redis"
-  },
-  "postgres": {
-    "host": "/var/run/postgresql/",
-    "port": "5432",
-    "database": "backlog",
-    "username": "postgres",
-    "password": "xxx",
-    "name": "postgres",
-    "debug": true,
-    "connector": "postgresql"
   }
+
 }

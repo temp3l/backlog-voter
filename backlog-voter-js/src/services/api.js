@@ -20,7 +20,8 @@ axios.interceptors.response.use(
   },
   error => {
     if (error.response.status === 401) {
-      window.confirm("401 intercepted => /login") === true ?  history.push("/login") :  console.log(error)    }
+      window.confirm("401 intercepted => /login") === true ?  history.push("/login") :  console.log(error)
+    }
     return error;
   }
 );

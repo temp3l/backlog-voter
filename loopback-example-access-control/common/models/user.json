@@ -24,6 +24,12 @@
       "type": "hasMany",
       "model": "Report",
       "foreignKey": "ownerId"
+    },
+    "groups": {
+      "type": "hasAndBelongsToMany",
+      "model": "Group",
+      "foreignKey": "ownerId",
+      "through": "UserGroup"
     }
   },
   "acls": [
@@ -31,7 +37,8 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "DENY"
+      "permission": "ALLOW",
+      "property": "*"
     },
     {
       "principalType": "ROLE",
@@ -41,17 +48,17 @@
         "find"
       ]
     },
-   
     {
       "principalType": "ROLE",
-      "principalId": "$owner",
+      "principalId": "$everyone",
       "permission": "ALLOW",
       "property": [
         "__create__reports",
         "__get__reports",
         "__destroyById__accessTokens",
         "getRolesById",
-        "info"
+        "info",
+        "__get__groups"
       ]
     }
   ],
