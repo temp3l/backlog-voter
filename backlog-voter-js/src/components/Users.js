@@ -13,15 +13,12 @@ const Admin = props => {
     fetchData();
   }, []);
 
-
-
   const edit = () => {
 
   };
 
   const {isAdmin} = props;
 
-  console.log('users');
   if(!users) return <Spinner/>
   return (
     <div className="container backlogs">
@@ -52,7 +49,6 @@ const Admin = props => {
                   <button className="btn btn-success btn-sm" onClick={e => edit(user, i)}>
                     <i className="fas fa-users-cog"></i>
                   </button>
-                  
                 </td>
                 <td>{user.email}</td>
                 <td><Moment format="DD.MM.YYYY HH:MM">{user.created}</Moment></td>

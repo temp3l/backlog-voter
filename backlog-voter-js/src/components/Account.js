@@ -83,18 +83,11 @@ function Account(props) {
                     return (
                       <tr key={token.id}>
                         <td>
-                          <button
-                            className="btn btn-danger btn-sm"
-                            onClick={e => removeToken(token, i)}
-                          >
+                          <button className="btn btn-danger btn-sm" onClick={e => removeToken(token, i)}>
                             <i className="fas fa-trash" />
                           </button>
                         </td>
-                        <td>
-                          <Moment format="DD.MM.YYYY HH:MM">
-                            {token.created}
-                          </Moment>
-                        </td>
+                        <td><Moment format="DD.MM.YYYY hh:mm">{token.created}</Moment></td>
                         <td>{token.id}</td>
                       </tr>
                     );

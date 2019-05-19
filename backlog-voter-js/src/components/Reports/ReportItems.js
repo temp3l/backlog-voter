@@ -21,8 +21,7 @@ const CreateReportItemForm = props => {
   };
 
   return (
-    <div className="container-fluid">
-      <h4>Create ReportItems</h4>
+    <div className="container shadow bg-white p-3 mb-3 rounded">
       <form className="form-inline" onSubmit={onFormSubmit}>
         <input
           type="text"
@@ -36,7 +35,7 @@ const CreateReportItemForm = props => {
         />
         <input
           type="text"
-          className="form-control mb-2 mr-sm-2"
+          className="form-control mb-2 mr-sm-8"
           id="pwd2"
           placeholder="Description"
           value={state.desc}

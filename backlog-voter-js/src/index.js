@@ -1,10 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.css';
+import "./styles/index.scss";
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.scss";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import './styles/variables.scss';
+
 
 
 ReactDOM.render(<App />, document.getElementById("root"));

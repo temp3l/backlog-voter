@@ -11,7 +11,6 @@ import ReportItems from "./ReportItems";
 <div class="shadow-sm p-3 mb-5 bg-white rounded">Small shadow</div>
 <div class="shadow p-3 mb-5 bg-white rounded">Regular shadow</div>
 <div class="shadow-lg p-3 mb-5 bg-white rounded">Larger shadow</div>
-
 */
 const CreateBacklogForm = props => {
   const [state, setState] = useState({ name: "", desc: "" });
@@ -27,10 +26,8 @@ const CreateBacklogForm = props => {
       setError(err.response.data);
     }
   };
-
   return (
-
-    <div className="container">
+  <div className="container">
     <div className="shadow bg-white p-3 mb-3 rounded">
       <form className="form-inline"  onSubmit={onFormSubmit}>
         <input
@@ -66,7 +63,7 @@ const CreateBacklogForm = props => {
   );
 };
 
-
+//http://localhost:5000/api/backlogs/?access_token=UtrvusAr4H3axdJZO3JAQSYxYCiEs0CHDsy0EXZ2oLmHFo05HpvGzczoU2ZzgTaE&filter[include]=reports
 function VoteButtons({session, backlog, removeItem}){
   let completed = backlog.reports.map(rep => rep.ownerId).indexOf(session.id) !== -1;
   return (<div>
@@ -108,48 +105,45 @@ const Backlogs = props => {
   if (!backlogs) return <Spinner />;
   const {session, isAdmin} = props;
   return (
-      <div>
-        {isAdmin && <CreateBacklogForm doFetch={updateCount} />}
-        <h4>Backlogs</h4>
-        <table className="table backlogTable table-condensed table-hover">
-          <thead className="thead-dark">
-            <tr>
-              <th>created</th>
-              <th>Name</th>
-              <th>desc</th>
-              <th>createReport</th>
-              <th>#</th>
-            </tr>
-          </thead>
-          <tbody>
-            {backlogs && backlogs.map((backlog, i) => {
-                            
-              return (
-                <tr key={backlog.id}>
-                  <td>
-                    <Moment format="DD.MM.YYYY hh:mm">{backlog.date}</Moment>
-                  </td>
-                  <td>
-                    <b>{backlog.name}</b>
-                  </td>
-                  <td>
-                    <i>{backlog.desc}</i>
-                  </td>
-                  <td>
-                    <VoteButtons session={session} backlog={backlog} removeItem={removeItem}/>
-                  </td>
-                  <td>{backlog.reports.length}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <br/>
-        <br/><br/><br/>
-        
-        {isAdmin && <ReportItems isAdmin={isAdmin} />}
-
-      </div>
+    <div>
+      {isAdmin && <CreateBacklogForm doFetch={updateCount} />}
+      <h4>Backlogs</h4>
+      <table className="table backlogTable table-condensed table-hover">
+        <thead className="thead-dark">
+          <tr>
+            <th>created</th>
+            <th>Name</th>
+            <th>desc</th>
+            <th>createReport</th>
+            <th>votes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {backlogs && backlogs.map((backlog, i) => {
+            return (
+              <tr key={backlog.id}>
+                <td>
+                  <Moment format="DD.MM.YYYY hh:mm">{backlog.date}</Moment>
+                </td>
+                <td>
+                  <b>{backlog.name}</b>
+                </td>
+                <td>
+                  <i>{backlog.desc}</i>
+                </td>
+                <td>
+                  <VoteButtons session={session} backlog={backlog} removeItem={removeItem}/>
+                </td>
+                <td>{backlog.reports.length}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <br/>
+      <br/><br/><br/>
+      {isAdmin && <ReportItems isAdmin={isAdmin} />}
+    </div>
   );
 };
 

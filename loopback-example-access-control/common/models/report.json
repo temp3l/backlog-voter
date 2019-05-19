@@ -17,7 +17,7 @@
     },
     "date": {
       "type": "date",
-      "required": true,
+      "required": false,
       "default": "$now"
     }
   },
