@@ -28,7 +28,7 @@
     "groups": {
       "type": "hasAndBelongsToMany",
       "model": "Group",
-      "foreignKey": "ownerId",
+      "foreignKey": "groupId",
       "through": "UserGroup"
     }
   },
@@ -37,8 +37,7 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "*"
+      "permission": "DENY"
     },
     {
       "principalType": "ROLE",

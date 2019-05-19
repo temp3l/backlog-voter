@@ -4,6 +4,14 @@ GET /appointments?filter={"include":["patient"],"where":{"physicianId":2}}
 
     http://localhost:5000/api/userGroups?filter={%22include%22:[%22group%22],%22where%22:{%22userId%22:4}}
     http://localhost:5000/api/userGroups?filter={%22include%22:[%22user%22],%22where%22:{%22groupId%22:1}}
+    
+    http://localhost:5000/api/userGroups?filter[include][user]&filter[include][group]
+    ?filter={"include":["group"],"where":{"userId":4}}
+    ?filter[include]=group&filter[include]=owner
+    http://localhost:5000/api/userGroups?filter[include][user][groups]
+    ?filter[include][user][groups]
+    ?filter[include][user][groups]
+    ?filter[include][user][groups]
 */
 
 module.exports = function(app) {
@@ -61,7 +69,7 @@ module.exports = function(app) {
       groups.forEach(group => {
         User.find({}, (err, users) => {
           let userId = users[getRandomInt(users.length - 1)].id;
-          UserGroup.create({ userId: userId, groupId: group.id }, console.log);
+          UserGroup.create({ userId, groupId: group.id, ownerId: userId }, console.log);
         });
       });
     });

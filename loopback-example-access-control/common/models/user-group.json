@@ -7,13 +7,17 @@
     "validateUpsert": true
   },
   "properties": {
+    "ownerId": {
+      "type": "number",
+      "required": true
+    }
   },
   "validations": [],
   "relations": {
     "user": {
       "type": "belongsTo",
       "model": "User",
-      "foreignKey": "ownerId"
+      "foreignKey": "userId"
     },
     "group": {
       "type": "belongsTo",

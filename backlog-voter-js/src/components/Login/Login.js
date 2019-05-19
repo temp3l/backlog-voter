@@ -86,7 +86,7 @@ function Login(props) {
         </div>
         <div className="col-md-8 shadow-lg p-3 mb-5 bg-white rounded">
           <div className="container">
-            <table className="table table-condensed">
+            <table className="table table-condensed table-hover cursor">
               <thead>
                 <tr>
                   <th>email</th>
