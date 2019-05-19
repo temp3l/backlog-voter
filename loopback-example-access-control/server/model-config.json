@@ -58,5 +58,13 @@
   "Group": {
     "dataSource": "db",
     "public": true
+  },
+  "Permission": {
+    "dataSource": "db",
+    "public": true
+  },
+  "GroupPermission": {
+    "dataSource": "db",
+    "public": true
   }
 }

@@ -93,7 +93,7 @@ function Root() {
 
             {session &&  <Route path="/users" exact
                 render={props => isAuthenticated() ? (
-                  <Users {...props} isAdmin={isAdmin(roles)}/>
+                  <Users {...props} session={session} isAdmin={isAdmin(roles)}/>
                 ) : ( <Redirect  to={{ pathname: "/login", state: { from: props.location } }}  /> )}
               />}
 

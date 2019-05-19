@@ -1,12 +1,22 @@
 # Backend
 
-- **No Mocks!!!** => PostgresQL
+- **No Mocks!!!**
 - Token based Auth
 - **Dynamic RBAC**: [ $owner, $authenticated, $everyone ]
 - static roles: [ admin, teamMember, ... **Assona_admin** ]
 - custom role-resolver (checks if user is a member of **assona-team** for ressource)
 - GraphQL, OpenAPI.spec, SwaggerUI+token
 - login/register/auth -users
+
+- Group hasAndBelongsToMany User
+- User  hasAndBelongsToMany Groups
+- admin is $owner of through-model
+
+# Query-style related modules
+
+- /api/users?filter[include][groups][permissions]
+- /api/userGroups?filter={"include":["group"],"where":{"ownerId":4}}
+- /api/users?filter[include][groups]&access_token=sjCJZ984g947197b19n34...
 
 # Frontend
 

@@ -1,28 +1,26 @@
 {
-  "name": "Group",
+  "name": "Permission",
+  "plural": "permissions",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "descr": {
+    "name": {
       "type": "string",
-      "default": "describe"
+      "required": true
+    },
+    "descr": {
+      "type": "string"
     }
   },
   "validations": [],
   "relations": {
-    "users": {
+    "groups": {
       "type": "hasAndBelongsToMany",
-      "model": "User",
-      "foreignKey": "userId",
-      "through": "UserGroup"
-    },
-    "permissions": {
-      "type": "hasAndBelongsToMany",
-      "model": "Permission",
-      "foreignKey": "permissionId",
+      "model": "Group",
+      "foreignKey": "groupId",
       "through": "GroupPermission"
     }
   },

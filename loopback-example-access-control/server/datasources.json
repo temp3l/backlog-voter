@@ -4,5 +4,4 @@
     "connector": "memory",
     "file": "data/data.json"
   }
-
 }

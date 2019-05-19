@@ -23,6 +23,12 @@
       "type": "belongsTo",
       "model": "Group",
       "foreignKey": "groupId"
+    },
+    "permissions": {
+      "type": "hasAndBelongsToMany",
+      "model": "Permission",
+      "foreignKey": "permissionId",
+      "through": "GroupPermission"
     }
   },
   "acls": [],
