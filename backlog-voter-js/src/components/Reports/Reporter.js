@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import api from "../../services/api";
 import "./Reporter.scss";
 
-function Reporter( props) {
+function Reporter(props) {
   const [reportItems, setReportItems] = useState([]);
   const [backlog, setBacklog] = useState({});
   //const [val, setVal] = useState(10);
@@ -20,19 +20,17 @@ function Reporter( props) {
 
       setReportItems(
         reportItems.data.map(item =>
-          Object.assign(item, { value: getRandomInt(50) })
+          Object.assign(item, { value: getRandomInt(30) })
         )
       );
       let interval = setInterval(() => {
         setReportItems(
           reportItems.data.map(item =>
-            Object.assign(item, { value: item.value + 1 })
+            Object.assign(item, { value: item.value + 0.28 })
           )
         );
-      }, 50);
-      setTimeout(() => {
-        clearInterval(interval);
-      }, 1500);
+      }, 20);
+      setTimeout(() => clearInterval(interval), 3500);
     };
     fetchData();
   }, [backlogId]);
@@ -43,7 +41,7 @@ function Reporter( props) {
     setReportItems(obj);
   };
 
-  const submitReport = async() => {
+  const submitReport = async () => {
     let report = Object.assign(
       { backlogId: backlog.id },
       { data: reportItems }
@@ -51,21 +49,18 @@ function Reporter( props) {
     console.log(report);
     try {
       const { data } = await api.post("/users/me/reports", report);
-      props.history.push('/reports/');
-    }
-    catch(e){
-      console.log(e)
+      props.history.push("/backlogs");
+    } catch (e) {
+      console.log(e);
     }
   };
-  console.log('reporter');
-  
+  console.log("reporter");
+
   return (
     <div className="container-fluid Slider">
       <h3>Create a report for: {backlog.name} </h3>
       <p className="description">{backlog.desc}</p>
 
-
-      
       <div className="container-fluid">
         {reportItems.map((item, idx) => (
           <div className="row SliderRow" key={item.id}>

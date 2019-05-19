@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { clearToken, saveToken } from "../../services/auth2";
+import { clearToken, saveToken, saveUser, loadUser } from "../../services/auth2";
 import _ from "lodash";
 const sampleUsers = [
   {
@@ -26,7 +26,7 @@ const sampleUsers = [
 ];
 
 function Login(props) {
-  const [user, setUser] = useState(sampleUsers[2]);
+  const [user, setUser] = useState(loadUser() || sampleUsers[2]);
   const [error, setError] = useState(null);
   const { setToken } = props;
 
@@ -35,13 +35,16 @@ function Login(props) {
     axios
       .post("/api/users/login", _.omit(user,['username', 'role']), { handlerEnabled: false })
       .then(data => {
+        
         saveToken(data);
         setToken(data);
+        if(data.id) saveUser(_.omit(user,['username', 'role']))
         if (data.id) return props.history.push("/account");
         setError(data.response.data);
       })
       .catch(err => {
         clearToken();
+
         if (err.response && err.response.data)  return setError(err.response.data);
         setError(err);
       });
@@ -60,6 +63,7 @@ function Login(props) {
 
   return (
     <div className="container">
+    <h3>Backlog - Retrospective</h3>
       <div className="row">
         <div className="col-md-4 shadow-lg p-3 mb-5 bg-white rounded">
           <h3>Login </h3>

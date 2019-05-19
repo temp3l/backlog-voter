@@ -105,6 +105,13 @@ function Root() {
     </div>
   );
 }
+
+function NotFound() {
+  return <p>404</p>;
+}
+
+
+
 // const ProtectedRoute = ({ component: Component, ...attrs }) => {
 //   return (
 //     <Route
@@ -148,11 +155,6 @@ function Root() {
 //     </Router>
 //   );
 // }
-
-function NotFound() {
-  return <p>404</p>;
-}
-
 
 
 /*

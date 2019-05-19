@@ -22,9 +22,10 @@ const Admin = props => {
   const {isAdmin, session} = props;
 
   if(!users) return <Spinner/>
+
   const host = window.location.hostname;
   return (
-    <div className="container backlogs">
+    <div className="container-fluid backlogs">
       <table className="table tokenTable table-condensed table-hover">
         <thead className="thead-dark">
           <tr>
@@ -45,10 +46,6 @@ const Admin = props => {
               if( permissions!==undefined && permissions !== null ) return group.permissions.length 
               return 0
             })
-            
-            
-            
-
             return (
               <tr key={user.id}>
                 <td>{user.id} </td>
@@ -80,9 +77,9 @@ const Admin = props => {
         <li className="list-group-item"><i>/api/users&filter[include][groups]?access_token=sjCJZ4Gqr6C6ZWLjyWcOc60RoES1zqoGx2x3uTZICABCLSPYAJeTuGxqJrryghdp</i></li>
       </ul>
 
-      <pre>{JSON.stringify(users, undefined, 4)}</pre>
+        
     </div>
   );
 };
-
+//<pre>{JSON.stringify(users, undefined, 4)}</pre>
 export default Admin;
