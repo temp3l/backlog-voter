@@ -5,60 +5,19 @@ import {
   Switch
 } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import Reporter from "./components/Reporter";
+import Reporter from "./components/Reports/Reporter";
 import Navbar2 from "./components/Navbar2";
-import Login from "./components/Login";
-import Backlogs from "./components/Backlogs";
+import Login from "./components/Login/Login";
+import Backlogs from "./components/Reports/Backlogs";
 import Users from "./components/Users";
 import Account from "./components/Account";
-import { isAuthenticated, readToken } from "./services/auth2";
+import ReportsList from "./components/Reports/ReportsList";
+import { isAuthenticated, readToken, isAdmin } from "./services/auth2";
 import api from "./services/api";
 import history from './services/history';
 
 
-function Reports() {
-  const [reports, setReports] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      let response = await api.get("/users/me/reports");
-      setReports(response.data);
-    };
-
-    fetchData();
-  }, []);
-
-  return (
-    <div>
-      <ul>
-        {reports.map(report => {
-          return (
-            <li key={report.id}>
-              id: {report.id} backlogId: {report.backlogId} userId:{" "}
-              {report.ownerId}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-}
-const ProtectedRoute = ({ component: Component, ...attrs }) => {
-  return (
-    <Route
-      {...attrs}
-      render={props =>
-        isAuthenticated() ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{ pathname: "/login", state: { from: props.location } }}
-          />
-        )
-      }
-    />
-  );
-};
 
 function Root() {
   const [session, setSession] = useState(null); //its basically read-only
@@ -69,17 +28,11 @@ function Root() {
   
   const removeToken = _token => {
     if(_token.id === session.token.id) {
-      // eslint(no-restricted-globals)
-      if( window.confirm('darn stupid, u enjoy?') === false) return false
+      if( window.confirm('darn stupid, enjoy!') === false) return false
     }
     api.delete("/users/1/AccessTokens/" + _token.id);
     setTokens(tokens.filter(x => x.id !== _token.id));
   };
-  
-
-  const pushHistory = path => {
-    ///props.history.push('/test')
-  }
 
   useEffect(() => {
     console.log('Root-Effects');
@@ -87,11 +40,11 @@ function Root() {
       try {
         const { data } = await api("/users/info?id=" + token.userId);
         const { payload } = data;
-        const { username, email, id } = payload;
-        setSession({ username, email, id, token: readToken() });
+        const { username, email, id, } = payload;
         setTokens(payload.accessTokens);
         setRoles(payload.roles);
         setTeams(payload.teams);
+        setSession({ username, email, id, token: readToken(), isAdmin: isAdmin(payload.roles) });
       } catch (err) {
         throw err;
       }
@@ -105,25 +58,44 @@ function Root() {
     <div>
       <Router history={history}>
         <div className="router">
-          <Navbar2 />
+          <Navbar2 isAdmin={isAdmin(roles)} session={session}/>
+       
           <div className="Content container-fluid">
-
             <Switch>
               <Route path="/login/" render={props => (
-                <Login {...props} setToken={setToken} pushHistory={pushHistory}/>
+                <Login {...props} setToken={setToken} />
               )} />
 
-              <Route path="/account"
+              {session &&<Route path="/account"
                 render={props => isAuthenticated() ? (
-                  <Account {...props} tokens={tokens} removeToken={removeToken} session={session} roles={roles} teams={teams}/>
+                  <Account {...props} tokens={tokens} removeToken={removeToken} session={session} roles={roles} teams={teams} isAdmin={isAdmin(roles)}/>
                 ) : ( <Redirect  to={{ pathname: "/login", state: { from: props.location } }}  /> )}
-              />
+              />}
 
-              <Route path="/account"
+             {session && <Route path="/backlogs" exact
                 render={props => isAuthenticated() ? (
-                  <Account {...props} tokens={tokens} removeToken={removeToken} session={session} roles={roles} teams={teams}/>
+                  <Backlogs {...props} isAdmin={isAdmin(roles)} session={session}/>
                 ) : ( <Redirect  to={{ pathname: "/login", state: { from: props.location } }}  /> )}
-              />
+              />}
+
+
+            {session && <Route path="/backlogs/:id"
+                render={props => isAuthenticated() ? (
+                  <Reporter {...props} isAdmin={isAdmin(roles)}/>
+                ) : ( <Redirect  to={{ pathname: "/login", state: { from: props.location } }}  /> )}
+              />}
+
+            {session && <Route path="/reports" exact
+                render={props => isAuthenticated() ? (
+                  <ReportsList {...props} isAdmin={isAdmin(roles)}/>
+                ) : ( <Redirect  to={{ pathname: "/login", state: { from: props.location } }}  /> )}
+              /> }
+
+            {session &&  <Route path="/users" exact
+                render={props => isAuthenticated() ? (
+                  <Users {...props} isAdmin={isAdmin(roles)}/>
+                ) : ( <Redirect  to={{ pathname: "/login", state: { from: props.location } }}  /> )}
+              />}
 
               <Route render={props => <NotFound {...props} />} />
             </Switch>
@@ -133,32 +105,49 @@ function Root() {
     </div>
   );
 }
-function App() {
-  return (
-    <Router>
-      <div>
-        <Navbar2 />
+// const ProtectedRoute = ({ component: Component, ...attrs }) => {
+//   return (
+//     <Route
+//       {...attrs}
+//       render={props =>
+//         isAuthenticated() ? (
+//           <Component {...props} />
+//         ) : (
+//           <Redirect
+//             to={{ pathname: "/login", state: { from: props.location } }}
+//           />
+//         )
+//       }
+//     />
+//   );
+// };
 
-        <div className="container-fluid Content">
-          <Route path="/login/" component={Login} />
-          <ProtectedRoute exact path="/" component={Account} />
+// function App() {
+//   return (
+//     <Router>
+//       <div>
+//         <Navbar2 />
 
-          <ProtectedRoute exact path="/backlogs" component={Backlogs} />
-          <ProtectedRoute path="/backlogs/:id" component={Reporter} exact />
-          <ProtectedRoute
-            path="/backlogs/:id/report/:reportId"
-            component={Reporter}
-          />
+//         <div className="container-fluid Content">
+//           <Route path="/login/" component={Login} />
+//           <ProtectedRoute exact path="/" component={Account} />
 
-          <ProtectedRoute path="/users/" component={Users} />
-          <ProtectedRoute path="/reports/" component={Reports} />
-          <ProtectedRoute path="/reporter/" component={Reporter} />
-          <Route render={() => <NotFound />} />
-        </div>
-      </div>
-    </Router>
-  );
-}
+//           <ProtectedRoute exact path="/backlogs" component={Backlogs} />
+//           <ProtectedRoute path="/backlogs/:id" component={Reporter} exact />
+//           <ProtectedRoute
+//             path="/backlogs/:id/report/:reportId"
+//             component={Reporter}
+//           />
+
+//           <ProtectedRoute path="/users/" component={Users} />
+//           <ProtectedRoute path="/reports/" component={ReportsList} />
+//           <ProtectedRoute path="/reporter/" component={Reporter} />
+//           <Route render={() => <NotFound />} />
+//         </div>
+//       </div>
+//     </Router>
+//   );
+// }
 
 function NotFound() {
   return <p>404</p>;

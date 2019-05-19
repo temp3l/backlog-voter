@@ -7,6 +7,10 @@
     "validateUpsert": true
   },
   "properties": {
+    "backlogId": {
+      "type": "string",
+      "required": true
+    },
     "data": {
       "type": "object",
       "required": true
@@ -22,18 +26,12 @@
     "user": {
       "type": "belongsTo",
       "model": "user",
-      "foreignKey": "",
-      "options": {
-        "nestRemoting": true
-      }
+      "foreignKey": "userId"
     },
     "backlog": {
-      "type": "belongsTo",
+      "type": "hasOne",
       "model": "Backlog",
-      "foreignKey": "",
-      "options": {
-        "nestRemoting": true
-      }
+      "foreignKey": ""
     }
   },
   "acls": [
@@ -41,6 +39,12 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
       "permission": "ALLOW"
     }
   ],

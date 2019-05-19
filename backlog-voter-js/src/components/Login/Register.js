@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import api from "../services/api";
-import "./Login.css";
+import api from "../../services/api";
+import "./Login.scss";
 
 function Login(props) {
   const [user, setUser] = useState({ email: "", password: "", username: "" });

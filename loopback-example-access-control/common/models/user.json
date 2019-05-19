@@ -15,21 +15,15 @@
       "model": "team",
       "foreignKey": "ownerId"
     },
-    "reports": { 
-      "type": "hasMany",
-      "model": "Report",
-      "foreignKey": "ownerId",
-      "options": {
-        "nestRemoting": true
-      }
-    },
     "accessTokens": {
       "type": "hasMany",
       "model": "AccessToken",
-      "foreignKey": "userId",
-      "options": {
-        "nestRemoting": true
-      }
+      "foreignKey": "userId"
+    },
+    "reports": {
+      "type": "hasMany",
+      "model": "Report",
+      "foreignKey": "ownerId"
     }
   },
   "acls": [

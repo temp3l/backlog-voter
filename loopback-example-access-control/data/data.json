@@ -1,54 +1,87 @@
 {
   "ids": {
     "User": 1,
-    "AccessToken": 179,
+    "AccessToken": 19,
     "ACL": 1,
-    "RoleMapping": 5,
-    "Role": 3,
-    "user": 13,
-    "team": 4,
+    "RoleMapping": 14,
+    "Role": 12,
+    "user": 10,
+    "team": 8,
     "project": 3,
-    "ReportItem": 10,
-    "Backlog": 4,
-    "Report": 1
+    "ReportItem": 13,
+    "Backlog": 20,
+    "Report": 9
   },
   "models": {
     "User": {},
     "AccessToken": {
-      "ugJmJ9LcCzBsGsqwTqK9dj9XzjyubSCTUuYcMSvAi5Bd4ckTZjF0sIjfGUFzuzP1": "{\"id\":\"ugJmJ9LcCzBsGsqwTqK9dj9XzjyubSCTUuYcMSvAi5Bd4ckTZjF0sIjfGUFzuzP1\",\"ttl\":1209600,\"created\":\"2019-05-18T09:03:18.359Z\",\"userId\":4}",
-      "AH3zAAND33muvJbN9MKhfPVGm0FHkOsueVFccEdWGDQiYbDiRZe3SLHBMPOboGdK": "{\"id\":\"AH3zAAND33muvJbN9MKhfPVGm0FHkOsueVFccEdWGDQiYbDiRZe3SLHBMPOboGdK\",\"ttl\":1209600,\"created\":\"2019-05-18T11:00:25.679Z\",\"userId\":5}",
-      "zynW2npouhaZCAGxw8LZQ3NINDaLKSF1YLR38NbqkAGmWyWGk8Togmy1wK0qOFbM": "{\"id\":\"zynW2npouhaZCAGxw8LZQ3NINDaLKSF1YLR38NbqkAGmWyWGk8Togmy1wK0qOFbM\",\"ttl\":1209600,\"created\":\"2019-05-18T16:01:42.276Z\",\"userId\":1}",
-      "Ocz4N3G7VLs6x6XRNFI1RIAcUTa9WqNopQdRrFDIDG2TXlSdvXvjB0gKgk4qerEg": "{\"id\":\"Ocz4N3G7VLs6x6XRNFI1RIAcUTa9WqNopQdRrFDIDG2TXlSdvXvjB0gKgk4qerEg\",\"ttl\":1209600,\"created\":\"2019-05-18T16:05:50.495Z\",\"userId\":1}"
+      "k2K40oHHS6IGuMVplawdJgaEq7KZE3vCa8QRBuZ7GgY4M9sqEt0L8PkTUy6SDnB0": "{\"id\":\"k2K40oHHS6IGuMVplawdJgaEq7KZE3vCa8QRBuZ7GgY4M9sqEt0L8PkTUy6SDnB0\",\"ttl\":1209600,\"created\":\"2019-05-19T01:58:41.416Z\",\"userId\":3}",
+      "H5qDQo7ssasxpHSNOnDMc3iFAPruett3le1CZ8xf82Vlh3AY3ueGBXhEaHjo4Pot": "{\"id\":\"H5qDQo7ssasxpHSNOnDMc3iFAPruett3le1CZ8xf82Vlh3AY3ueGBXhEaHjo4Pot\",\"ttl\":1209600,\"created\":\"2019-05-19T02:05:32.959Z\",\"userId\":2}",
+      "UtrvusAr4H3axdJZO3JAQSYxYCiEs0CHDsy0EXZ2oLmHFo05HpvGzczoU2ZzgTaE": "{\"id\":\"UtrvusAr4H3axdJZO3JAQSYxYCiEs0CHDsy0EXZ2oLmHFo05HpvGzczoU2ZzgTaE\",\"ttl\":1209600,\"created\":\"2019-05-19T02:05:40.539Z\",\"userId\":3}",
+      "PaGzFJ670L8az15oQp9e3h6iL6yjzSSLENP2lIAT63YdKpaXuZpitD5ICJkRzmLC": "{\"id\":\"PaGzFJ670L8az15oQp9e3h6iL6yjzSSLENP2lIAT63YdKpaXuZpitD5ICJkRzmLC\",\"ttl\":1209600,\"created\":\"2019-05-19T02:17:24.749Z\",\"userId\":2}",
+      "75fCpPNFn6UsFkBp48rd74LNIj9LU6PmWqIFGBE0GboOEymy2WbnOcvrHnHaAZoQ": "{\"id\":\"75fCpPNFn6UsFkBp48rd74LNIj9LU6PmWqIFGBE0GboOEymy2WbnOcvrHnHaAZoQ\",\"ttl\":1209600,\"created\":\"2019-05-19T02:31:28.383Z\",\"userId\":3}",
+      "D5yFWhGBA1Kn4Er89qrUXzMRmM2JNV1g0P89Q0Uu1UELRXt73rqdMUvhuN24HaGe": "{\"id\":\"D5yFWhGBA1Kn4Er89qrUXzMRmM2JNV1g0P89Q0Uu1UELRXt73rqdMUvhuN24HaGe\",\"ttl\":1209600,\"created\":\"2019-05-19T02:56:04.041Z\",\"userId\":3}",
+      "ZfvhRairSpP3a6vNgYiSggK7QtXRGIFKv2DP1s3ix1M9mUPUAXOmoRt2ViOaMZDg": "{\"id\":\"ZfvhRairSpP3a6vNgYiSggK7QtXRGIFKv2DP1s3ix1M9mUPUAXOmoRt2ViOaMZDg\",\"ttl\":1209600,\"created\":\"2019-05-19T02:56:06.777Z\",\"userId\":3}",
+      "XIzmZFgpob1QyAjZ04e9YkEWrlMGPrKKpl2wgbN3TSx8J7yLwQydEKciSoA7C7vm": "{\"id\":\"XIzmZFgpob1QyAjZ04e9YkEWrlMGPrKKpl2wgbN3TSx8J7yLwQydEKciSoA7C7vm\",\"ttl\":1209600,\"created\":\"2019-05-19T03:19:44.752Z\",\"userId\":1}",
+      "HCEBac1FWlF7MIxke6snHmk69FcNoCnEYnrkFzMeEusE3BFu8TWdluzCTg9b9wQh": "{\"id\":\"HCEBac1FWlF7MIxke6snHmk69FcNoCnEYnrkFzMeEusE3BFu8TWdluzCTg9b9wQh\",\"ttl\":1209600,\"created\":\"2019-05-19T03:20:57.554Z\",\"userId\":2}",
+      "1KTbxQi1MeZcV8vHdichhCH8icwtwwzTHtRuhqgBmutjLV4GmFFFOSlbwc7f1SBp": "{\"id\":\"1KTbxQi1MeZcV8vHdichhCH8icwtwwzTHtRuhqgBmutjLV4GmFFFOSlbwc7f1SBp\",\"ttl\":1209600,\"created\":\"2019-05-19T03:22:49.621Z\",\"userId\":3}",
+      "k6UherN26G4i8NcQakjnBeOCmc3N2LAf8HAOdNY0l0FW4oGfSYEu9AqsxcQdXG6D": "{\"id\":\"k6UherN26G4i8NcQakjnBeOCmc3N2LAf8HAOdNY0l0FW4oGfSYEu9AqsxcQdXG6D\",\"ttl\":1209600,\"created\":\"2019-05-19T03:23:00.314Z\",\"userId\":2}",
+      "wGJ16GPbiAN7KgBIB9YV0dg6X0sZABmmYhGwXthhYgtPb9ISuDeveCzn4RmXtNTe": "{\"id\":\"wGJ16GPbiAN7KgBIB9YV0dg6X0sZABmmYhGwXthhYgtPb9ISuDeveCzn4RmXtNTe\",\"ttl\":1209600,\"created\":\"2019-05-19T03:27:45.791Z\",\"userId\":3}",
+      "IL1wFh2UMv7pH6Q0AoPmRwl5U2oea2g9tYowLwh4kUtsrNT00BDNH3GVPAFBulH5": "{\"id\":\"IL1wFh2UMv7pH6Q0AoPmRwl5U2oea2g9tYowLwh4kUtsrNT00BDNH3GVPAFBulH5\",\"ttl\":1209600,\"created\":\"2019-05-19T03:33:41.163Z\",\"userId\":4}",
+      "YA8BsPJ161k14CyH00rB0rhagAtqkIoxpn4xspbd3089eYURKd115Wmoj9SN4Btj": "{\"id\":\"YA8BsPJ161k14CyH00rB0rhagAtqkIoxpn4xspbd3089eYURKd115Wmoj9SN4Btj\",\"ttl\":1209600,\"created\":\"2019-05-19T03:33:44.992Z\",\"userId\":1}",
+      "EjpD8TAvScd5MHM53bYJbNFvNAG6wzHKV7gSZjoqD38hQ5PBUkDV8DBpZPie8GHI": "{\"id\":\"EjpD8TAvScd5MHM53bYJbNFvNAG6wzHKV7gSZjoqD38hQ5PBUkDV8DBpZPie8GHI\",\"ttl\":1209600,\"created\":\"2019-05-19T03:34:07.606Z\",\"userId\":1}",
+      "kPnXy4BneHNBzLTYDxLQewM1VBcCw28SfLDllZkAQeH7KK20OCcFYGsEw3pIJrGG": "{\"id\":\"kPnXy4BneHNBzLTYDxLQewM1VBcCw28SfLDllZkAQeH7KK20OCcFYGsEw3pIJrGG\",\"ttl\":1209600,\"created\":\"2019-05-19T03:34:10.572Z\",\"userId\":4}",
+      "T1ojXB4LSd4vlYjpQuNTswZG1zIOH2xutJW8f8FVOsJUAplB1k12D4YG9KPssIRF": "{\"id\":\"T1ojXB4LSd4vlYjpQuNTswZG1zIOH2xutJW8f8FVOsJUAplB1k12D4YG9KPssIRF\",\"ttl\":1209600,\"created\":\"2019-05-19T03:34:23.420Z\",\"userId\":3}",
+      "jwT6u99f8U3akxcGNGASiTIr5EzQNNIlhZJ7GDnsnzv7ar31lbijDUl3LNJRUz2L": "{\"id\":\"jwT6u99f8U3akxcGNGASiTIr5EzQNNIlhZJ7GDnsnzv7ar31lbijDUl3LNJRUz2L\",\"ttl\":1209600,\"created\":\"2019-05-19T03:36:39.760Z\",\"userId\":3}"
     },
     "ACL": {},
     "RoleMapping": {
       "1": "{\"principalType\":\"USER\",\"principalId\":\"3\",\"roleId\":1,\"id\":1}",
-      "2": "{\"principalType\":\"USER\",\"principalId\":\"4\",\"roleId\":1,\"id\":2}",
-      "3": "{\"principalType\":\"USER\",\"principalId\":\"1\",\"roleId\":2,\"id\":3}",
-      "4": "{\"principalType\":\"USER\",\"principalId\":\"4\",\"roleId\":2,\"id\":4}"
+      "2": "{\"principalType\":\"USER\",\"principalId\":\"4\",\"roleId\":2,\"id\":2}",
+      "3": "{\"principalType\":\"USER\",\"principalId\":\"3\",\"roleId\":3,\"id\":3}",
+      "4": "{\"principalType\":\"USER\",\"principalId\":\"8\",\"roleId\":4,\"id\":4}",
+      "5": "{\"principalType\":\"USER\",\"principalId\":\"6\",\"roleId\":5,\"id\":5}",
+      "6": "{\"principalType\":\"USER\",\"principalId\":\"1\",\"roleId\":6,\"id\":6}",
+      "7": "{\"principalType\":\"USER\",\"principalId\":\"6\",\"roleId\":7,\"id\":7}",
+      "8": "{\"principalType\":\"USER\",\"principalId\":\"7\",\"roleId\":8,\"id\":8}",
+      "9": "{\"principalType\":\"USER\",\"principalId\":\"2\",\"roleId\":9,\"id\":9}",
+      "10": "{\"principalType\":\"USER\",\"principalId\":\"3\",\"roleId\":10,\"id\":10}",
+      "11": "{\"principalType\":\"USER\",\"principalId\":\"4\",\"roleId\":10,\"id\":11}",
+      "12": "{\"principalType\":\"USER\",\"principalId\":\"1\",\"roleId\":11,\"id\":12}",
+      "13": "{\"principalType\":\"USER\",\"principalId\":\"4\",\"roleId\":11,\"id\":13}"
     },
     "Role": {
-      "1": "{\"name\":\"admin\",\"created\":\"2019-05-18T09:03:15.967Z\",\"modified\":\"2019-05-18T09:03:15.967Z\",\"id\":1}",
-      "2": "{\"name\":\"SNT-admin\",\"created\":\"2019-05-18T09:03:15.967Z\",\"modified\":\"2019-05-18T09:03:15.967Z\",\"id\":2}"
+      "1": "{\"name\":\"ASSONA_USER\",\"created\":\"2019-05-19T01:58:22.132Z\",\"modified\":\"2019-05-19T01:58:22.132Z\",\"id\":1}",
+      "2": "{\"name\":\"SNT_USER\",\"created\":\"2019-05-19T01:58:22.133Z\",\"modified\":\"2019-05-19T01:58:22.133Z\",\"id\":2}",
+      "3": "{\"name\":\"GMIT_USER\",\"created\":\"2019-05-19T01:58:22.133Z\",\"modified\":\"2019-05-19T01:58:22.133Z\",\"id\":3}",
+      "4": "{\"name\":\"ASSONA_ADMIN\",\"created\":\"2019-05-19T01:58:22.133Z\",\"modified\":\"2019-05-19T01:58:22.133Z\",\"id\":4}",
+      "5": "{\"name\":\"SNT_ADMIN\",\"created\":\"2019-05-19T01:58:22.133Z\",\"modified\":\"2019-05-19T01:58:22.133Z\",\"id\":5}",
+      "6": "{\"name\":\"GMIT_ADMIN\",\"created\":\"2019-05-19T01:58:22.133Z\",\"modified\":\"2019-05-19T01:58:22.133Z\",\"id\":6}",
+      "7": "{\"name\":\"ASSONA_MANGER\",\"created\":\"2019-05-19T01:58:22.133Z\",\"modified\":\"2019-05-19T01:58:22.133Z\",\"id\":7}",
+      "8": "{\"name\":\"SNT_MANGER\",\"created\":\"2019-05-19T01:58:22.133Z\",\"modified\":\"2019-05-19T01:58:22.133Z\",\"id\":8}",
+      "9": "{\"name\":\"GMIT_MANGER\",\"created\":\"2019-05-19T01:58:22.133Z\",\"modified\":\"2019-05-19T01:58:22.133Z\",\"id\":9}",
+      "10": "{\"name\":\"admin\",\"created\":\"2019-05-19T01:58:22.136Z\",\"modified\":\"2019-05-19T01:58:22.136Z\",\"id\":10}",
+      "11": "{\"name\":\"SNT-admin\",\"created\":\"2019-05-19T01:58:22.136Z\",\"modified\":\"2019-05-19T01:58:22.136Z\",\"id\":11}"
     },
     "user": {
-      "1": "{\"username\":\"John\",\"password\":\"$2a$10$9qR9h8nUGD6Ru5PPNfrq6./qjqNM5XuLLNFR.gt9zhLIKY2q6M63q\",\"email\":\"john@doe.com\",\"id\":1}",
-      "2": "{\"username\":\"Jane\",\"password\":\"$2a$10$f.2FJnlWYsMrJCzywv4Wge5C91X5iiKdYuJ5aeoZ/SMKV8xFKSPk6\",\"email\":\"jane@doe.com\",\"id\":2}",
-      "3": "{\"username\":\"Bob\",\"password\":\"$2a$10$PPC6LAkDSdiR7gXWIddjWuTrtDdcDFcpc2ZL4knNKvDH.Y2KKWxU2\",\"email\":\"bob@doe.com\",\"id\":3}",
-      "4": "{\"username\":\"mult\",\"password\":\"$2a$10$NBRKEayLeqs8aZgugiQTdeX5jxG97JyIc7ZESBY7Mxv..VlVqIdsG\",\"email\":\"mult@doe.com\",\"id\":4}",
-      "5": "{\"username\":\"\",\"password\":\"$2a$10$Zr41R4f/37j6gIqxNdkZmeGhRtCgHRfVRV.Z/lMSzK/bLX4Jpfvp2\",\"email\":\"john@doe.coms\",\"id\":5}",
-      "6": "{\"username\":\"\",\"password\":\"$2a$10$8LbgoUNDdvis4DhcucLP6OtLtYlYMjITTzYizQC6rUlAWlN9sABtS\",\"email\":\"sjohn@doe.coms\",\"id\":6}",
-      "7": "{\"username\":\"s\",\"password\":\"$2a$10$FrB4OWdWkNavp50ue3S83uCZgvLtcsDEf4XlfeLrbDuLS9XnBAVU.\",\"email\":\"john@doe.comss\",\"id\":7}",
-      "8": "{\"username\":\"\",\"password\":\"$2a$10$5atmdMcl8pNCRQ9Jk6QQWOeM4I5ywtzo2A0r3YLzFfxslMLqfaKG2\",\"email\":\"john@doe.comd\",\"id\":8}",
-      "9": "{\"username\":\"\",\"password\":\"$2a$10$7jAzikliFeXWlMlvfazoI.cTSHNcjaQ68tr0r7vzdVcapY.ts6E2S\",\"email\":\"john@doe.comdd\",\"id\":9}",
-      "10": "{\"username\":\"\",\"password\":\"$2a$10$f/QhoWTwH1mKBFN0Czuh1OE05n/VvrAnrIV0zVb4jRw7suuljjSPq\",\"email\":\"john@doe.comddd\",\"id\":10}",
-      "11": "{\"username\":\"\",\"password\":\"$2a$10$Q/Gy8wCfDIMlA977Itdy.OE9wxuZrQZ6XU5h.2qo/16e0wKMHWuS2\",\"email\":\"john@doe.comddddd\",\"id\":11}",
-      "12": "{\"username\":\"adadasd\",\"password\":\"$2a$10$n/bmYBzYK4D.g6yDvHlHte0K9nRrZUXDv4tAS.eQdR1v3weqiXFFW\",\"email\":\"john@doe.com111\",\"id\":12}"
+      "1": "{\"username\":\"John\",\"password\":\"$2a$10$8cwUmdiWhWNKDo9oBs2ule8tUTk8m5FaW59ySH9yN9gRdSraoHS3y\",\"email\":\"john@doe.com\",\"id\":1}",
+      "2": "{\"username\":\"Jane\",\"password\":\"$2a$10$wkcFXTCAZ.aG0GEhUrdwjuKOTFjCc6YAO4c3KmPrPNid99492EfU6\",\"email\":\"jane@doe.com\",\"id\":2}",
+      "3": "{\"username\":\"Bob\",\"password\":\"$2a$10$uSIVBoKgmBt5YkIkxZ9AnuGQzcYKO3s6VYhyf.ZVcT7e8NlFgxsUK\",\"email\":\"bob@doe.com\",\"id\":3}",
+      "4": "{\"username\":\"mult\",\"password\":\"$2a$10$.XQEyM5opRjKBsaBKFIHHOyM5mWwlIW1lnXHvQSLXfOuvuxC06oNO\",\"email\":\"mult@doe.com\",\"id\":4}",
+      "5": "{\"username\":\"aaa\",\"password\":\"$2a$10$bmcENiHHuGacUP4xdH9YJe83n3X/Vng0NoBZjfHVereAMBZou9Z8G\",\"email\":\"aaa@doe.com\",\"id\":5}",
+      "6": "{\"username\":\"bbb\",\"password\":\"$2a$10$GPouIE.TDc6xBpxIHGEqUei5JEPWKQvSKc/FOSSQlnlqyJgw/akDG\",\"email\":\"bbb@doe.com\",\"id\":6}",
+      "7": "{\"username\":\"ccc\",\"password\":\"$2a$10$.e0BdUpXW6TVj7.iNZsVyuE3Mr/wrDyti7Dji95wJho8CHZ4nKaU.\",\"email\":\"ccc@doe.com\",\"id\":7}",
+      "8": "{\"username\":\"ddd\",\"password\":\"$2a$10$G2W1sNqlPd7sBuvfd///0.lI30cOZJacj3yNZcHus5gMOpVoL/oCG\",\"email\":\"ddd@doe.com\",\"id\":8}",
+      "9": "{\"username\":\"eee\",\"password\":\"$2a$10$Kbr5xM2Hrtnr47gU9nafNeBSh8LTp.URrbNrvYQb3Y3OAdHoiBbB2\",\"email\":\"eee@doe.com\",\"id\":9}"
     },
     "team": {
-      "1": "{\"ownerId\":1,\"memberId\":\"1\",\"name\":\"SNT\",\"id\":1}",
-      "2": "{\"ownerId\":1,\"memberId\":\"2\",\"name\":\"SMB\",\"id\":2}",
-      "3": "{\"ownerId\":2,\"memberId\":\"2\",\"name\":\"Aassona\",\"id\":3}"
+      "1": "{\"ownerId\":1,\"memberId\":\"1\",\"id\":1}",
+      "2": "{\"ownerId\":1,\"memberId\":\"2\",\"id\":2}",
+      "3": "{\"ownerId\":2,\"memberId\":\"2\",\"id\":3}",
+      "4": "{\"ownerId\":2,\"memberId\":\"3\",\"id\":4}",
+      "5": "{\"ownerId\":2,\"memberId\":\"4\",\"id\":5}",
+      "6": "{\"ownerId\":2,\"memberId\":\"5\",\"id\":6}",
+      "7": "{\"ownerId\":2,\"memberId\":\"6\",\"id\":7}"
     },
     "project": {
       "1": "{\"name\":\"project1\",\"balance\":100,\"ownerId\":1,\"id\":1}",
@@ -63,13 +96,25 @@
       "6": "{\"name\":\"customerSatisfaction\",\"desc\":\"estimate customerSatisfaction\",\"id\":6}",
       "7": "{\"name\":\"partnerSatisfaction\",\"desc\":\"estimate partnerSatisfaction\",\"id\":7}",
       "8": "{\"name\":\"eco\",\"desc\":\"estimate eco\",\"id\":8}",
-      "9": "{\"name\":\"roi\",\"desc\":\"estimate roi\",\"id\":9}"
+      "9": "{\"name\":\"roi\",\"desc\":\"estimate roi\",\"id\":9}",
+      "12": "{\"name\":\"asd\",\"desc\":\"asd\",\"id\":12}"
     },
     "Backlog": {
-      "1": "{\"name\":\"First Backlog\",\"desc\":\"This backlog is about usefull stuff!\",\"date\":\"2019-05-18T09:03:15.409Z\",\"id\":1}",
-      "2": "{\"name\":\"Second Backlog\",\"desc\":\"Please report on this very tricky stuff!\",\"date\":\"2019-05-18T09:03:15.410Z\",\"id\":2}",
-      "3": "{\"name\":\"Third Backlog\",\"desc\":\"This backlog is about less tricky stuff\",\"date\":\"2019-05-18T09:03:15.410Z\",\"id\":3}"
+      "1": "{\"name\":\"First Backlog\",\"desc\":\"This backlog is about usefull stuff!\",\"date\":\"2019-05-19T01:58:20.981Z\",\"id\":1}",
+      "2": "{\"name\":\"Second Backlog\",\"desc\":\"Please report on this very tricky stuff!\",\"date\":\"2019-05-19T01:58:20.981Z\",\"id\":2}",
+      "3": "{\"name\":\"Third Backlog\",\"desc\":\"This backlog is about less tricky stuff\",\"date\":\"2019-05-19T01:58:20.981Z\",\"id\":3}",
+      "17": "{\"name\":\"asd\",\"desc\":\"asd\",\"date\":\"2019-05-19T03:20:42.246Z\",\"id\":17}",
+      "18": "{\"name\":\"ads\",\"desc\":\"asd\",\"date\":\"2019-05-19T03:21:38.744Z\",\"id\":18}",
+      "19": "{\"name\":\"ads\",\"desc\":\"asd\",\"date\":\"2019-05-19T03:21:39.641Z\",\"id\":19}"
     },
-    "Report": {}
+    "Report": {
+      "2": "{\"backlogId\":\"1\",\"data\":[{\"name\":\"winnings\",\"desc\":\"estimate winnings\",\"id\":1,\"value\":51},{\"name\":\"potential\",\"desc\":\"estimate potential\",\"id\":2,\"value\":69},{\"name\":\"dependence\",\"desc\":\"estimate dependence\",\"id\":3,\"value\":45},{\"name\":\"image\",\"desc\":\"estimate image\",\"id\":4,\"value\":47},{\"name\":\"employeeSatisfaction\",\"desc\":\"estimate employeeSatisfaction\",\"id\":5,\"value\":75},{\"name\":\"customerSatisfaction\",\"desc\":\"estimate customerSatisfaction\",\"id\":6,\"value\":59},{\"name\":\"partnerSatisfaction\",\"desc\":\"estimate partnerSatisfaction\",\"id\":7,\"value\":52},{\"name\":\"eco\",\"desc\":\"estimate eco\",\"id\":8,\"value\":74},{\"name\":\"roi\",\"desc\":\"estimate roi\",\"id\":9,\"value\":33}],\"date\":\"2019-05-19T02:05:11.027Z\",\"ownerId\":3,\"id\":2}",
+      "3": "{\"backlogId\":3,\"data\":[{\"name\":\"winnings\",\"desc\":\"estimate winnings\",\"id\":1,\"value\":55},{\"name\":\"potential\",\"desc\":\"estimate potential\",\"id\":2,\"value\":69},{\"name\":\"dependence\",\"desc\":\"estimate dependence\",\"id\":3,\"value\":56},{\"name\":\"image\",\"desc\":\"estimate image\",\"id\":4,\"value\":54},{\"name\":\"employeeSatisfaction\",\"desc\":\"estimate employeeSatisfaction\",\"id\":5,\"value\":70},{\"name\":\"customerSatisfaction\",\"desc\":\"estimate customerSatisfaction\",\"id\":6,\"value\":40},{\"name\":\"partnerSatisfaction\",\"desc\":\"estimate partnerSatisfaction\",\"id\":7,\"value\":60},{\"name\":\"eco\",\"desc\":\"estimate eco\",\"id\":8,\"value\":55},{\"name\":\"roi\",\"desc\":\"estimate roi\",\"id\":9,\"value\":66}],\"date\":\"2019-05-19T02:16:41.886Z\",\"ownerId\":3,\"id\":3}",
+      "4": "{\"backlogId\":2,\"data\":[{\"name\":\"winnings\",\"desc\":\"estimate winnings\",\"id\":1,\"value\":64},{\"name\":\"potential\",\"desc\":\"estimate potential\",\"id\":2,\"value\":38},{\"name\":\"dependence\",\"desc\":\"estimate dependence\",\"id\":3,\"value\":29},{\"name\":\"image\",\"desc\":\"estimate image\",\"id\":4,\"value\":45},{\"name\":\"employeeSatisfaction\",\"desc\":\"estimate employeeSatisfaction\",\"id\":5,\"value\":27},{\"name\":\"customerSatisfaction\",\"desc\":\"estimate customerSatisfaction\",\"id\":6,\"value\":51},{\"name\":\"partnerSatisfaction\",\"desc\":\"estimate partnerSatisfaction\",\"id\":7,\"value\":22},{\"name\":\"eco\",\"desc\":\"estimate eco\",\"id\":8,\"value\":32},{\"name\":\"roi\",\"desc\":\"estimate roi\",\"id\":9,\"value\":64}],\"date\":\"2019-05-19T02:17:01.744Z\",\"ownerId\":3,\"id\":4}",
+      "5": "{\"backlogId\":1,\"data\":[{\"name\":\"winnings\",\"desc\":\"estimate winnings\",\"id\":1,\"value\":82},{\"name\":\"potential\",\"desc\":\"estimate potential\",\"id\":2,\"value\":67},{\"name\":\"dependence\",\"desc\":\"estimate dependence\",\"id\":3,\"value\":60},{\"name\":\"image\",\"desc\":\"estimate image\",\"id\":4,\"value\":52},{\"name\":\"employeeSatisfaction\",\"desc\":\"estimate employeeSatisfaction\",\"id\":5,\"value\":82},{\"name\":\"customerSatisfaction\",\"desc\":\"estimate customerSatisfaction\",\"id\":6,\"value\":44},{\"name\":\"partnerSatisfaction\",\"desc\":\"estimate partnerSatisfaction\",\"id\":7,\"value\":54},{\"name\":\"eco\",\"desc\":\"estimate eco\",\"id\":8,\"value\":41},{\"name\":\"roi\",\"desc\":\"estimate roi\",\"id\":9,\"value\":80}],\"date\":\"2019-05-19T02:17:34.278Z\",\"ownerId\":2,\"id\":5}",
+      "6": "{\"backlogId\":2,\"data\":[{\"name\":\"winnings\",\"desc\":\"estimate winnings\",\"id\":1,\"value\":82},{\"name\":\"potential\",\"desc\":\"estimate potential\",\"id\":2,\"value\":81},{\"name\":\"dependence\",\"desc\":\"estimate dependence\",\"id\":3,\"value\":45},{\"name\":\"image\",\"desc\":\"estimate image\",\"id\":4,\"value\":47},{\"name\":\"employeeSatisfaction\",\"desc\":\"estimate employeeSatisfaction\",\"id\":5,\"value\":46},{\"name\":\"customerSatisfaction\",\"desc\":\"estimate customerSatisfaction\",\"id\":6,\"value\":71},{\"name\":\"partnerSatisfaction\",\"desc\":\"estimate partnerSatisfaction\",\"id\":7,\"value\":70},{\"name\":\"eco\",\"desc\":\"estimate eco\",\"id\":8,\"value\":63},{\"name\":\"roi\",\"desc\":\"estimate roi\",\"id\":9,\"value\":81},{\"name\":\"asd\",\"desc\":\"asd\",\"id\":12,\"value\":86}],\"date\":\"2019-05-19T03:19:52.050Z\",\"ownerId\":1,\"id\":6}",
+      "7": "{\"backlogId\":1,\"data\":[{\"name\":\"winnings\",\"desc\":\"estimate winnings\",\"id\":1,\"value\":42},{\"name\":\"potential\",\"desc\":\"estimate potential\",\"id\":2,\"value\":68},{\"name\":\"dependence\",\"desc\":\"estimate dependence\",\"id\":3,\"value\":58},{\"name\":\"image\",\"desc\":\"estimate image\",\"id\":4,\"value\":77},{\"name\":\"employeeSatisfaction\",\"desc\":\"estimate employeeSatisfaction\",\"id\":5,\"value\":59},{\"name\":\"customerSatisfaction\",\"desc\":\"estimate customerSatisfaction\",\"id\":6,\"value\":67},{\"name\":\"partnerSatisfaction\",\"desc\":\"estimate partnerSatisfaction\",\"id\":7,\"value\":73},{\"name\":\"eco\",\"desc\":\"estimate eco\",\"id\":8,\"value\":62},{\"name\":\"roi\",\"desc\":\"estimate roi\",\"id\":9,\"value\":81},{\"name\":\"asd\",\"desc\":\"asd\",\"id\":12,\"value\":86}],\"date\":\"2019-05-19T03:20:31.884Z\",\"ownerId\":1,\"id\":7}",
+      "8": "{\"backlogId\":18,\"data\":[{\"name\":\"winnings\",\"desc\":\"estimate winnings\",\"id\":1,\"value\":80},{\"name\":\"potential\",\"desc\":\"estimate potential\",\"id\":2,\"value\":63},{\"name\":\"dependence\",\"desc\":\"estimate dependence\",\"id\":3,\"value\":46},{\"name\":\"image\",\"desc\":\"estimate image\",\"id\":4,\"value\":51},{\"name\":\"employeeSatisfaction\",\"desc\":\"estimate employeeSatisfaction\",\"id\":5,\"value\":58},{\"name\":\"customerSatisfaction\",\"desc\":\"estimate customerSatisfaction\",\"id\":6,\"value\":71},{\"name\":\"partnerSatisfaction\",\"desc\":\"estimate partnerSatisfaction\",\"id\":7,\"value\":72},{\"name\":\"eco\",\"desc\":\"estimate eco\",\"id\":8,\"value\":60},{\"name\":\"roi\",\"desc\":\"estimate roi\",\"id\":9,\"value\":67},{\"name\":\"asd\",\"desc\":\"asd\",\"id\":12,\"value\":53}],\"date\":\"2019-05-19T03:21:46.818Z\",\"ownerId\":2,\"id\":8}"
+    }
   }
 }

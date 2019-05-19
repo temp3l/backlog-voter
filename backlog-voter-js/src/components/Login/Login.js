@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./Login.css";
-import { clearToken, saveToken } from "../services/auth2";
+import "./Login.scss";
+import { clearToken, saveToken } from "../../services/auth2";
 import Register from "./Register";
 //import history from '../services/history';
 
@@ -20,14 +20,15 @@ const sampleUsers = [
   },
   {
     username: "Bob",
-    email: "bob@projects.com",
+    email: "bob@doe.com",
     password: "xxx",
     role: "admin, $authenticated, $everyone"
-  }
+  },
+  { username: "mult", email: "mult@doe.com", password: "xxx", role: "admin, SNT-admin, ..." }
 ];
 
 function Login(props) {
-  const [user, setUser] = useState(sampleUsers[0]);
+  const [user, setUser] = useState(sampleUsers[2]);
   const [error, setError] = useState(null);
   const [token] = useState(null);
   const { setToken } = props;
@@ -61,6 +62,7 @@ function Login(props) {
             <div className="row">
               <div className="col-md-5 LoginBox">
                 <h3>Login</h3>
+
                 <form onSubmit={handleSubmit}>
                   <div className="row">
                     <div className="input-group col-md-6">
@@ -132,7 +134,7 @@ function Login(props) {
                   {sampleUsers.map((user, i) => {
                     return (
                       <tr key={i}>
-                        <td>{user.email}</td>
+                        <td onClick={ (e)=> {setUser({email:user.email,password:'xxx'})} }>{user.email}</td>
                         <td>{user.password}</td>
                         <td>{user.name}</td>
                         <td>{user.role}</td>

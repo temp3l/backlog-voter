@@ -10,11 +10,6 @@
     "memberId": {
       "type": "string",
       "required": true
-    },
-    "name": {
-      "type": "string",
-      "required": true,
-      "default": "Default Team Name"
     }
   },
   "validations": [],

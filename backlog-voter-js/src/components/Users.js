@@ -1,31 +1,38 @@
 import React, { useState, useEffect } from "react";
 import api from "../services/api";
-import "./Backlogs.css";
+import Moment from "react-moment";
+import Spinner from './Spinner';
 
 const Admin = props => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const userResponse = await api("/users?filter[include]=teams&filter[include]=roles");
+      const userResponse = await api("/users?filter[include]=teams");
       setUsers(userResponse.data);
     };
     fetchData();
   }, []);
-  const editUser = () => {};
+
+
+
+  const edit = () => {
+
+  };
 
   const {isAdmin} = props;
-  if(!isAdmin) return (<p>Need Admin Role!</p>)
 
+  console.log('users');
+  if(!users) return <Spinner/>
   return (
     <div className="container backlogs">
-      <table className="table">
-        <thead>
+      <table className="table tokenTable table-condensed table-hover">
+        <thead className="thead-dark">
           <tr>
             <th>id</th>
             <th>del</th>
             <th>email</th>
-            <th>userName</th>
-            <th>token</th>
+            <th>created</th>
+            <th>teams</th>
           </tr>
         </thead>
         <tbody>
@@ -34,15 +41,22 @@ const Admin = props => {
               <tr key={user.id}>
                 <td>{user.id} </td>
                 <td>
-                  <button className="btn btn-warning" onClick={editUser}>
+                  <button className="btn btn-danger btn-sm" onClick={e => edit(user, i)}>
                     <i className="fas fa-trash" />
                   </button>
+                  &nbsp;
+                  <button className="btn btn-warning btn-sm" onClick={e => edit(user, i)}>
+                    <i className="fas fa-edit" />
+                  </button>
+                  &nbsp;
+                  <button className="btn btn-success btn-sm" onClick={e => edit(user, i)}>
+                    <i className="fas fa-users-cog"></i>
+                  </button>
+                  
                 </td>
                 <td>{user.email}</td>
-                <td>{user.username}</td>
-                <td>
-                </td>
-                <td>{user.id}</td>
+                <td><Moment format="DD.MM.YYYY HH:MM">{user.created}</Moment></td>
+                <td>{user.teams.length}</td>
               </tr>
             );
           })}
