@@ -1,9 +1,4 @@
-import {
-  Router,
-  Route,
-  Redirect,
-  Switch
-} from "react-router-dom";
+import { Router, Route, Redirect, Switch } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Reporter from "./components/Reports/Reporter";
 import Navbar2 from "./components/Navbar2";
@@ -14,43 +9,48 @@ import Account from "./components/Account";
 import ReportsList from "./components/Reports/ReportsList";
 import { isAuthenticated, readToken, isAdmin } from "./services/auth2";
 import api from "./services/api";
-import history from './services/history';
-
-
-
+import history from "./services/history";
+import _ from "lodash";
 
 function Root() {
   const [session, setSession] = useState(null); //its basically read-only
   const [tokens, setTokens] = useState([]); //pass to Account
-  const [token, setToken] = useState(readToken())
+  const [token, setToken] = useState(readToken());
   const [roles, setRoles] = useState([]); //pass to Account
   const [teams, setTeams] = useState(null); //pass to Account
-  
+
   const removeToken = _token => {
-    if(_token.id === session.token.id) {
-      if( window.confirm('darn stupid, enjoy!') === false) return false
+    if (_token.id === session.token.id) {
+      if (window.confirm("darn stupid, enjoy!") === false) return false;
     }
     api.delete("/users/1/AccessTokens/" + _token.id);
     setTokens(tokens.filter(x => x.id !== _token.id));
   };
 
   useEffect(() => {
-    console.log('Root-Effects');
+    console.log("Root-Effects");
     const fetchData = async () => {
       try {
         const { data } = await api("/users/info?id=" + token.userId);
         const { payload } = data;
-        const { username, email, id, } = payload;
+        const { username, email, id } = payload;
         setTokens(payload.accessTokens);
         setRoles(payload.roles);
         setTeams(payload.teams);
-        setSession({ username, email, id, token: readToken(), isAdmin: isAdmin(payload.roles) });
+        setSession({
+          username,
+          email,
+          id,
+          token: readToken(),
+          isAdmin: isAdmin(payload.roles),
+          ..._.omit(payload, ["teams", "accessTokens", "roles", "reports"])
+        });
       } catch (err) {
         throw err;
       }
     };
-    if(token && token.userId){
-        fetchData();
+    if (token && token.userId) {
+      fetchData();
     }
   }, [token]);
 
@@ -58,44 +58,123 @@ function Root() {
     <div>
       <Router history={history}>
         <div className="router">
-          <Navbar2 isAdmin={isAdmin(roles)} session={session}/>
-       
+          <Navbar2 isAdmin={isAdmin(roles)} session={session} />
+
           <div className="Content container-fluid">
             <Switch>
-              <Route path="/login/" render={props => (
-                <Login {...props} setToken={setToken} />
-              )} />
+              <Route
+                path="/login/"
+                render={props => <Login {...props} setToken={setToken} />}
+              />
 
-              {session &&<Route path="/account"
-                render={props => isAuthenticated() ? (
-                  <Account {...props} tokens={tokens} removeToken={removeToken} session={session} roles={roles} teams={teams} isAdmin={isAdmin(roles)}/>
-                ) : ( <Redirect  to={{ pathname: "/login", state: { from: props.location } }}  /> )}
-              />}
+              {session && (
+                <Route
+                  path="/account"
+                  render={props =>
+                    isAuthenticated() ? (
+                      <Account
+                        {...props}
+                        tokens={tokens}
+                        removeToken={removeToken}
+                        session={session}
+                        roles={roles}
+                        teams={teams}
+                        isAdmin={isAdmin(roles)}
+                      />
+                    ) : (
+                      <Redirect
+                        to={{
+                          pathname: "/login",
+                          state: { from: props.location }
+                        }}
+                      />
+                    )
+                  }
+                />
+              )}
 
-             {session && <Route path="/backlogs" exact
-                render={props => isAuthenticated() ? (
-                  <Backlogs {...props} isAdmin={isAdmin(roles)} session={session}/>
-                ) : ( <Redirect  to={{ pathname: "/login", state: { from: props.location } }}  /> )}
-              />}
+              {session && (
+                <Route
+                  path="/backlogs"
+                  exact
+                  render={props =>
+                    isAuthenticated() ? (
+                      <Backlogs
+                        {...props}
+                        isAdmin={isAdmin(roles)}
+                        session={session}
+                      />
+                    ) : (
+                      <Redirect
+                        to={{
+                          pathname: "/login",
+                          state: { from: props.location }
+                        }}
+                      />
+                    )
+                  }
+                />
+              )}
 
+              {session && (
+                <Route
+                  path="/backlogs/:id"
+                  render={props =>
+                    isAuthenticated() ? (
+                      <Reporter {...props} isAdmin={isAdmin(roles)} />
+                    ) : (
+                      <Redirect
+                        to={{
+                          pathname: "/login",
+                          state: { from: props.location }
+                        }}
+                      />
+                    )
+                  }
+                />
+              )}
 
-            {session && <Route path="/backlogs/:id"
-                render={props => isAuthenticated() ? (
-                  <Reporter {...props} isAdmin={isAdmin(roles)}/>
-                ) : ( <Redirect  to={{ pathname: "/login", state: { from: props.location } }}  /> )}
-              />}
+              {session && (
+                <Route
+                  path="/reports"
+                  exact
+                  render={props =>
+                    isAuthenticated() ? (
+                      <ReportsList {...props} isAdmin={isAdmin(roles)} />
+                    ) : (
+                      <Redirect
+                        to={{
+                          pathname: "/login",
+                          state: { from: props.location }
+                        }}
+                      />
+                    )
+                  }
+                />
+              )}
 
-            {session && <Route path="/reports" exact
-                render={props => isAuthenticated() ? (
-                  <ReportsList {...props} isAdmin={isAdmin(roles)}/>
-                ) : ( <Redirect  to={{ pathname: "/login", state: { from: props.location } }}  /> )}
-              /> }
-
-            {session &&  <Route path="/users" exact
-                render={props => isAuthenticated() ? (
-                  <Users {...props} session={session} isAdmin={isAdmin(roles)}/>
-                ) : ( <Redirect  to={{ pathname: "/login", state: { from: props.location } }}  /> )}
-              />}
+              {session && (
+                <Route
+                  path="/users"
+                  exact
+                  render={props =>
+                    isAuthenticated() ? (
+                      <Users
+                        {...props}
+                        session={session}
+                        isAdmin={isAdmin(roles)}
+                      />
+                    ) : (
+                      <Redirect
+                        to={{
+                          pathname: "/login",
+                          state: { from: props.location }
+                        }}
+                      />
+                    )
+                  }
+                />
+              )}
 
               <Route render={props => <NotFound {...props} />} />
             </Switch>
@@ -109,8 +188,6 @@ function Root() {
 function NotFound() {
   return <p>404</p>;
 }
-
-
 
 // const ProtectedRoute = ({ component: Component, ...attrs }) => {
 //   return (
@@ -155,7 +232,6 @@ function NotFound() {
 //     </Router>
 //   );
 // }
-
 
 /*
 ## State Management

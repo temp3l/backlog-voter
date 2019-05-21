@@ -1,5 +1,5 @@
 {
-  "name": "loopback-example-access-control",
+  "name": "user-manager-auth-backlog-retrospection",
   "version": "1.0.0",
   "main": "server/server.js",
   "scripts": {

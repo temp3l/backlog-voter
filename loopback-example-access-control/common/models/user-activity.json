@@ -1,0 +1,25 @@
+{
+  "name": "UserActivity",
+  "plural": "userActivities",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "User",
+      "foreignKey": "userId"
+    },
+    "activity": {
+      "type": "belongsTo",
+      "model": "Activity",
+      "foreignKey": "activityId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

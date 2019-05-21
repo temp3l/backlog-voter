@@ -2,17 +2,9 @@
 GET /appointments?filter={"include":["patient"],"where":{"physicianId":2}}    
     https://loopback.io/doc/en/lb2/HasManyThrough-relations.html
 
-    http://localhost:5000/api/userGroups?filter={%22include%22:[%22group%22],%22where%22:{%22userId%22:4}}
-    http://localhost:5000/api/userGroups?filter={%22include%22:[%22user%22],%22where%22:{%22groupId%22:1}}
-    
-    http://localhost:5000/api/userGroups?filter[include][user]&filter[include][group]
-    ?filter={"include":["group"],"where":{"userId":4}}
-    ?filter[include]=group&filter[include]=owner
-    http://localhost:5000/api/userGroups?filter[include][user][groups]
-    ?filter[include][user][groups]
-    ?filter[include][user][groups]
-    ?filter[include][user][groups]
-    ?filter[include][groups][permissions]
+    http://10.50.2.103:4000/api/users?filter={"include":["group"],"where":{"userId":4}}
+    http://10.50.2.103:4000/api/users?filter[include][groups][permissions]
+    http://10.50.2.103:4000/api/users?filter[include]=activities&filter[include][groups][permissions]
 */
 
 module.exports = function(app) {
@@ -24,25 +16,55 @@ module.exports = function(app) {
   const Permission = app.models.Permission;
   const GroupPermission = app.models.GroupPermission;
   const Group = app.models.Group;
+  const Activity = app.models.Activity;
+  const UserActivity = app.models.UserActivity;
   const UserGroup = app.models.UserGroup;
   const _sampleGroups = [
-    { name: "ADMIN", descr: "admin group" },
-    { name: "USER", descr: "user groups" }
+    { name: "ADMIN", description: "admin group" },
+    { name: "USER", description: "user groups" }
   ];
 
   const getRandomInt = max => Math.floor(Math.random() * Math.floor(max));
   const fakeGroup = () => ({
     name: faker.internet.userName().toUpperCase(),
-    descr: faker.lorem.words()
+    description: faker.lorem.words()
   });
   const fakePermission = () => ({
     name: "PERM_" + faker.hacker.verb().toUpperCase(),
-    descr: faker.hacker.verb()
+    description: faker.hacker.verb()
+  });
+
+  const fakeActivity = () => ({
+    name: faker.finance.transactionType(),
+    date: faker.date.past()
+  });
+
+  Activity.count({}, (err, count) => {
+    if (count > 0) return true;
+
+    Activity.create(_.times(50, () => fakeActivity()), (err, activities) => {
+      User.find({}, (err, users) => {
+        users.forEach(user => {
+          UserActivity.create(
+            _.times(
+              10,
+              () => {
+                return {
+                  userId: users[getRandomInt(users.length - 1)].id,
+                  activityId: activities[getRandomInt(activities.length - 1)].id
+                };
+              },
+              (err, res) => console.log
+            )
+          );
+        });
+      });
+    });
   });
 
   Group.count({}, (err, count) => {
     console.log("Groups: ", count);
-    if (count > 100) {
+    if (count > 0) {
       console.log("not mocking UserGroups!");
       return true;
     }
@@ -60,28 +82,31 @@ module.exports = function(app) {
   });
 
   const createPermissions = () => {
-    Permission.create(
-      _.times(20, () => fakePermission()),
-      (err, permissions) => {
-        console.log("created Perms ", err, permissions);
-        UserGroup.find({}, (err, ugs) => {
-          console.log("USERGROUPS: " + ugs.length);
+    Permission.count({}, (err, count) => {
+      if (count > 0) return true;
+      Permission.create(
+        _.times(20, () => fakePermission()),
+        (err, permissions) => {
+          console.log("created Perms ", err, permissions);
+          UserGroup.find({}, (err, ugs) => {
+            console.log("USERGROUPS: " + ugs.length);
 
-          ugs.forEach(ug => {
-            _.times(getRandomInt(10), () =>
-              GroupPermission.create(
-                {
-                  permissionId:
-                    permissions[getRandomInt(permissions.length - 1)].id,
-                  groupId: ug.id
-                },
-                console.log
-              )
-            );
+            ugs.forEach(ug => {
+              _.times(getRandomInt(10), () =>
+                GroupPermission.create(
+                  {
+                    permissionId:
+                      permissions[getRandomInt(permissions.length - 1)].id,
+                    groupId: ug.id
+                  },
+                  console.log
+                )
+              );
+            });
           });
-        });
-      }
-    );
+        }
+      );
+    });
   };
 
   const createGroupsAndAssociateUsers = next => {

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import api from "../../services/api";
 import Spinner from "../Spinner";
 
-const endPoint = '/reportItems'
+const endPoint = "/reportItems";
 
 const CreateReportItemForm = props => {
-  const [state, setState] = useState({ name: "", desc: "" });
+  const [state, setState] = useState({ name: "", description: "" });
   const [error, setError] = useState(null);
 
   const onFormSubmit = async event => {
@@ -37,10 +37,10 @@ const CreateReportItemForm = props => {
           type="text"
           className="form-control mb-2 mr-sm-2"
           id="pwd2"
-          placeholder="Description"
-          value={state.desc}
+          placeholder="description"
+          value={state.description}
           onChange={e =>
-            setState(Object.assign({}, state, { desc: e.target.value }))
+            setState(Object.assign({}, state, { description: e.target.value }))
           }
         />
         <button type="submit" className="btn btn-primary mb-2">
@@ -87,7 +87,7 @@ const ReportsItems = props => {
         <thead className="thead-dark">
           <tr>
             <th>Name</th>
-            <th>desc</th>
+            <th>description</th>
             <th>del</th>
           </tr>
         </thead>
@@ -99,7 +99,7 @@ const ReportsItems = props => {
                   <b>{reportItem.name}</b>
                 </td>
                 <td>
-                  <i>{reportItem.desc}</i>
+                  <i>{reportItem.description}</i>
                 </td>
                 <td>
                   {isAdmin && (

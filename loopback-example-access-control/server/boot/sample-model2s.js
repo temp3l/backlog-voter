@@ -1,6 +1,5 @@
 module.exports = function(app) {
-  console.log('no mocking users');
-  
+  console.log("no mocking users");
 
   var User = app.models.user;
   var Role = app.models.Role;
@@ -34,12 +33,28 @@ module.exports = function(app) {
     { username: "ddd", email: "ddd@doe.com", password: "xxx" },
     { username: "eee", email: "eee@doe.com", password: "xxx" }
     //..._.times(10, () => fakeUser())
-  ];
+  ].map(user => {
+    return Object.assign(
+      {},
+      {
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        userName: user.username,
+        //email: faker.internet.email(),
+        status: faker.random.boolean() === true ? "active" : "inactive",
+        authSource: faker.random.boolean() === true ? "directory" : "local",
+        expiry: faker.date.future(),
+        locked: faker.random.boolean(),
+        lastLogin: faker.date.past()
+      },
+      user
+    );
+  });
 
   const _roles = ["USER", "ADMIN", "MANGER"]
     .map(role => ["ASSONA", "SNT", "GMIT"].map(str => str + "_" + role))
     .flat()
-    .map(r => ({ name: r }));
+    .map(r => ({ name: r, description: faker.lorem.words() }));
 
   const _projects = ["VIEW", "CREATE", "MODIFY", "DELETE"]
     .map(perm => ["TICKET", "WIKI", "CONTRACT"].map(str => str + "-" + perm))
@@ -50,27 +65,42 @@ module.exports = function(app) {
     if (count > 0) return console.log("\nReportItems already exist: ", count);
 
     ReportItem.create([
-      { name: "winnings", desc: "estimate winnings" },
-      { name: "potential", desc: "estimate potential" },
-      { name: "dependence", desc: "estimate dependence" },
-      { name: "image", desc: "estimate image" },
-      { name: "employeeSatisfaction", desc: "estimate employeeSatisfaction" },
-      { name: "customerSatisfaction", desc: "estimate customerSatisfaction" },
-      { name: "partnerSatisfaction", desc: "estimate partnerSatisfaction" },
-      { name: "eco", desc: "estimate eco" },
-      { name: "roi", desc: "estimate roi" }
+      { name: "winnings", description: "estimate winnings" },
+      { name: "potential", description: "estimate potential" },
+      { name: "dependence", description: "estimate dependence" },
+      { name: "image", description: "estimate image" },
+      {
+        name: "employeeSatisfaction",
+        description: "estimate employeeSatisfaction"
+      },
+      {
+        name: "customerSatisfaction",
+        description: "estimate customerSatisfaction"
+      },
+      {
+        name: "partnerSatisfaction",
+        description: "estimate partnerSatisfaction"
+      },
+      { name: "eco", description: "estimate eco" },
+      { name: "roi", description: "estimate roi" }
     ]);
   });
 
   Backlog.count({}, function(err, count) {
     if (count > 0) return console.log("RoleItems already exist: ", count);
     Backlog.create([
-      { name: "First Backlog", desc: "This backlog is about usefull stuff!" },
+      {
+        name: "First Backlog",
+        description: "This backlog is about usefull stuff!"
+      },
       {
         name: "Second Backlog",
-        desc: "Please report on this very tricky stuff!"
+        description: "Please report on this very tricky stuff!"
       },
-      { name: "Third Backlog", desc: "This backlog is about less tricky stuff" }
+      {
+        name: "Third Backlog",
+        description: "This backlog is about less tricky stuff"
+      }
     ]);
   });
 

@@ -1,0 +1,29 @@
+{
+  "name": "Activity",
+  "plural": "activities",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "users": {
+      "type": "hasAndBelongsToMany",
+      "model": "User",
+      "foreignKey": "userId",
+      "through": "UserActivity"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

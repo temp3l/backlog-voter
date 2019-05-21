@@ -11,14 +11,13 @@
       "type": "string",
       "required": true
     },
-    "desc": {
+    "description": {
       "type": "string",
       "required": true
     },
     "date": {
       "type": "date",
-      "required": false,
-      "default": "$now"
+      "defaultFn": "now"
     }
   },
   "validations": [],

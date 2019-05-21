@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { clearToken, saveToken, saveUser, loadUser } from "../../services/auth2";
+import {
+  clearToken,
+  saveToken,
+  saveUser,
+  loadUser
+} from "../../services/auth2";
 import _ from "lodash";
 const sampleUsers = [
   {
@@ -26,26 +31,28 @@ const sampleUsers = [
 ];
 
 function Login(props) {
-  const [user, setUser] = useState(loadUser() || sampleUsers[2]);
+  const [user, setUser] = useState(loadUser() || sampleUsers[0]);
   const [error, setError] = useState(null);
   const { setToken } = props;
 
   const handleLogin = async event => {
     event.preventDefault();
     axios
-      .post("/api/users/login", _.omit(user,['username', 'role']), { handlerEnabled: false })
+      .post("/api/users/login", _.omit(user, ["username", "role"]), {
+        handlerEnabled: false
+      })
       .then(data => {
-        
         saveToken(data);
         setToken(data);
-        if(data.id) saveUser(_.omit(user,['username', 'role']))
+        if (data.id) saveUser(_.omit(user, ["username", "role"]));
         if (data.id) return props.history.push("/account");
         setError(data.response.data);
       })
       .catch(err => {
         clearToken();
 
-        if (err.response && err.response.data)  return setError(err.response.data);
+        if (err.response && err.response.data)
+          return setError(err.response.data);
         setError(err);
       });
   };
@@ -53,7 +60,9 @@ function Login(props) {
   const handleRegister = async event => {
     event.preventDefault();
     axios
-      .post("/api/users", _.omit(user,['username', 'role']), { handlerEnabled: false })
+      .post("/api/users", _.omit(user, ["username", "role"]), {
+        handlerEnabled: false
+      })
       .then(response => setError(response.response.data.error))
       .catch(err => setError(err));
   };
@@ -63,25 +72,49 @@ function Login(props) {
 
   return (
     <div className="container">
-    <h3>Backlog - Retrospective</h3>
+      <h3>Backlog - Retrospective</h3>
       <div className="row">
         <div className="col-md-4 shadow-lg p-3 mb-5 bg-white rounded">
           <h3>Login </h3>
-          <form  onSubmit={handleLogin}>
+          <form onSubmit={handleLogin}>
             <div className="form-group">
-                <input type="text" className="form-control" placeholder="Your Email *" value={user.email} onChange={e => onChange("email", e)}/>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Your Email *"
+                value={user.email}
+                onChange={e => onChange("email", e)}
+              />
             </div>
             <div className="form-group">
-                <input type="password" className="form-control" placeholder="Your Password *" value={user.password} onChange={e => onChange("password", e)}/>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Your Password *"
+                value={user.password}
+                onChange={e => onChange("password", e)}
+              />
             </div>
             <div className="form-group">
-              <div className='container-fluid'>
-                <div className='row'>
-                  <div className='col-md-6'>
-                      <button type="submit" className="btn btn-primary btn-block" value="Login" >login</button>
+              <div className="container-fluid">
+                <div className="row">
+                  <div className="col-md-6">
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-block"
+                      value="Login"
+                    >
+                      login
+                    </button>
                   </div>
-                  <div className='col-md-6'>
-                    <button className="btn btn-success btn-block" value="Register" onClick={handleRegister}>register</button>
+                  <div className="col-md-6">
+                    <button
+                      className="btn btn-success btn-block"
+                      value="Register"
+                      onClick={handleRegister}
+                    >
+                      register
+                    </button>
                   </div>
                 </div>
               </div>
@@ -101,7 +134,12 @@ function Login(props) {
               <tbody>
                 {sampleUsers.map((user, i) => {
                   return (
-                    <tr key={i} onClick={e => { setUser({ email: user.email, password: "xxx" }); }}>
+                    <tr
+                      key={i}
+                      onClick={e => {
+                        setUser({ email: user.email, password: "xxx" });
+                      }}
+                    >
                       <td> {user.email}</td>
                       <td>{user.password}</td>
                       <td>{user.role}</td>
@@ -114,10 +152,12 @@ function Login(props) {
         </div>
       </div>
       <div className="row">
-      <br/>
-        {error && (<div className="col-md-12 shadow-lg p-3 mb-5 bg-white rounded"> 
-          <pre className="error">{JSON.stringify(error, undefined, 4)}</pre>
-        </div>)}
+        <br />
+        {error && (
+          <div className="col-md-12 shadow-lg p-3 mb-5 bg-white rounded">
+            <pre className="error">{JSON.stringify(error, undefined, 4)}</pre>
+          </div>
+        )}
       </div>
     </div>
   );

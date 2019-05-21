@@ -2,7 +2,35 @@
   "name": "user",
   "base": "User",
   "idInjection": true,
-  "properties": {},
+  "properties": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "userName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "authSource": {
+      "type": "string"
+    },
+    "expiry": {
+      "type": "date"
+    },
+    "locked": {
+      "type": "boolean"
+    },
+    "lastLogin": {
+      "type": "string"
+    }
+  },
   "validations": [],
   "relations": {
     "projects": {
@@ -30,6 +58,12 @@
       "model": "Group",
       "foreignKey": "groupId",
       "through": "UserGroup"
+    },
+    "activities": {
+      "type": "hasAndBelongsToMany",
+      "model": "Activity",
+      "foreignKey": "activityId",
+      "through": "UserActivity"
     }
   },
   "acls": [
@@ -37,19 +71,17 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "DENY"
+      "permission": "ALLOW"
     },
     {
       "principalType": "ROLE",
-      "principalId": "admin",
+      "principalId": "$everyone",
       "permission": "ALLOW",
-      "property": [
-        "find"
-      ]
+      "property": ["find"]
     },
     {
       "principalType": "ROLE",
-      "principalId": "$owner",
+      "principalId": "$everyone",
       "permission": "ALLOW",
       "property": [
         "__create__reports",
@@ -57,7 +89,9 @@
         "__destroyById__accessTokens",
         "getRolesById",
         "info",
-        "__get__groups"
+        "__get__groups",
+        "find",
+        "findById"
       ]
     }
   ],
