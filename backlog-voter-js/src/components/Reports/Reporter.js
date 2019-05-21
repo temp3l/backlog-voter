@@ -43,7 +43,7 @@ function Reporter(props) {
 
   const submitReport = async () => {
     let report = Object.assign(
-      { backlogId: backlog.id },
+      { backlogId: backlog.id, userId: props.session.id },
       { data: reportItems }
     );
     console.log(report);

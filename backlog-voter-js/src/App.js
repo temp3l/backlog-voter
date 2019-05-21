@@ -121,7 +121,7 @@ function Root() {
                   path="/backlogs/:id"
                   render={props =>
                     isAuthenticated() ? (
-                      <Reporter {...props} isAdmin={isAdmin(roles)} />
+                      <Reporter {...props} isAdmin={isAdmin(roles)} session={session} />
                     ) : (
                       <Redirect
                         to={{
@@ -140,7 +140,7 @@ function Root() {
                   exact
                   render={props =>
                     isAuthenticated() ? (
-                      <ReportsList {...props} isAdmin={isAdmin(roles)} />
+                      <ReportsList {...props} isAdmin={isAdmin(roles)} session={session} />
                     ) : (
                       <Redirect
                         to={{

@@ -12,17 +12,19 @@ import _ from "lodash";
 */
 function ReportsList() {
   const [reports, setReports] = useState();
+  const [backlog, setBacklog] = useState();
 
+  const backlogId = 3;
   useEffect(() => {
     const fetchData = async () => {
-      let response = await api.get("/users/me/reports");
-      setReports(response.data);
+      let response = await api.get("/backlogs/"+backlogId+"?filter[include][reports][user]");
+      setBacklog(response.data);
     };
 
     fetchData();
   }, []);
-  if (!reports) return <Spinner />;
-  console.log('report list')
+
+  if (!backlog) return <Spinner />;
 
   //shadow-lg p-3 mb-5 bg-white rounded
   return (
@@ -34,19 +36,26 @@ function ReportsList() {
             <th>id</th>
             <th>BacklogID</th>
             <th>created</th>
-            <th>token</th>
+            <th>userName</th>
+            <th>email</th>
+            <th>score</th>
+            <th>data</th>
           </tr>
         </thead>
         <tbody>
-          {reports.map((report, i) => {
+          {backlog.reports.map((report, i) => {
             return (
               <tr key={report.id}>
                 <td>{report.id}</td>
                 <td>{report.backlogId}</td>
                 <td><Moment format="DD.MM.YYYY hh:mm">{report.date}</Moment></td>
-                <td>
-                  <pre>{JSON.stringify( _.omit(report,'data'))}</pre>
-                </td>
+                <td>{report.user.userName}</td>
+                <td>{report.user.email}</td>
+                <td>0</td>
+                <td>{report.data.map(item=>{
+                  return item.value.toFixed(0)
+                }).join(', ')}</td>
+               
               </tr>
             );
           })}
