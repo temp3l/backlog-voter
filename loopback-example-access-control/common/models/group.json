@@ -9,6 +9,10 @@
     "descr": {
       "type": "string",
       "default": "describe"
+    },
+    "name": {
+      "type": "string",
+      "unique": true
     }
   },
   "validations": [],

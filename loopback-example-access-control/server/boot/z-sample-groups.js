@@ -26,12 +26,12 @@ module.exports = function(app) {
 
   const getRandomInt = max => Math.floor(Math.random() * Math.floor(max));
   const fakeGroup = () => ({
-    name: faker.internet.userName().toUpperCase(),
-    description: faker.lorem.words()
+    name: "ROLE_" + faker.company.bsBuzz(),
+    description: faker.hacker.phrase()
   });
   const fakePermission = () => ({
     name: "PERM_" + faker.hacker.verb().toUpperCase(),
-    description: faker.hacker.verb()
+    description: faker.hacker.phrase()
   });
 
   const fakeActivity = () => ({
