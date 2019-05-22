@@ -5,13 +5,6 @@ import Moment from "react-moment";
 import Spinner from "../Spinner";
 import ReportItems from "./ReportItems";
 
-/*
-  <div class="shadow-none p-3 mb-5 bg-light rounded">No shadow</div>
-  <div class="shadow-sm p-3 mb-5 bg-white rounded">Small shadow</div>
-  <div class="shadow p-3 mb-5 bg-white rounded">Regular shadow</div>
-  <div class="shadow-lg p-3 mb-5 bg-white rounded">Larger shadow</div>
-*/
-
 const CreateBacklogForm = props => {
   const [state, setState] = useState({ name: "", description: "" });
   const [error, setError] = useState(null);
@@ -20,7 +13,6 @@ const CreateBacklogForm = props => {
     event.preventDefault();
     try {
       let { data } = await api.post("/backlogs", state);
-      console.log(data);
       props.doFetch(Date.now());
     } catch (err) {
       setError(err.response.data);

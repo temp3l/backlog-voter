@@ -65,23 +65,53 @@ module.exports = function(app) {
     if (count > 0) return console.log("\nReportItems already exist: ", count);
 
     ReportItem.create([
-      { name: "winnings", description: "estimate winnings" },
-      { name: "potential", description: "estimate potential" },
-      { name: "dependence", description: "estimate dependence" },
-      { name: "image", description: "estimate image" },
       {
-        name: "employeeSatisfaction",
-        description: "estimate employeeSatisfaction"
+        name: "Gewinn",
+        description: "Viele Gewinn wird erwartet.",
+        modifier: "1.0"
       },
       {
-        name: "customerSatisfaction",
-        description: "estimate customerSatisfaction"
+        name: "zusätzliches Potenzial",
+        description:
+          "Bietet es eine Grundlage für andere Dinge. Lernen wir dabei? Türöffner für neue Marktbereiche und neue Partner?",
+        modifier: "1.0"
       },
       {
-        name: "partnerSatisfaction",
-        description: "estimate partnerSatisfaction"
+        name: "Unabhängigkeit",
+        description:
+          "Wie viel trägt diese BB zur Diversifikation bei, um große Abhängigkeiten von Partner oder Kunden zu vermeiden, die sonst der assona ihren Willen aufzwingen könnten.",
+        modifier: "0.8"
       },
-      { name: "eco", description: "estimate eco" },
+      {
+        name: "Image / PR / Auswirkung",
+        description:
+          "Wie viel trägt diese BB bei der Ausbildung vom gewollten Image bei.",
+        modifier: "0.8"
+      },
+      {
+        name: "Mitarbeiterzufriedenheit	",
+        description:
+          "Hilft es der assona Mitarbeiter zu halten? Verbessert sich der Arbeitsalltag dadurch?",
+        modifier: "0.6"
+      },
+      {
+        name: "Partnerzufriedenheit",
+        description:
+          "Hilft es die Entscheidung für unserer Dienstleistern und Vertriebspartnern weiter mit der assona zusammenzuarbeiten zu erleichtern?",
+        modifier: "0.6"
+      },
+      {
+        name: "Kundenzufriedenheit",
+        description:
+          "Verbessert es unsere Bewertungen in Vergleichsportalen und würde unsere Kunden uns danach mehr weiterempfehlen?",
+        modifier: "0.8"
+      },
+      {
+        name: "Umwelt",
+        description:
+          "Kann die assona dadurch ein Beitrag zum Umweltschutz durch z.B. mehr Reparaturen und weniger Müll leisten?",
+        modifier: "0.8"
+      },
       { name: "roi", description: "estimate roi" }
     ]);
   });

@@ -14,6 +14,10 @@
     "description": {
       "type": "string",
       "required": true
+    },
+    "modifier": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],

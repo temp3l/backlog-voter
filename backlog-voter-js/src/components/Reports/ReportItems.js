@@ -5,7 +5,11 @@ import Spinner from "../Spinner";
 const endPoint = "/reportItems";
 
 const CreateReportItemForm = props => {
-  const [state, setState] = useState({ name: "", description: "" });
+  const [state, setState] = useState({
+    name: "",
+    description: "",
+    modifier: "0.8"
+  });
   const [error, setError] = useState(null);
 
   const onFormSubmit = async event => {
@@ -41,6 +45,16 @@ const CreateReportItemForm = props => {
           value={state.description}
           onChange={e =>
             setState(Object.assign({}, state, { description: e.target.value }))
+          }
+        />
+        <input
+          type="number"
+          className="form-control mb-2 mr-sm-2"
+          id="modifier"
+          placeholder="modifier"
+          value={state.modifier}
+          onChange={e =>
+            setState(Object.assign({}, state, { modifier: e.target.value }))
           }
         />
         <button type="submit" className="btn btn-primary mb-2">
@@ -88,6 +102,7 @@ const ReportsItems = props => {
           <tr>
             <th>Name</th>
             <th>description</th>
+            <th>modifier</th>
             <th>del</th>
           </tr>
         </thead>
@@ -100,6 +115,9 @@ const ReportsItems = props => {
                 </td>
                 <td>
                   <i>{reportItem.description}</i>
+                </td>
+                <td>
+                  <i>{reportItem.modifier}</i>
                 </td>
                 <td>
                   {isAdmin && (

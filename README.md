@@ -9,8 +9,8 @@
 - login/register/auth -users
 
 - Group hasAndBelongsToMany User
-- User  hasAndBelongsToMany Groups
-- admin is $owner of through-model
+- User hasAndBelongsToMany Groups
+- admin is \$owner of through-model
 
 # Query-style related modules
 
@@ -99,11 +99,7 @@ MyUser.disableRemoteMethod(
 
 # Backlog-Voter
 
-
 # foo-logic
-
-
-
 
 ## App-Setup
 
@@ -114,10 +110,8 @@ MyUser.disableRemoteMethod(
 
 1. User fetches /backlogs
 2. User fetches /reportItems
-3. User creates *one* Report for every Backlog
+3. User creates _one_ Report for every Backlog
 4. A report provides a numeric value for every ReportItem
-
-
 
 ## Models involved
 
