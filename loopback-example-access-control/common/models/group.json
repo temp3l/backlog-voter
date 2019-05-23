@@ -6,12 +6,13 @@
     "validateUpsert": true
   },
   "properties": {
-    "descr": {
+    "description": {
       "type": "string",
-      "default": "describe"
+      "required": true
     },
     "name": {
       "type": "string",
+      "required": true,
       "unique": true
     }
   },

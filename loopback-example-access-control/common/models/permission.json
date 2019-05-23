@@ -12,8 +12,9 @@
       "required": true,
       "unique": true
     },
-    "descr": {
-      "type": "string"
+    "description": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
