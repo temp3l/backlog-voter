@@ -52,10 +52,9 @@ function ReportsList() {
                 <td>{report.user.userName}</td>
                 <td>{report.user.email}</td>
                 <td>0</td>
-                <td>{report.data.map(item=>{
-                  return item.value.toFixed(0)
+                <td>{report.data.map( item =>{
+                  return Number(item.value)
                 }).join(', ')}</td>
-               
               </tr>
             );
           })}

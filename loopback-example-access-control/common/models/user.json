@@ -71,13 +71,15 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "ALLOW"
+      "permission": "DENY"
     },
     {
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW",
-      "property": ["find"]
+      "property": [
+        "find"
+      ]
     },
     {
       "principalType": "ROLE",
@@ -90,7 +92,6 @@
         "getRolesById",
         "info",
         "__get__groups",
-        "find",
         "findById"
       ]
     }
