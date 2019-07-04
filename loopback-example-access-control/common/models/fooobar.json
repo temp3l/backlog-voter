@@ -1,0 +1,23 @@
+{
+  "name": "fooobar",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "bar": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "backlogs": {
+      "type": "hasMany",
+      "model": "Backlog",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
