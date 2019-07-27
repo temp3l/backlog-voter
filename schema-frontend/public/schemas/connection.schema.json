@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "http://10.50.2.115:3000/schemas/connection.schema.json#",
+  "title": "Task 1 - Connection",
+  "description": "User connection schema",
+  "type": "object",
+  "collectionName": "object",
+
+  "properties": {
+    "id": { "type": "integer", "pattern": "^[1-9][0-9]*$" },
+    "name": { "type": "string", "maxLength": 128 },
+    "since": { "type": "string", "format": "date", "default": "2019-04-20" },
+    "connType": {
+      "title": "realation",
+      "enum": ["friend", "colleague", "other"]
+    },
+    "close": { "type": "boolean" }
+  },
+
+  "required": ["id", "name", "since", "connType", "close"],
+  "additionalProperties": false
+}

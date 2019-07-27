@@ -1,0 +1,24 @@
+{
+    "id": 123123,
+    "name": "steph",
+    "email": "rebrea@asd.de",
+    "phone": "2342566475859",
+    "address": {
+        "newKey": "New Value",
+        "newKey-1": "New Value"
+    },
+    "personal": {
+        "DOB": "2019-04-18",
+        "age": 123,
+        "gender": "male"
+    },
+    "connections": [
+        {
+            "id": 123123,
+            "name": "asdad",
+            "since": "2019-04-19",
+            "connType": "colleague"
+        }
+    ],
+    "createdAt": "2019-04-26"
+}

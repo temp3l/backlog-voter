@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "collectionName": "network",
+
+  "description": "Definition of network stuff",
+  "title": "Network task list",
+  "properties": {
+    "string_hostname": {
+      "type": "string",
+      "description": "A hostname-like string.",
+      "format": "hostname"
+    },
+    "string_ipv4": {
+      "type": "string",
+      "description": "An IPv4-like string.",
+      "format": "ipv4",
+      "default": "127.0.0.1"
+    },
+    "string_ipv6": {
+      "type": "string",
+      "description": "An IPv6-like string.",
+      "format": "ipv6",
+      "default": "::1"
+    },
+    "string_uri": {
+      "type": "string",
+      "description": "A URI.",
+      "format": "uri"
+    },
+    "integer_threes": {
+      "type": "integer",
+      "description": "Guess what number is valid",
+      "multipleOf": 3,
+      "minimum": 2,
+      "maximum": 4
+    },
+    "yesno": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": ["string_hostname", "string_ipv4", "string_ipv6"]
+}

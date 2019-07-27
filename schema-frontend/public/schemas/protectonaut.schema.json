@@ -1,0 +1,22 @@
+{
+  "title": "Protectonaut",
+  "description": "A test example",
+  "type": "object",
+
+  "properties": {
+    "voucherCode": {
+      "type": "string",
+      "title": "voucherCode",
+      "minLength": 3,
+      "maxLength": 5
+    },
+    "voucherType": {
+      "title": "voucherType",
+      "type": "string",
+      "enum": ["free", "cheap", "gift"],
+      "default": "free"
+    }
+  },
+  "required": ["voucherCode", "voucherType"],
+  "collectionName": "protectonaut"
+}

@@ -1,0 +1,18 @@
+{
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "defaultSeverity": "warning",
+  "linterOptions": {
+    "exclude": [
+      "config/**/*.js",
+      "node_modules/**/*.ts",
+      "coverage/lcov-report/*.js"
+    ]
+  },
+  "rules": {
+    "jsx-wrap-multiline": false,
+    "no-console": false,
+    "no-unused-variable": false,
+    "no-unused-vars": 0,
+    "noUnusedLocals": false
+  }
+}

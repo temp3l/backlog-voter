@@ -1,0 +1,20 @@
+{
+  "title": "Simple",
+  "description": "A simple example",
+  "type": "object",
+
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "default": "test"
+    },
+
+    "country": {
+      "type": "string",
+      "enum": ["Germny", "Taiwan", "Sweden"],
+      "default": "Taiwan"
+    }
+  },
+  "required": ["firstName", "country"],
+  "collectionName": "simple"
+}

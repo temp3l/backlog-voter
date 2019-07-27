@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "title": "Person1",
+  "collectionTitle": "People1",
+  "collectionName": "people1",
+  "properties": {
+    "test": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "default": "huhu"
+      }
+    }
+  }
+}

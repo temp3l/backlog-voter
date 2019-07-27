@@ -1,0 +1,83 @@
+{
+  "title": "Person",
+  "description": "Specify person",
+  "type": "object",
+  "collectionName": "person",
+  "properties": {
+    "firstName": {
+      "title": "First name",
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 15
+    },
+    "lastName": {
+      "title": "Last name",
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 15
+    },
+    "birthDate": {
+      "title": "Birthday",
+      "description": "Date of birth",
+      "type": "string",
+      "format": "date",
+      "default": "2019-04-13"
+    },
+    "sex": {
+      "title": "Sex",
+      "enum": ["Male", "Female", "Alien"],
+      "type": "string",
+      "default": "Male"
+    },
+    "passportNumber": {
+      "type": "string",
+      "title": "Passport ID",
+      "minLength": 6,
+      "maxLength": 10
+    },
+    "passportExipirationDate": {
+      "title": "Passport expiry",
+      "type": "string",
+      "format": "date",
+      "passportExipirationDate": "2019-04-27"
+    },
+    "issuingCountry": {
+      "title": "Country",
+      "type": "string",
+      "enum": ["Germny", "Taiwan", "Sweden"]
+    },
+    "nationality": {
+      "title": "Nationality",
+      "type": "string",
+      "default": "Afghan",
+      "description": "nationality",
+      "enum": [
+        "Afghan",
+        "Albanian",
+        "Algerian",
+        "American",
+        "Andorran",
+        "Angolan",
+        "Antiguans",
+        "Argentinean",
+        "Armenian",
+        "Australian",
+        "Austrian",
+        "Azerbaijani",
+        "Bahamian",
+        "Bahraini",
+        "Bangladeshi",
+        "Barbadian"
+      ]
+    }
+  },
+  "required": [
+    "firstName",
+    "lastName",
+    "sex",
+    "passportNumber",
+    "passportExipirationDate",
+    "issuingCountry",
+    "nationality"
+  ]
+}
