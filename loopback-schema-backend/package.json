@@ -1,5 +1,5 @@
 {
-  "name": "user-manager-auth-backlog-retrospection",
+  "name": "auth-backlog-schema",
   "version": "1.0.0",
   "main": "server/server.js",
   "scripts": {
@@ -15,11 +15,13 @@
     "lodash": "^4.17.11",
     "loopback": "^3.0.0",
     "loopback-boot": "^2.4.0",
+    "loopback-connector-mongodb": "^5.0.0",
     "loopback-connector-postgresql": "^3.6.1",
     "loopback-connector-redis": "^3.0.0",
     "loopback-context": "^3.4.0",
     "loopback-datasource-juggler": "^4.7.1",
     "loopback-graphql": "^0.13.0",
+    "loopback-jsonschema": "^5.0.8",
     "redis": "^2.8.0",
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^3.2.0",

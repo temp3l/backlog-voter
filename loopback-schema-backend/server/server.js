@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var boot = require('loopback-boot');
 var loopback = require('loopback');
 var LoopBackContext = require('loopback-context');
+var loopbackJsonSchema = require('loopback-jsonschema');
 
 var path = require('path');
 
@@ -17,7 +18,8 @@ app.middleware('initial', bodyParser.urlencoded({ extended: true }));
 // Bootstrap the application, configure models, datasources and middleware.
 
 boot(app, __dirname);
-
+loopbackJsonSchema.init(app);
+loopbackJsonSchema.enableJsonSchemaMiddleware(app);
 app.set('view engine', 'ejs'); // LoopBack comes with EJS out-of-box
 app.set('json spaces', 2); // format json responses for easier viewing
 

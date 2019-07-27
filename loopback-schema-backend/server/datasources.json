@@ -1,0 +1,11 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory",
+    "file": "data/data.json"
+  },
+  "loopbackJsonSchemaDb": {
+    "connector": "loopback-connector-mongodb",
+    "url": "mongodb://127.0.0.1:27017/loop2"
+  }
+}
