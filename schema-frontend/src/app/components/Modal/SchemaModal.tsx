@@ -2,27 +2,16 @@ import * as React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-jsonschema-form";
-import axios from "axios";
 
 class MyModal extends React.Component<any, any> {
   private onSubmit = (event: any) => {
     console.log(event);
   };
 
-  public render() {
-    const { children, heading, schema, selected, links } = this.props;
-    let _schema = Object.assign({}, schema, { $schema: undefined });
+  render() {
+    const { children, heading, schema, selected } = this.props;
+    const _schema = Object.assign({}, schema, { $schema: undefined });
     delete _schema.$schema;
-    console.log(_schema);
-
-    let test = {
-      rel: "create",
-      method: "POST",
-      href: "http://localhost:4000/api/protectonaut",
-      schema: {
-        $ref: "http://localhost:4000/api/item-schemas/protectonaut"
-      }
-    };
 
     return (
       <Modal

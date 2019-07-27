@@ -7,12 +7,13 @@ import {
 } from "react-router-dom";
 import Code from "./app/components/Code/Code2";
 import HeaderContainer from "./app/components/HeaderContainer/HeaderContainer";
+import Hello from "./app/data/containers/Hello";
 import JsonForm from "./app/components/JsonForm/JsonForm";
-import Markdown from "./app/components/Markdown/Markdown";
 import JsonFormDiag from "./app/components/JsonForm/JsonFormDiag";
+import Login from "./app/components/Account/login";
+import Markdown from "./app/components/Markdown/Markdown";
 import MiniFormik from "./app/components/MiniFormik/MiniFormik";
 import Test from "./app/components/Test/Test";
-import Hello from "./app/data/containers/Hello";
 
 interface IParams {
   id: string;
@@ -34,6 +35,7 @@ class App extends React.Component {
               <Route path="/products/:id" component={Product} />
               <Route path="/hello" component={Hello} />
               <Route path="/test" component={Test} />
+              <Route path="/login" component={Login} />
               <Route path="/mark/:file" component={Markdown} />
               <Route path="/code/:file" component={Code} />
               <Route path="/jsonForm/:file" component={JsonForm} />

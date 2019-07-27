@@ -14,6 +14,7 @@ const fillTemplate = (ldo: any, valueSet: any) => {
 };
 
 const hyperLinksConfig = {
+  /*
   self: { icon: "fa fa-default", className: "btn btn-sm btn-outline-default" }, // href /{id}
   parent: {
     icon: "fa fa-default",
@@ -26,6 +27,7 @@ const hyperLinksConfig = {
   }, // method + schema
   update: { icon: "fa fa-default", className: "btn btn-sm btn-outline-info" }, // method /{id}
   delete: { icon: "fa fa-default", className: "btn btn-sm btn-outline-warning" } // method /{id}
+  */
 };
 
 const returnLinks = (links: any, valueSet: any) => {

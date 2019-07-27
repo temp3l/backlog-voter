@@ -1,12 +1,14 @@
-import React, { useState } from "react";
 import axios from "axios";
+import * as React from "react";
+import { useState } from "react";
+import _ from "lodash";
 import {
   clearToken,
   saveToken,
   saveUser,
   loadUser
-} from "../../services/auth2";
-import _ from "lodash";
+} from "../../../utils/auth2";
+
 const sampleUsers = [
   {
     email: "john@doe.com",
@@ -30,18 +32,17 @@ const sampleUsers = [
   }
 ];
 
-function Login(props) {
-  const [user, setUser] = useState(loadUser() || sampleUsers[0]);
+function Login(props: any) {
+  const [user, setUser] = useState(sampleUsers[0]);
   const [error, setError] = useState(null);
   const { setToken } = props;
 
-  const handleLogin = async event => {
+  const handleLogin = async (event: any) => {
     event.preventDefault();
     axios
-      .post("/api/users/login", _.omit(user, ["username", "role"]), {
-        handlerEnabled: false
-      })
-      .then(data => {
+      .post("/api/users/login", _.omit(user, ["username", "role"]))
+      .then(res => {
+        const data = res.data;
         saveToken(data);
         setToken(data);
         if (data.id) saveUser(_.omit(user, ["username", "role"]));
@@ -57,16 +58,14 @@ function Login(props) {
       });
   };
 
-  const handleRegister = async event => {
+  const handleRegister = async (event: any) => {
     event.preventDefault();
     axios
-      .post("/api/users", _.omit(user, ["username", "role"]), {
-        handlerEnabled: false
-      })
-      .then(response => setError(response.response.data.error))
+      .post("/api/users", _.omit(user, ["username", "role"]))
+      .then(response => setError(response.data.error))
       .catch(err => setError(err));
   };
-  const onChange = (name, evt) => {
+  const onChange = (name: any, evt: any) => {
     setUser(Object.assign({}, user, { [name]: evt.target.value.trim() }));
   };
 
@@ -137,7 +136,11 @@ function Login(props) {
                     <tr
                       key={i}
                       onClick={e => {
-                        setUser({ email: user.email, password: "xxx" });
+                        setUser({
+                          email: user.email,
+                          password: "xxx",
+                          role: "a"
+                        });
                       }}
                     >
                       <td> {user.email}</td>

@@ -3,21 +3,12 @@ import * as React from "react";
 import ListView from "./ListView";
 import SchemaModal from "../Modal/SchemaModal";
 import { RouteComponentProps } from "react-router-dom";
-import { fillTemplate, returnLinks } from "../../../utils/utils";
+import { returnLinks } from "../../../utils/utils";
 // https://github.com/swagger-api/swagger-codegen/blob/master/samples/client/petstore/typescript-fetch/builds/default/api.ts
 
 const API = process.env.REACT_APP_API_ENDPOINT;
 const API_EXPLORER = process.env.REACT_APP_API_EXPLORER;
 const initialState = {};
-
-/*
-> use loop
-> db.people.find()
-> db.collection.find()
-    { "_id" : ObjectId("5d29fbc4076cfa11443968a0") }
-    { "_id" : ObjectId("5d29fbd5076cfa11443968a1") }
-*/
-// filter[limit]=1&filter[offset]=2
 
 interface TParams {
   file: string;

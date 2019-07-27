@@ -1,7 +1,7 @@
 import * as React from "react";
-import "./Test.scss";
 import SwaggerUI from "swagger-ui-react";
 import "swagger-ui-react/swagger-ui.css";
+import "./Test.scss";
 
 const Test = () => (
   <div className="container">

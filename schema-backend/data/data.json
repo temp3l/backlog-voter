@@ -1,11 +1,11 @@
 {
   "ids": {
     "User": 1,
-    "AccessToken": 6,
+    "AccessToken": 12,
     "ACL": 1,
     "RoleMapping": 17,
     "Role": 12,
-    "user": 10,
+    "user": 12,
     "team": 8,
     "project": 3,
     "ReportItem": 9,
@@ -25,7 +25,13 @@
       "c4nFIZ26wCx0Tl3hyMmQCpD1p1DgPfwabFhwv5dCSHW1GFB0kz0hInvB8PP1RzIA": "{\"id\":\"c4nFIZ26wCx0Tl3hyMmQCpD1p1DgPfwabFhwv5dCSHW1GFB0kz0hInvB8PP1RzIA\",\"ttl\":1209600,\"created\":\"2019-05-22T18:17:01.117Z\",\"userId\":1}",
       "ULsQl3oxWBKBGVGhnlC0hFBESmoPEiCKcdB1f52grNfO6OkGoCWU6eRFzlqnOnuL": "{\"id\":\"ULsQl3oxWBKBGVGhnlC0hFBESmoPEiCKcdB1f52grNfO6OkGoCWU6eRFzlqnOnuL\",\"ttl\":1209600,\"created\":\"2019-05-22T18:38:31.232Z\",\"userId\":4}",
       "krqFilMIo68zjmhHaauNqRjb0PwNJvjsL3HdBY3PXADiBljPRJfaLMAvCLGIGhBq": "{\"id\":\"krqFilMIo68zjmhHaauNqRjb0PwNJvjsL3HdBY3PXADiBljPRJfaLMAvCLGIGhBq\",\"ttl\":1209600,\"created\":\"2019-05-22T18:47:29.566Z\",\"userId\":4}",
-      "oO4x0tUQRumRAGADPBOviwJWOPIo9Wk9XqsVrB8eeAmJOKzKr41jAhGFC71sUkEb": "{\"id\":\"oO4x0tUQRumRAGADPBOviwJWOPIo9Wk9XqsVrB8eeAmJOKzKr41jAhGFC71sUkEb\",\"ttl\":1209600,\"created\":\"2019-05-22T18:47:37.173Z\",\"userId\":1}"
+      "oO4x0tUQRumRAGADPBOviwJWOPIo9Wk9XqsVrB8eeAmJOKzKr41jAhGFC71sUkEb": "{\"id\":\"oO4x0tUQRumRAGADPBOviwJWOPIo9Wk9XqsVrB8eeAmJOKzKr41jAhGFC71sUkEb\",\"ttl\":1209600,\"created\":\"2019-05-22T18:47:37.173Z\",\"userId\":1}",
+      "qwFRG0hlEcKuFv7iLYpyw6FknGXxQ53iReoSYpLIkAkhZKqnYJbg7wTkf4JYGN8p": "{\"id\":\"qwFRG0hlEcKuFv7iLYpyw6FknGXxQ53iReoSYpLIkAkhZKqnYJbg7wTkf4JYGN8p\",\"ttl\":1209600,\"created\":\"2019-07-27T13:22:34.345Z\",\"userId\":1}",
+      "TkI3TnLjZagAMgLees7dbXdHboyVGuIe0PqaQIluptzn3t7jwdDesN3CVRLkzC9P": "{\"id\":\"TkI3TnLjZagAMgLees7dbXdHboyVGuIe0PqaQIluptzn3t7jwdDesN3CVRLkzC9P\",\"ttl\":1209600,\"created\":\"2019-07-27T13:23:34.825Z\",\"userId\":10}",
+      "9vbULTepRFZYiq59sHw0F84LM02tt7BP55t87fo0V6vmnHG8tQ9AwoTENaPr8Wn0": "{\"id\":\"9vbULTepRFZYiq59sHw0F84LM02tt7BP55t87fo0V6vmnHG8tQ9AwoTENaPr8Wn0\",\"ttl\":1209600,\"created\":\"2019-07-27T13:50:25.912Z\",\"userId\":1}",
+      "cxK8tbwsUMuDbN2yZEHgb3oNAhFwQxebRCoB6LBzKALN2erxGAkzGyPABxOe0RI1": "{\"id\":\"cxK8tbwsUMuDbN2yZEHgb3oNAhFwQxebRCoB6LBzKALN2erxGAkzGyPABxOe0RI1\",\"ttl\":1209600,\"created\":\"2019-07-27T13:50:53.390Z\",\"userId\":11}",
+      "vQNgYKngX36dilEFQiGAQRZ8qD0E5X2ugGgYWsMR5fcbRoHRw646Z7lXaHGGQmyv": "{\"id\":\"vQNgYKngX36dilEFQiGAQRZ8qD0E5X2ugGgYWsMR5fcbRoHRw646Z7lXaHGGQmyv\",\"ttl\":1209600,\"created\":\"2019-07-27T13:50:55.745Z\",\"userId\":11}",
+      "YbhOgGocs8gqopzJhmvC0ruro38coXAw4OTsXV14NgrBgoqfxrlxcnDDLNx7EITk": "{\"id\":\"YbhOgGocs8gqopzJhmvC0ruro38coXAw4OTsXV14NgrBgoqfxrlxcnDDLNx7EITk\",\"ttl\":1209600,\"created\":\"2019-07-27T13:50:58.936Z\",\"userId\":1}"
     },
     "ACL": {},
     "RoleMapping": {
@@ -68,7 +74,9 @@
       "6": "{\"firstName\":\"Joey\",\"lastName\":\"Johnston\",\"userName\":\"bbb\",\"email\":\"bbb@doe.com\",\"status\":\"inactive\",\"authSource\":\"local\",\"expiry\":\"2020-03-30T18:04:39.230Z\",\"locked\":true,\"lastLogin\":\"Fri Jul 06 2018 16:21:07 GMT+0200 (Central European Summer Time)\",\"username\":\"bbb\",\"password\":\"$2a$10$RcriGqiWv4wuW1RFO9PXdesBCc1jv8oTuS1MKJ2sLmRNm3F/S9wby\",\"id\":6}",
       "7": "{\"firstName\":\"Antone\",\"lastName\":\"Cummings\",\"userName\":\"ccc\",\"email\":\"ccc@doe.com\",\"status\":\"active\",\"authSource\":\"local\",\"expiry\":\"2019-06-19T06:43:27.428Z\",\"locked\":true,\"lastLogin\":\"Thu Feb 21 2019 03:59:56 GMT+0100 (Central European Standard Time)\",\"username\":\"ccc\",\"password\":\"$2a$10$BhAKDTogi7wMGU4//NGg5u6/2aU1LwJh6MMRAJAHSbfm3tLUdZHiS\",\"id\":7}",
       "8": "{\"firstName\":\"Bryana\",\"lastName\":\"Senger\",\"userName\":\"ddd\",\"email\":\"ddd@doe.com\",\"status\":\"inactive\",\"authSource\":\"local\",\"expiry\":\"2019-10-02T05:40:50.781Z\",\"locked\":false,\"lastLogin\":\"Thu Dec 06 2018 12:45:43 GMT+0100 (Central European Standard Time)\",\"username\":\"ddd\",\"password\":\"$2a$10$DZgBjm3gGu8/bw2YUVMJdeNzvEbjkhhnlaLe8Sg3cSKtxXOjp3U12\",\"id\":8}",
-      "9": "{\"firstName\":\"Claudia\",\"lastName\":\"Doyle\",\"userName\":\"eee\",\"email\":\"eee@doe.com\",\"status\":\"inactive\",\"authSource\":\"local\",\"expiry\":\"2019-08-08T12:58:00.424Z\",\"locked\":false,\"lastLogin\":\"Mon Jul 30 2018 01:49:07 GMT+0200 (Central European Summer Time)\",\"username\":\"eee\",\"password\":\"$2a$10$PrgbOXRMQGkRjfBK7pyrIen.VV.ThqPiMJp5L/PcQrRcwWoMjOTMe\",\"id\":9}"
+      "9": "{\"firstName\":\"Claudia\",\"lastName\":\"Doyle\",\"userName\":\"eee\",\"email\":\"eee@doe.com\",\"status\":\"inactive\",\"authSource\":\"local\",\"expiry\":\"2019-08-08T12:58:00.424Z\",\"locked\":false,\"lastLogin\":\"Mon Jul 30 2018 01:49:07 GMT+0200 (Central European Summer Time)\",\"username\":\"eee\",\"password\":\"$2a$10$PrgbOXRMQGkRjfBK7pyrIen.VV.ThqPiMJp5L/PcQrRcwWoMjOTMe\",\"id\":9}",
+      "10": "{\"email\":\"john@1doe.com\",\"password\":\"$2a$10$FFxsuGGPZr7rDZAF4N41t.z7dU8GUQwu4pGQjPs6agdX16LHrHbTu\",\"id\":10}",
+      "11": "{\"email\":\"john1@doe.com\",\"password\":\"$2a$10$cMXTk2f5NJ6rHDKyjrCmbeTMYsdYh/jTckEehEfNdZpfCQbG5qp02\",\"id\":11}"
     },
     "team": {
       "1": "{\"ownerId\":1,\"memberId\":\"1\",\"id\":1}",

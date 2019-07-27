@@ -1,24 +1,56 @@
 # Backend
 
-- **No Mocks!!!**
-- Token based Auth
-- **Dynamic RBAC**: [ $owner, $authenticated, $everyone ]
-- static roles: [ admin, teamMember, ... **Assona_admin** ]
-- custom role-resolver (checks if user is a member of **assona-team** for ressource)
-- GraphQL, OpenAPI.spec, SwaggerUI+token
-- login/register/auth -users
+- https://github.com/gokercebeci/loopback-react
+- https://github.com/swagger-api/swagger-js
+- https://github.com/diogodoreto/react-loopback
 
-- Group hasAndBelongsToMany User
-- User hasAndBelongsToMany Groups
-- admin is \$owner of through-model
+- https://schema.link.fish/downloads/all.json
+- https://github.com/link-fish/schema-org-rdf
 
-# Query-style related modules
+## JSON-Schema validation
+
+- **validate** (according to the paths definition of the swagger file)
+- - request body
+- - headers
+- - path parameters
+- - query parameters
+
+## Parameter-Types
+
+- query parameters, such as /users?role=admin
+- path parameters, such as /users/{id}
+- header parameters, such as X-MyHeader: Value
+- body parameters that describe the body of POST, PUT and PATCH requests (see Describing Request Body)
+- form parameters – a variety of body parameters used to describe the payload of requests (application/x-www-form-urlencoded,..)
+
+## Node.js
+
+- A Monorepo of various packages to power OpenAPI in node
+- https://github.com/kogosoftwarellc/open-api
+- https://github.com/cdimascio/express-openapi-validator
+- - An OpenApi validator for ExpressJS that automatically validates API requests using an OpenAPI 3.x specification,
+
+- https://github.com/kogosoftwarellc/open-api/tree/master/packages/express-openapi
+
+* **No Mocks!!!**
+* Token based Auth
+* **Dynamic RBAC**: [ $owner, $authenticated, $everyone ]
+* static roles: [ admin, teamMember, ... **Assona_admin** ]
+* custom role-resolver (checks if user is a member of **assona-team** for ressource)
+* GraphQL, OpenAPI.spec, SwaggerUI+token
+* login/register/auth -users
+
+* Group hasAndBelongsToMany User
+* User hasAndBelongsToMany Groups
+* admin is \$owner of through-model
+
+## Query-style related modules
 
 - /api/users?filter[include][groups][permissions]
 - /api/userGroups?filter={"include":["group"],"where":{"ownerId":4}}
 - /api/users?filter[include][groups]&access_token=sjCJZ984g947197b19n34...
 
-# Frontend
+## Frontend
 
 - keine deps auf material-ui/bootstrap/antd ...just css classes!
 - speichert aktives Token im localStorage
@@ -26,7 +58,7 @@
 - benutzt simple REST-Calls (kein graphQL, kein redux)
 - no error-handling yet
 
-# Permissions
+## Permissions
 
 - admin ALLOW any on [ /users, /accessTokens, /roles, /roleMapping ]
 - \$owner ALLOW \* on `own`-ressources [ ..., AccessTokens ]
@@ -35,9 +67,9 @@
 - \$authenticated ALLOW CREATE on [ ReportItems, Backlog ]
 - all users limited to `their` items
 
-# ACLs
+## ACLs
 
-## Sample ACL (UserModel)
+### Sample ACL (UserModel)
 
 ```json
 [
@@ -69,7 +101,7 @@
 ]
 ```
 
-##Programmatic ACLs
+### Programmatic ACLs
 
 ```js
 MyUser.disableRemoteMethod("create", true);
@@ -86,7 +118,7 @@ MyUser.disableRemoteMethod(
 );
 ```
 
-## Access control concepts
+### Access control concepts
 
 | First Header | Second Header                                      | Responsibility                                                           | Example                                                                                                                                                                                                                                                                                                                                                    |
 | ------------ | -------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -97,9 +129,9 @@ MyUser.disableRemoteMethod(
 
 - https://loopback.io/doc/en/lb2/Controlling-data-access.html
 
-# Backlog-Voter
+## Backlog-Voter
 
-# foo-logic
+## foo-logic
 
 ## App-Setup
 
@@ -149,7 +181,7 @@ MyUser.disableRemoteMethod(
     { id: 1, name: "user1", reports: reportID_1, reportID_2 },
 ```
 
-# Adding logic to models
+## Adding logic to models
 
 - https://loopback.io/doc/en/lb3/Adding-logic-to-models.html
 - Remote methods - REST endpoints mapped to Node functions.
