@@ -12,7 +12,7 @@
     "jsx-wrap-multiline": false,
     "no-console": false,
     "no-unused-variable": false,
-    "no-unused-vars": 0,
-    "noUnusedLocals": false
+    "noUnusedLocals": false,
+    "ordered-imports": false
   }
 }

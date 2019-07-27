@@ -7,5 +7,32 @@
   "loopbackJsonSchemaDb": {
     "connector": "loopback-connector-mongodb",
     "url": "mongodb://127.0.0.1:27017/loop2"
+  },
+  "storage": {
+    "name": "storage",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "./data/",
+    "maxFileSize": "52428800",
+    "nameConflict": "makeUnique"
+  },
+  "email": {
+    "name": "email",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "smtp.gmail.com",
+        "secure": true,
+        "port": 465,
+        "tls": {
+          "rejectUnauthorized": false
+        },
+        "auth": {
+          "user": "USER",
+          "pass": "PASS"
+        }
+      }
+    ]
   }
 }

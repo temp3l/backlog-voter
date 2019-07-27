@@ -4,7 +4,7 @@ const timeout = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 const fillTemplate = (ldo: any, valueSet: any) => {
   if (!ldo || !ldo.href) {
-    throw new Error("LDO parse error");
+    console.log("LDO parse error");
   }
   return Object.assign({}, ldo, {
     className: hyperLinksConfig[ldo.rel].className,
@@ -14,20 +14,21 @@ const fillTemplate = (ldo: any, valueSet: any) => {
 };
 
 const hyperLinksConfig = {
-  /*
-  self: { icon: "fa fa-default", className: "btn btn-sm btn-outline-default" }, // href /{id}
-  parent: {
-    icon: "fa fa-default",
-    className: "btn btn-sm btn-outline-default"
-  }, // href /{id}
-  item: { icon: "fa fa-default", className: "btn btn-sm btn-outline-default" }, // href /{id}
   create: {
+    className: "btn btn-sm btn-outline-success",
+    icon: "fa fa-default"
+  },
+  delete: {
     icon: "fa fa-default",
-    className: "btn btn-sm btn-outline-success"
-  }, // method + schema
-  update: { icon: "fa fa-default", className: "btn btn-sm btn-outline-info" }, // method /{id}
-  delete: { icon: "fa fa-default", className: "btn btn-sm btn-outline-warning" } // method /{id}
-  */
+    className: "btn btn-sm btn-outline-warning"
+  },
+  item: { icon: "fa fa-default", className: "btn btn-sm btn-outline-default" }, // href /{id}
+  parent: {
+    className: "btn btn-sm btn-outline-default",
+    icon: "fa fa-default"
+  },
+  self: { icon: "fa fa-default", className: "btn btn-sm btn-outline-default" }, // href /{id}
+  update: { icon: "fa fa-default", className: "btn btn-sm btn-outline-info" } // method /{id}
 };
 
 const returnLinks = (links: any, valueSet: any) => {

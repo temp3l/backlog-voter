@@ -1,5 +1,7 @@
 {
   "restApiRoot": "/api",
+  "url": "http://localhost:4000",
+  "fromMail": "info@localhost",
   "host": "0.0.0.0",
   "port": 4000,
   "legacyExplorer": false,

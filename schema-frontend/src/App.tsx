@@ -1,19 +1,18 @@
-// import { hot } from "react-hot-loader/root";
 import * as React from "react";
 import {
   BrowserRouter as Router,
   Route,
   RouteComponentProps
 } from "react-router-dom";
+import Login from "./app/components/Account/login";
 import Code from "./app/components/Code/Code2";
 import HeaderContainer from "./app/components/HeaderContainer/HeaderContainer";
-import Hello from "./app/data/containers/Hello";
 import JsonForm from "./app/components/JsonForm/JsonForm";
 import JsonFormDiag from "./app/components/JsonForm/JsonFormDiag";
-import Login from "./app/components/Account/login";
 import Markdown from "./app/components/Markdown/Markdown";
 import MiniFormik from "./app/components/MiniFormik/MiniFormik";
 import Test from "./app/components/Test/Test";
+import Hello from "./app/data/containers/Hello";
 
 interface IParams {
   id: string;

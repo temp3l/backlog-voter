@@ -1,11 +1,10 @@
-// https://github.com/swagger-api/swagger-codegen/blob/master/samples/client/petstore/typescript-fetch/builds/default/api.ts
 import axios from "axios";
 import * as React from "react";
-import ReactPaginate from "react-paginate";
 import Alert from "react-bootstrap/Alert";
+import ReactPaginate from "react-paginate";
 import MyModal from "../Modal/Modal";
 import "./JsonForm.css";
-// const API = process.env.REACT_APP_API_ENDPOINT;
+// https://github.com/swagger-api/swagger-codegen/blob/master/samples/client/petstore/typescript-fetch/builds/default/api.ts
 
 interface IParams {
   schema: object;
@@ -13,10 +12,11 @@ interface IParams {
 
 const ListItem = (props: any) => {
   const { id } = props;
+
   return (
     <>
       <button
-        onClick={() => props.deleteItem(id)}
+        onClick={props.deleteItem(id)}
         type="button"
         className="btn btn-sm btn-outline-danger"
       >
@@ -24,7 +24,7 @@ const ListItem = (props: any) => {
       </button>
       &nbsp; &nbsp;
       <button
-        onClick={() => props.editItem(id)}
+        onClick={props.editItem(id)}
         type="button"
         className="btn btn-sm btn-outline-info"
       >
@@ -33,7 +33,7 @@ const ListItem = (props: any) => {
       &nbsp;
       <code>{JSON.stringify(props)}</code>
       <button
-        onClick={() => props.editItem(id)}
+        onClick={props.editItem(id)}
         type="button"
         className="btn btn-sm btn-outline-default pull-right"
       >
@@ -49,9 +49,9 @@ const ListItems = (props: any) => {
         {props.items.map((item: any, idx: number) => (
           <li key={idx} className="list-group-item list-group-item-success">
             <ListItem
-              {...item}
               deleteItem={props.deleteItem}
               editItem={props.editItem}
+              {...item}
             />
           </li>
         ))}
@@ -65,59 +65,58 @@ export default class Loop extends React.Component<IParams, any> {
     super(props);
     const collectionName = props.schema.collectionName;
     this.state = {
-      loading: false,
-      skip: 0,
-      limit: 3,
-      total: 0,
+      activeItem: null,
+      collectionName,
       count: 0,
       errors: null,
-      items: [],
-      collectionName,
-      url: process.env.REACT_APP_API_ENDPOINT + "/" + collectionName,
       explorer: process.env.REACT_APP_API_EXPLORER,
-      activeItem: null,
-      modalShow: false
+      items: [],
+      limit: 3,
+      loading: false,
+      modalShow: false,
+      skip: 0,
+      total: 0,
+      url: process.env.REACT_APP_API_ENDPOINT + "/" + collectionName
     };
   }
-  componentDidMount = () => {
+  public componentDidMount = () => {
     this.fetchItems();
   };
 
-  countCollection = (next: any) => {
+  public countCollection = (next: any) => {
     axios.get(`${this.state.url}/count`).then((res: any) => {
       const count = Math.ceil(res.data.count / this.state.limit);
       this.setState({ count, total: res.data.count }, () => next());
     });
   };
-  fetchItems = () => {
+  public fetchItems = () => {
     const { limit, skip } = this.state;
     this.countCollection(() => {
       axios
         .get(`${this.state.url}`, { params: { filter: { limit, skip } } })
         .then((response: any) => {
-          this.setState({ items: response.data }); //fix remove last
+          // this.setState({ items: response.data }); // fix remove last
         });
     });
   };
-  deleteItem = (id: string | number) => {
+  public deleteItem = (id: string | number) => {
     axios.delete(`${this.state.url}/${id}`).then(this.fetchItems);
   };
-  editItem = (id: any) => {
+  public editItem = (id: any) => {
     this.setState(
-      {
-        activeItem: this.state.items.find((item: any) => item.id === id)
-      },
+      { activeItem: this.state.items.find((item: any) => item.id === id) },
       () => this.toggleModal()
     );
   };
-  handlePageClick = (data: any) => {
-    let selected = data.selected;
-    let skip = Math.ceil(selected * this.state.limit);
+  public handlePageClick = (data: any) => {
+    const selected = data.selected;
+    const skip = Math.ceil(selected * this.state.limit);
     this.setState({ skip }, () => this.fetchItems());
   };
-  toggleModal = () => this.setState({ modalShow: !this.state.modalShow });
+  public toggleModal = () =>
+    this.setState({ modalShow: !this.state.modalShow });
 
-  render() {
+  public render() {
     const {
       items,
       count,
@@ -131,6 +130,7 @@ export default class Loop extends React.Component<IParams, any> {
     return (
       <>
         <div className="container">
+          <h3>{total}</h3>
           {total > 0 && (
             <>
               <ListItems

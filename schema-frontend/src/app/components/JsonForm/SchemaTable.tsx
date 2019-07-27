@@ -9,7 +9,7 @@ function addProducts(quantity: number) {
   for (let i = 0; i < quantity; i++) {
     const id = startId + i;
     products.push({
-      id: id,
+      id,
       name: "Item name " + id,
       price: 2100 + i
     });
@@ -22,7 +22,7 @@ export default class DefaultPaginationTable extends React.Component<any, any> {
     super(props);
   }
 
-  render() {
+  public render() {
     const options = {
       page: 2, // which page you want to show as default
       sizePerPageList: [
@@ -30,7 +30,8 @@ export default class DefaultPaginationTable extends React.Component<any, any> {
         { text: "10", value: 10 },
         { text: "All", value: products.length }
       ],
-      sizePerPage: 5, // which size per page you want to locate as default
+
+      // tslint:disable-next-line: object-literal-sort-keys
       pageStartIndex: 0, // where to start counting the pages
       paginationSize: 5, // the pagination bar size.
       prePage: "Prev", // Previous page button text
@@ -42,6 +43,7 @@ export default class DefaultPaginationTable extends React.Component<any, any> {
       // firstPageTitle: 'Go to first', // First page button title
       // lastPageTitle: 'Go to Last', // Last page button title
       paginationShowsTotal: false, // Accept bool or function
+      sizePerPage: 5, // which size per page you want to locate as default
       // keepSizePerPageState: true //default is false, enable will keep sizePerPage dropdown state(open/clode) when external rerender happened
       // hideSizePerPage: true > You can hide the dropdown for sizePerPage
       // alwaysShowAllBtns: true // Always show next and previous button
@@ -50,7 +52,7 @@ export default class DefaultPaginationTable extends React.Component<any, any> {
     };
     return (
       <div>
-        <BootstrapTable data={products} options={options} pagination>
+        <BootstrapTable data={products} options={options} pagination={true}>
           <TableHeaderColumn dataField="id" isKey={true}>
             Product ID
           </TableHeaderColumn>

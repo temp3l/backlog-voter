@@ -1,13 +1,8 @@
 import axios from "axios";
+import _ from "lodash";
 import * as React from "react";
 import { useState } from "react";
-import _ from "lodash";
-import {
-  clearToken,
-  saveToken,
-  saveUser,
-  loadUser
-} from "../../../utils/auth2";
+import { clearToken, saveToken, saveUser } from "../../../utils/auth2";
 
 const sampleUsers = [
   {
@@ -45,15 +40,20 @@ function Login(props: any) {
         const data = res.data;
         saveToken(data);
         setToken(data);
-        if (data.id) saveUser(_.omit(user, ["username", "role"]));
-        if (data.id) return props.history.push("/account");
+        if (data.id) {
+          saveUser(_.omit(user, ["username", "role"]));
+        }
+        if (data.id) {
+          return props.history.push("/account");
+        }
         setError(data.response.data);
       })
       .catch(err => {
         clearToken();
 
-        if (err.response && err.response.data)
+        if (err.response && err.response.data) {
           return setError(err.response.data);
+        }
         setError(err);
       });
   };
@@ -82,6 +82,7 @@ function Login(props: any) {
                 className="form-control"
                 placeholder="Your Email *"
                 value={user.email}
+                // tslint:disable-next-line: jsx-no-lambda
                 onChange={e => onChange("email", e)}
               />
             </div>
@@ -91,6 +92,7 @@ function Login(props: any) {
                 className="form-control"
                 placeholder="Your Password *"
                 value={user.password}
+                // tslint:disable-next-line: jsx-no-lambda
                 onChange={e => onChange("password", e)}
               />
             </div>
@@ -131,21 +133,22 @@ function Login(props: any) {
                 </tr>
               </thead>
               <tbody>
-                {sampleUsers.map((user, i) => {
+                {sampleUsers.map((uuser: any, i: number) => {
                   return (
                     <tr
                       key={i}
-                      onClick={e => {
+                      // tslint:disable-next-line: jsx-no-lambda
+                      onClick={() => {
                         setUser({
-                          email: user.email,
+                          email: uuser.email,
                           password: "xxx",
                           role: "a"
                         });
                       }}
                     >
-                      <td> {user.email}</td>
-                      <td>{user.password}</td>
-                      <td>{user.role}</td>
+                      <td> {uuser.email}</td>
+                      <td>{uuser.password}</td>
+                      <td>{uuser.role}</td>
                     </tr>
                   );
                 })}

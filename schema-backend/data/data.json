@@ -1,11 +1,11 @@
 {
   "ids": {
     "User": 1,
-    "AccessToken": 12,
+    "AccessToken": 23,
     "ACL": 1,
     "RoleMapping": 17,
     "Role": 12,
-    "user": 12,
+    "user": 15,
     "team": 8,
     "project": 3,
     "ReportItem": 9,
@@ -31,7 +31,18 @@
       "9vbULTepRFZYiq59sHw0F84LM02tt7BP55t87fo0V6vmnHG8tQ9AwoTENaPr8Wn0": "{\"id\":\"9vbULTepRFZYiq59sHw0F84LM02tt7BP55t87fo0V6vmnHG8tQ9AwoTENaPr8Wn0\",\"ttl\":1209600,\"created\":\"2019-07-27T13:50:25.912Z\",\"userId\":1}",
       "cxK8tbwsUMuDbN2yZEHgb3oNAhFwQxebRCoB6LBzKALN2erxGAkzGyPABxOe0RI1": "{\"id\":\"cxK8tbwsUMuDbN2yZEHgb3oNAhFwQxebRCoB6LBzKALN2erxGAkzGyPABxOe0RI1\",\"ttl\":1209600,\"created\":\"2019-07-27T13:50:53.390Z\",\"userId\":11}",
       "vQNgYKngX36dilEFQiGAQRZ8qD0E5X2ugGgYWsMR5fcbRoHRw646Z7lXaHGGQmyv": "{\"id\":\"vQNgYKngX36dilEFQiGAQRZ8qD0E5X2ugGgYWsMR5fcbRoHRw646Z7lXaHGGQmyv\",\"ttl\":1209600,\"created\":\"2019-07-27T13:50:55.745Z\",\"userId\":11}",
-      "YbhOgGocs8gqopzJhmvC0ruro38coXAw4OTsXV14NgrBgoqfxrlxcnDDLNx7EITk": "{\"id\":\"YbhOgGocs8gqopzJhmvC0ruro38coXAw4OTsXV14NgrBgoqfxrlxcnDDLNx7EITk\",\"ttl\":1209600,\"created\":\"2019-07-27T13:50:58.936Z\",\"userId\":1}"
+      "YbhOgGocs8gqopzJhmvC0ruro38coXAw4OTsXV14NgrBgoqfxrlxcnDDLNx7EITk": "{\"id\":\"YbhOgGocs8gqopzJhmvC0ruro38coXAw4OTsXV14NgrBgoqfxrlxcnDDLNx7EITk\",\"ttl\":1209600,\"created\":\"2019-07-27T13:50:58.936Z\",\"userId\":1}",
+      "pgnc7sgO9R9wGrQG3Q2S4CiXn4L2FFFOtJCIBJ58sLBynJGfymaN9MEeWvCCgPW8": "{\"id\":\"pgnc7sgO9R9wGrQG3Q2S4CiXn4L2FFFOtJCIBJ58sLBynJGfymaN9MEeWvCCgPW8\",\"ttl\":1209600,\"created\":\"2019-07-27T15:11:12.824Z\",\"userId\":1}",
+      "vO1FApYFC4TCGuNPqEN0Xp8iMB49bajxWDuF874Ot6KSCCF9gMdDMhzICktwB0yJ": "{\"id\":\"vO1FApYFC4TCGuNPqEN0Xp8iMB49bajxWDuF874Ot6KSCCF9gMdDMhzICktwB0yJ\",\"ttl\":1209600,\"created\":\"2019-07-27T15:11:16.249Z\",\"userId\":4}",
+      "DfIScZ2JxuWUqcW7MaodLV86Be0FUsmIZ2GOzQUYXAYn0SxQL4qieGDEnKOBR3K3": "{\"id\":\"DfIScZ2JxuWUqcW7MaodLV86Be0FUsmIZ2GOzQUYXAYn0SxQL4qieGDEnKOBR3K3\",\"ttl\":1209600,\"created\":\"2019-07-27T15:11:42.270Z\",\"userId\":1}",
+      "KAHAC3EoPk8HGuEGkEbJOGAxsoB7CadoVJcokYHIfVOS5cSLK6C3XTW5wAOuCvEO": "{\"id\":\"KAHAC3EoPk8HGuEGkEbJOGAxsoB7CadoVJcokYHIfVOS5cSLK6C3XTW5wAOuCvEO\",\"ttl\":1209600,\"created\":\"2019-07-27T15:12:18.644Z\",\"userId\":1}",
+      "b2vmxbdjtz5eXE4P2XA34naQbTRIQDqbEtQAimKBX95B2hs9KiGzBhFm45NngLBb": "{\"id\":\"b2vmxbdjtz5eXE4P2XA34naQbTRIQDqbEtQAimKBX95B2hs9KiGzBhFm45NngLBb\",\"ttl\":1209600,\"created\":\"2019-07-27T15:14:56.630Z\",\"userId\":1}",
+      "S9xjdWR9DCGUrpbLD7oCyHK6RhWsYgrPIqDAifJKAQuvdiGdHSKX9Z43tw8A4oRV": "{\"id\":\"S9xjdWR9DCGUrpbLD7oCyHK6RhWsYgrPIqDAifJKAQuvdiGdHSKX9Z43tw8A4oRV\",\"ttl\":1209600,\"created\":\"2019-07-27T15:14:59.328Z\",\"userId\":1}",
+      "uDCcAogyFhNY23FaI4cj66J7iMed6zo7O5uAEZ6uIbgjvuAJWErS67w3hLViNPmo": "{\"id\":\"uDCcAogyFhNY23FaI4cj66J7iMed6zo7O5uAEZ6uIbgjvuAJWErS67w3hLViNPmo\",\"ttl\":1209600,\"created\":\"2019-07-27T15:14:59.632Z\",\"userId\":1}",
+      "yKmoH6WesS5zGISaMV1lFuZeIXuLZbQJlvh1uKKIhiydrPB0Wgum49TxkDuZqUhn": "{\"id\":\"yKmoH6WesS5zGISaMV1lFuZeIXuLZbQJlvh1uKKIhiydrPB0Wgum49TxkDuZqUhn\",\"ttl\":1209600,\"created\":\"2019-07-27T15:16:53.110Z\",\"userId\":13}",
+      "jE7AhXP38eccT8TiIyV63HpylmXhFWsPuY9wHFiVM5AF1IfRnvzdoN5FdehCdLYC": "{\"id\":\"jE7AhXP38eccT8TiIyV63HpylmXhFWsPuY9wHFiVM5AF1IfRnvzdoN5FdehCdLYC\",\"ttl\":1209600,\"created\":\"2019-07-27T15:18:14.851Z\",\"userId\":14}",
+      "DWTXKVpBuXdL6U8kINW2miGCAgzE7F5U6NLS96aiWCFP43W6eiGQxBlGEoONaHtA": "{\"id\":\"DWTXKVpBuXdL6U8kINW2miGCAgzE7F5U6NLS96aiWCFP43W6eiGQxBlGEoONaHtA\",\"ttl\":1209600,\"created\":\"2019-07-27T15:18:45.658Z\",\"userId\":1}",
+      "YUUfcE7aphCIzxnusjQixEodO31HlPxGkBAKQ7A46HWaKAy4jNjzNjCFjH8iKVcU": "{\"id\":\"YUUfcE7aphCIzxnusjQixEodO31HlPxGkBAKQ7A46HWaKAy4jNjzNjCFjH8iKVcU\",\"ttl\":1209600,\"created\":\"2019-07-27T15:19:24.677Z\",\"userId\":1}"
     },
     "ACL": {},
     "RoleMapping": {
@@ -76,7 +87,10 @@
       "8": "{\"firstName\":\"Bryana\",\"lastName\":\"Senger\",\"userName\":\"ddd\",\"email\":\"ddd@doe.com\",\"status\":\"inactive\",\"authSource\":\"local\",\"expiry\":\"2019-10-02T05:40:50.781Z\",\"locked\":false,\"lastLogin\":\"Thu Dec 06 2018 12:45:43 GMT+0100 (Central European Standard Time)\",\"username\":\"ddd\",\"password\":\"$2a$10$DZgBjm3gGu8/bw2YUVMJdeNzvEbjkhhnlaLe8Sg3cSKtxXOjp3U12\",\"id\":8}",
       "9": "{\"firstName\":\"Claudia\",\"lastName\":\"Doyle\",\"userName\":\"eee\",\"email\":\"eee@doe.com\",\"status\":\"inactive\",\"authSource\":\"local\",\"expiry\":\"2019-08-08T12:58:00.424Z\",\"locked\":false,\"lastLogin\":\"Mon Jul 30 2018 01:49:07 GMT+0200 (Central European Summer Time)\",\"username\":\"eee\",\"password\":\"$2a$10$PrgbOXRMQGkRjfBK7pyrIen.VV.ThqPiMJp5L/PcQrRcwWoMjOTMe\",\"id\":9}",
       "10": "{\"email\":\"john@1doe.com\",\"password\":\"$2a$10$FFxsuGGPZr7rDZAF4N41t.z7dU8GUQwu4pGQjPs6agdX16LHrHbTu\",\"id\":10}",
-      "11": "{\"email\":\"john1@doe.com\",\"password\":\"$2a$10$cMXTk2f5NJ6rHDKyjrCmbeTMYsdYh/jTckEehEfNdZpfCQbG5qp02\",\"id\":11}"
+      "11": "{\"email\":\"john1@doe.com\",\"password\":\"$2a$10$cMXTk2f5NJ6rHDKyjrCmbeTMYsdYh/jTckEehEfNdZpfCQbG5qp02\",\"id\":11}",
+      "12": "{\"email\":\"jane@1doe.com\",\"password\":\"$2a$10$d4WCI8z7kkcCUu7HMKlgkOIQuB/fyfZtRYty4dToHNG6Q38AgKiV2\",\"created\":\"2019-07-27T15:09:21.316Z\",\"modified\":\"2019-07-27T15:09:21.316Z\",\"id\":12}",
+      "13": "{\"email\":\"john@doe.com1\",\"password\":\"$2a$10$gAKZ0BCAIOqKZnt8MADI4uukpuQzXuYHZnMMjpZBGwC5g2s7L9iWS\",\"created\":\"2019-07-27T15:16:42.951Z\",\"modified\":\"2019-07-27T15:16:42.973Z\",\"id\":13,\"status\":\"true\",\"verificationToken\":\"19598d251c4c011f756703c0e0e73fb128aa2b190d9c01c2b0a489240a7a9d72250fcba8c6ae5d0656035f11d010846e19d462e081f64cd2c3322aa8ef62d8f4\"}",
+      "14": "{\"email\":\"john@doe.com12\",\"password\":\"$2a$10$6REYdD0N9Qn1qMJTF33a9OeSKcgyFBlcU1/mNOfEKn00jqPZg3SKi\",\"created\":\"2019-07-27T15:18:00.646Z\",\"modified\":\"2019-07-27T15:18:20.021Z\",\"id\":14,\"status\":\"true\",\"verificationToken\":null,\"emailVerified\":true}"
     },
     "team": {
       "1": "{\"ownerId\":1,\"memberId\":\"1\",\"id\":1}",

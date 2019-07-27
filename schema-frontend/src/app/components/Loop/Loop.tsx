@@ -22,7 +22,7 @@ class Loop extends React.Component<IParams, IMyState> {
   }
 
   public componentDidMount() {
-    //console.log(this.state);
+    // console.log(this.state);
   }
 
   public createEndpoint = async () => {
@@ -37,6 +37,7 @@ class Loop extends React.Component<IParams, IMyState> {
 
   public render() {
     const { schema } = this.state;
+    // tslint:disable-next-line: no-string-literal
     const collectionName = schema["collectionName"];
 
     return (
@@ -45,6 +46,7 @@ class Loop extends React.Component<IParams, IMyState> {
           <div className="row">
             <div className="col-md-4">
               <Button
+                // tslint:disable-next-line: jsx-no-lambda
                 onClick={() => this.setState({ show: true })}
                 variant="info"
                 block={true}
@@ -58,6 +60,7 @@ class Loop extends React.Component<IParams, IMyState> {
         <Modal
           size="lg"
           show={this.state.show}
+          // tslint:disable-next-line: jsx-no-lambda
           onHide={() => this.setState({ show: false })}
           dialogClassName="modal-90w"
         >

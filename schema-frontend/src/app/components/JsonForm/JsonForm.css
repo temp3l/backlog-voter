@@ -5,6 +5,7 @@
 .apiMenu li {
   display: inline;
   font-size: 70%;
+  margin: 10px;
 }
 
 .field-description {

@@ -18,7 +18,9 @@ function Account(props: any) {
     "http://" + window.location.hostname + ":4000/explorer/swagger.json";
   const explorer = "http://" + window.location.hostname + ":4000/explorer";
 
-  if (!session) return <Spinner />;
+  if (!session) {
+    return <Spinner />;
+  }
 
   return (
     <div className="container-fluid">
@@ -90,7 +92,8 @@ function Account(props: any) {
                         <td>
                           <button
                             className="btn btn-danger btn-sm"
-                            onClick={e => removeToken(token, i)}
+                            // tslint:disable-next-line: jsx-no-lambda
+                            onClick={() => removeToken(token, i)}
                           >
                             <i className="fas fa-trash" />
                           </button>

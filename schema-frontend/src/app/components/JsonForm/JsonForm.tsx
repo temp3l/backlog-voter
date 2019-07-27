@@ -19,7 +19,6 @@ import Spinner from "../Spinner/Spinner";
 import "./JsonForm.css";
 import resolveAkeliusSchema from "./samples/akelius";
 import resolveSchema from "./samples/generic";
-import ListView from "./ListView";
 
 interface IMyState {
   loading: boolean;

@@ -7,7 +7,9 @@ const api = axios.create({
 });
 api.interceptors.request.use(async config => {
   const session = readToken();
+  // tslint:disable-next-line: no-string-literal
   if (session && session["id"]) {
+    // tslint:disable-next-line: no-string-literal
     config.headers.Authorization = `${session["id"]}`;
   }
   return config;

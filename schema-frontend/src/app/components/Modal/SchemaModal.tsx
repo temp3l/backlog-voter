@@ -4,14 +4,14 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-jsonschema-form";
 
 class MyModal extends React.Component<any, any> {
-  private onSubmit = (event: any) => {
+  public onSubmit = (event: any) => {
     console.log(event);
   };
 
-  render() {
+  public render() {
     const { children, heading, schema, selected } = this.props;
-    const _schema = Object.assign({}, schema, { $schema: undefined });
-    delete _schema.$schema;
+    const tSchema = Object.assign({}, schema, { $schema: undefined });
+    delete tSchema.$schema;
 
     return (
       <Modal
@@ -32,10 +32,10 @@ class MyModal extends React.Component<any, any> {
 
           <Form
             {...this.props}
-            schema={_schema}
-            onChange={() => console.log("changed")}
+            schema={tSchema}
+            onChange={console.log}
             onSubmit={this.onSubmit}
-            onError={() => console.log("errors")}
+            onError={console.log}
           />
 
           <pre>{JSON.stringify(schema, null, 3)}</pre>
@@ -46,7 +46,7 @@ class MyModal extends React.Component<any, any> {
         </Modal.Footer>
       </Modal>
     );
-    // <pre>{JSON.stringify(_schema,null,3)}</pre>
+    // <pre>{JSON.stringify(t_schema,null,3)}</pre>
   }
 }
 

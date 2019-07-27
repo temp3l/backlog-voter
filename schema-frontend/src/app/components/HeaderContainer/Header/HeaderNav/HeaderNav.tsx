@@ -6,7 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, NavLink } from "react-router-dom";
-
+/*
 const CRUD_linkSchema = [
   {
     rel: "create",
@@ -38,7 +38,7 @@ const CQRS_linkSchema = [
     schema: { $ref: "commandSchema" }
   }
 ];
-
+*/
 const HeaderNav = () => {
   const schemas = [
     "simple",
