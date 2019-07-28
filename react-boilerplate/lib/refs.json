@@ -1,0 +1,23 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "Simple Schema",
+  "required": [
+    "simple"
+  ],
+  "properties": {
+    "simple": {
+      "$id": "#/properties/simple",
+      "type": "integer",
+      "title": "The Simple Schema",
+      "default": 0,
+      "examples": [
+        1
+      ]
+    },
+    "remote": { "$ref": "http://localhost:4000/api/item-schemas/protectonaut" },
+    "bar":    { "$schema": "http://localhost:4000/api/collection-schemas/protectonaut" }
+  }
+}

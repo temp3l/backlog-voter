@@ -1,0 +1,89 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "fns",
+    "vok"
+  ],
+  "properties": {
+    "fns": {
+      "$id": "#/properties/fns",
+      "type": "array",
+      "title": "The Fns Schema",
+      "items": {
+        "$id": "#/properties/fns/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "walker"
+        ],
+        "properties": {
+          "walker": {
+            "$id": "#/properties/fns/items/properties/walker",
+            "type": "array",
+            "title": "The Walker Schema",
+            "items": {
+              "$id": "#/properties/fns/items/properties/walker/items",
+              "type": "string",
+              "title": "The Items Schema",
+              "default": "",
+              "examples": [
+                "getSubschema",
+                "schemaWalk",
+                "subschemaWalk",
+                "getVocabulary",
+                "vocabularies"
+              ],
+              "pattern": "^(.*)$"
+            }
+          }
+        }
+      }
+    },
+    "vok": {
+      "$id": "#/properties/vok",
+      "type": "array",
+      "title": "The Vok Schema",
+      "items": {
+        "$id": "#/properties/vok/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "DRAFT_04"
+        ],
+        "properties": {
+          "DRAFT_04": {
+            "$id": "#/properties/vok/items/properties/DRAFT_04",
+            "type": "array",
+            "title": "The Draft_04 Schema",
+            "items": {
+              "$id": "#/properties/vok/items/properties/DRAFT_04/items",
+              "type": "string",
+              "title": "The Items Schema",
+              "default": "",
+              "examples": [
+                "properties",
+                "patternProperties",
+                "additionalProperties",
+                "dependencies",
+                "items",
+                "additionalItems",
+                "allOf",
+                "anyOf",
+                "oneOf",
+                "not",
+                "if",
+                "then",
+                "else"
+              ],
+              "pattern": "^(.*)$"
+            }
+          }
+        }
+      }
+    }
+  }
+}

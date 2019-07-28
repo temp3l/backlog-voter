@@ -1,0 +1,75 @@
+const fs = require('fs');
+const path = require('path');
+const transform = require('@cloudflare/json-schema-transform');
+const $RefParser = require('json-schema-ref-parser');
+// mergeCfRecurse, makeCfRecurseWalker, pruneDefinitions, removeLinksAndDefs,
+// getCollapseAllOfCallback, collapseSchemas, rollUpExamples, getCurlExampleCallback,
+// processApiDocSchema, getCurlsExampleCallback, processApiDocSchema, AutoExtensionDereferencer, vocabularies
+
+const schemas = [
+  'http://localhost:4000/api/item-schemas/protectonaut',
+  'http://localhost:4000/api/collection-schemas/protectonaut',
+  'file://refs.json',
+  'http://localhost:3000'
+];
+
+const options = {
+  parse: {
+    json: true, // Disable the JSON parser
+    yaml: {
+      allowEmpty: false, // Don't allow empty YAML files
+    },
+    text: {
+      canParse: ['.txt', '.html'], // Parse .txt and .html files as plain text (strings)
+      encoding: 'utf16', // Use UTF-16 encoding
+    },
+  },
+  resolve: {
+    file: true, // Don't resolve local file references
+    http: {
+      timeout: 2000, // 2 second timeout
+      withCredentials: true, // Include auth credentials when resolving HTTP references
+    },
+  },
+  dereference: {
+    circular: false, // Don't allow circular $refs
+  },
+};
+
+const re = new RegExp("^(http|https)://", "i");
+const resolveLocal = (uri) => {
+  let resolved = false
+  try {
+    console.log('local lookup for: '  + uri);
+    if( re.test(uri) === true ) return false
+    const localPath = uri.replace('file://', '');
+    resolved = JSON.parse( fs.readFileSync( path.resolve('./schemas/', localPath), 'utf-8') );
+    console.log(resolved);
+    
+  }
+  catch (e){
+    console.log(e)
+    if(e) console.log('local lookup failed: ', e.message);
+    return false
+  }
+
+  return resolved
+};
+
+
+const deref = (uri) => {
+  // .bundle() vs. .dereference()  =>  no circular references
+  const localContent = resolveLocal(uri);
+  console.log(uri)
+  $RefParser.bundle(localContent || schema, options, (err, schema) => {
+    if(err) console.log('bundling failed: ' + err.message);
+
+    console.log(JSON.stringify(schema, null, 4))
+  });
+}
+ const schema = schemas[2];
+ deref(schema)
+
+module.exports = {
+  deref,
+}

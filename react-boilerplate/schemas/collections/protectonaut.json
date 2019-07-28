@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-04/hyper-schema#",
+  "collectionName": "protectonaut",
+  "type": "array",
+  "items": {
+    "$ref": "http://localhost:4000/api/item-schemas/protectonaut"
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "http://localhost:4000/api/protectonaut"
+    },
+    {
+      "rel": "list",
+      "href": "http://localhost:4000/api/protectonaut"
+    },
+    {
+      "rel": "add",
+      "method": "POST",
+      "href": "http://localhost:4000/api/protectonaut",
+      "schema": {
+        "$ref": "http://localhost:4000/api/item-schemas/protectonaut"
+      }
+    },
+    {
+      "rel": "previous",
+      "href": "http://localhost:4000/api/protectonaut?filter[limit]={limit}&filter[offset]={previousOffset}{&paginateQs*}"
+    },
+    {
+      "rel": "next",
+      "href": "http://localhost:4000/api/protectonaut?filter[limit]={limit}&filter[offset]={nextOffset}{&paginateQs*}"
+    },
+    {
+      "rel": "page",
+      "href": "http://localhost:4000/api/protectonaut?filter[limit]={limit}&filter[offset]={offset}{&paginateQs*}"
+    },
+    {
+      "rel": "order",
+      "href": "http://localhost:4000/api/protectonaut?filter[order]={orderAttribute}%20{orderDirection}{&orderQs*}"
+    }
+  ]
+}
