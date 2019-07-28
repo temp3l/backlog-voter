@@ -1,21 +1,27 @@
 {
-  "definitions": {},
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://example.com/root.json",
-  "type": "object",
-  "title": "Simple Schema",
-  "required": [
-    "simple"
-  ],
-  "properties": {
-    "simple": {
-      "$id": "#/properties/simple",
-      "type": "integer",
-      "title": "The Simple Schema",
-      "default": 0
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "http://localhost:3000/deref/refs.json",
+
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "ReferenceToLocalSchema": {
+            "$ref": "#/definitions/LocalType"
+        },
+        "ReferenceToExternalSchema": {
+            "$ref": "http://localhost:4000/api/item-schemas/protectonaut"
+        }
     },
-    "remote": { "$ref": "http://localhost:4000/api/item-schemas/protectonaut" },
-    "bar": { "$schema": "http://localhost:4000/api/collection-schemas/protectonaut" }
-  },
-  "links": [ {"href":"#/properties/remote"}]
+    "definitions": {
+        "LocalType": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "no-write": {
+                    "type": "boolean",
+                    "default": false
+                }
+            }
+        }
+    }
 }

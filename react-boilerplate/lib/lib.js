@@ -10,7 +10,7 @@ const schemas = [
   'http://localhost:4000/api/item-schemas/protectonaut',
   'http://localhost:4000/api/collection-schemas/protectonaut',
   'file://refs.json',
-  'http://localhost:3000'
+  'http://localhost:80/refs.json'
 ];
 
 const options = {
@@ -40,15 +40,13 @@ const re = new RegExp("^(http|https)://", "i");
 const resolveLocal = (uri) => {
   let resolved = false
   try {
-    console.log('local lookup for: '  + uri);
+    console.log('local lookup for: ', uri);
     if( re.test(uri) === true ) return false
     const localPath = uri.replace('file://', '');
     resolved = JSON.parse( fs.readFileSync( path.resolve('./schemas/', localPath), 'utf-8') );
-    console.log(resolved);
-    
+    console.log('\n\n resolved local');
   }
   catch (e){
-    console.log(e)
     if(e) console.log('local lookup failed: ', e.message);
     return false
   }
@@ -56,19 +54,23 @@ const resolveLocal = (uri) => {
   return resolved
 };
 
-
-const deref = (uri) => {
-  // .bundle() vs. .dereference()  =>  no circular references
+// .bundle() vs. .dereference()  =>  no circular references
+const deref = async (uri) => {
   const localContent = resolveLocal(uri);
-  console.log(uri)
-  $RefParser.bundle(localContent || schema, options, (err, schema) => {
-    if(err) console.log('bundling failed: ' + err.message);
+  let dereferenced;
+  try {
+      dereferenced = await $RefParser.bundle(localContent || uri);
+    }
+    catch(err) {
+      console.error(err);
+      throw err
+  }
 
-    console.log(JSON.stringify(schema, null, 4))
-  });
+  console.log(dereferenced['$id']);
+  return dereferenced
 }
- const schema = schemas[2];
- deref(schema)
+// const schema = schemas[2];
+//deref(schema)
 
 module.exports = {
   deref,

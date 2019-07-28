@@ -1,8 +1,8 @@
 {
   "$id": "https://schema.example.com/interesting-stuff",
   "$schema": "http://json-schema.org/draft-07/hyper-schema#",
-  "required": ["stuffWorthEmailingAbout", "email", "title"],
   "properties": {
+    
     "title": {
       "type": "string"
     },
@@ -37,9 +37,9 @@
   "meta": {
     "type": "object",
     "properties": {
-      "prev": { "$ref": "#/definitions/pagination" },
+      "prev":    { "$ref": "#/definitions/pagination" },
       "current": { "$ref": "#/definitions/pagination" },
-      "next": { "$ref": "#/definitions/pagination" }
+      "next":    { "$ref": "#/definitions/pagination" }
     }
   },
 

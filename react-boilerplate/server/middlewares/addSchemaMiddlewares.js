@@ -14,14 +14,19 @@ const vocabulary = walker.vocabularies;
 const fns = { walker, transform, hyper, deref: { loader } };
 
 const schemaPath = path.resolve(process.cwd(), 'schemas');
+
 const schemas = [
   'http://localhost:4000/api/item-schemas/protectonaut',
   'http://localhost:4000/api/collection-schemas/protectonaut',
+  'file://refs.json',
+  'http://localhost:80/refs.json'
 ];
 const uri = './schemas/schema.json';
 const lib = require('../../lib/lib')
 const sample = JSON.parse( fs.readFileSync(uri.replace('file://','')) );
 const refs = JSON.parse(fs.readFileSync('./schemas/refs.json', 'utf-8'))
+
+
 // @cloudflare/json-schema-apidoc-loader
 /*
   mergeCfRecurse: [Function: mergeCfRecurse],
@@ -42,8 +47,6 @@ module.exports = function addProdMiddlewares(app, options) {
   const publicPath = options.publicPath || '/';
   const outputPath = options.outputPath || path.resolve(process.cwd(), 'build');
 
-
-
   // processApiDocSchema  - expects the document to be dereferenced alrady!
   const transformed = transform.processApiDocSchema(refs,
     { baseUri: 'http://localhost:3000/deref/',
@@ -54,9 +57,9 @@ module.exports = function addProdMiddlewares(app, options) {
         },
       },
     });
-  //console.log(JSON.stringify(transformed,null,2));
-  const pruned = transform.pruneDefinitions(refs)
-  console.log();
+  // console.log(JSON.stringify(transformed,null,2));
+  // const pruned = transform.pruneDefinitions(refs)
+  // console.log(pruned);
 
   app.get('/fns', (req, res) =>
     res.json(
@@ -80,7 +83,25 @@ module.exports = function addProdMiddlewares(app, options) {
     res.json({ fn, method, schema });
   });
 
-  app.get('/deref/:schema', (req, res) => {
+  app.get('/deref/:schema', async (req, res) => {
+    console.log(req.params);
+    const schemaPath = path.resolve('./schemas/', req.params.schema);
+    /*
+    lib.deref(path.resolve('./schemas/', req.params.schema)).then(dereferenced => {
+      console.log( typeof( dereferenced));
+      res.json({huhu:dereferenced})
+    }).catch(e => {
+      res.send(e.message)
+    });*/
+    try {
+      const dereferenced = await lib.deref(schemaPath);
+      res.json(dereferenced)
+    }catch(e){
+      console.log(e)
+      res.send(e.message)
+    }
+    
+    /*
     const transformed = transform.processApiDocSchema(req.params.schema, {
       baseUri: 'http://localhost:4000/api/',
       globalHeaderSchema: {
@@ -91,6 +112,7 @@ module.exports = function addProdMiddlewares(app, options) {
       },
     });
     res.json(transformed);
+    */
   });
   app.use(
     '/schemos',

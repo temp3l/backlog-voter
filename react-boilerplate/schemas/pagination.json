@@ -12,6 +12,9 @@
     "email": {
       "type": "string",
       "format": "email"
+    },
+    "items": {
+      "$ref": "http://localhost:4000/api/item-schemas/protectonaut"
     }
   },
 
