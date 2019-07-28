@@ -1,4 +1,4 @@
-import * as uriTemplates from "uri-templates";
+import uriTemplates from "uri-templates";
 const log = (type: any) => console.log.bind(console, type);
 const timeout = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -19,8 +19,8 @@ const hyperLinksConfig = {
     icon: "fa fa-default"
   },
   delete: {
+    className: "btn btn-sm btn-outline-warning",
     icon: "fa fa-default",
-    className: "btn btn-sm btn-outline-warning"
   },
   item: { icon: "fa fa-default", className: "btn btn-sm btn-outline-default" }, // href /{id}
   parent: {

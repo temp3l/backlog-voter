@@ -19,16 +19,13 @@ const ErrorPage = ({ error }: any) => (
 );
 
 const multiFetch = (name: string): Promise<object[] | void> => {
-  return Promise.all([
+  return axios.all([
     axios.get(`${API}/item-schemas/${name}`),
     axios.get(`${API}/collection-schemas/${name}`)
   ]);
 };
 
-export default class JsonFormDiag extends React.Component<
-  RouteComponentProps<ITParams>,
-  any
-> {
+export default class JsonFormDiag extends React.Component<RouteComponentProps<ITParams>,any> {
   constructor(props: any) {
     super(props);
     this.state = Object.assign({}, initialState, {
@@ -42,8 +39,7 @@ export default class JsonFormDiag extends React.Component<
     });
   }
 
-  public fetchSchema = (props: any) => {
-    return false;
+  public fetchSchema = (props) => {
     axios
       .get(`${API}/item-schemas/${this.state.file}`)
       .then(res => {
@@ -65,9 +61,9 @@ export default class JsonFormDiag extends React.Component<
 
   public componentDidMount = () => {
     multiFetch(this.state.file).then(data => {
-      const [a, v] = data;
-      // console.log(itemSchema, collectionSchema)
-      console.log(data[0]);
+      const [itemSchema, ollectionSchema]:any = data;
+
+      console.log([itemSchema, ollectionSchema]);
     });
   };
   public componentWillReceiveProps = (nextProps: any) => {

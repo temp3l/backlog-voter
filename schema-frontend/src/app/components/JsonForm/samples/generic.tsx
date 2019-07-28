@@ -16,9 +16,9 @@ const liveBundle = async (uri: string) => {
   // This lets you split-up your schema however you want while you're building it,
   // but easily combine all those files together when it's time to package or distribute the schema to other people.
   // The resulting schema size will be small, since it will still contain internal JSON references rather than being fully-dereferenced.
-  return await RefParser.bundle(uri).then((schema: any) => {
-    return schema;
-  });
+  // return await RefParser.bundle(uri).then((schema: any) => {
+  //   return schema;
+  // });
 };
 
 const resolve = async (file: string) => {

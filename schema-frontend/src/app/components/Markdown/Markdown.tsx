@@ -1,6 +1,6 @@
 import * as React from "react";
 import Spinner from "react-bootstrap/Spinner";
-import * as ReactMarkdown from "react-markdown";
+import ReactMarkdown from "react-markdown";
 import "./markdown.css";
 
 interface IMyState {

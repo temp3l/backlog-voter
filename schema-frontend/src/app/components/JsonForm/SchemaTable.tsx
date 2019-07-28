@@ -32,17 +32,21 @@ export default class DefaultPaginationTable extends React.Component<any, any> {
       ],
 
       // tslint:disable-next-line: object-literal-sort-keys
+      nextPage: "Next", // Next page button text
+
       pageStartIndex: 0, // where to start counting the pages
       paginationSize: 5, // the pagination bar size.
-      prePage: "Prev", // Previous page button text
-      nextPage: "Next", // Next page button text
+      
       // firstPage: 'First', // First page button text
       // lastPage: 'Last', // Last page button text
       // prePageTitle: 'Go to previous', // Previous page button title
       // nextPageTitle: 'Go to next', // Next page button title
       // firstPageTitle: 'Go to first', // First page button title
       // lastPageTitle: 'Go to Last', // Last page button title
+      // tslint:disable-next-line: object-literal-sort-keys
+
       paginationShowsTotal: false, // Accept bool or function
+      prePage: "Prev", // Previous page button text
       sizePerPage: 5, // which size per page you want to locate as default
       // keepSizePerPageState: true //default is false, enable will keep sizePerPage dropdown state(open/clode) when external rerender happened
       // hideSizePerPage: true > You can hide the dropdown for sizePerPage

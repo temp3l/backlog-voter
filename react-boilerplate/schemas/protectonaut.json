@@ -1,0 +1,61 @@
+{
+  "collectionName": "protectonaut",
+  "title": "Protectonaut",
+  "description": "A test example",
+  "type": "object",
+  "properties": {
+    "voucherCode": {
+      "type": "string",
+      "title": "voucherCode",
+      "minLength": 3,
+      "maxLength": 5
+    },
+    "voucherType": {
+      "title": "voucherType",
+      "type": "string",
+      "enum": [
+        "free",
+        "cheap",
+        "gift"
+      ],
+      "default": "free"
+    }
+  },
+  "required": [
+    "voucherCode",
+    "voucherType"
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "href": "http://localhost:4000/api/protectonaut/{id}"
+    },
+    {
+      "rel": "item",
+      "href": "http://localhost:4000/api/protectonaut/{id}"
+    },
+    {
+      "rel": "create",
+      "method": "POST",
+      "href": "http://localhost:4000/api/protectonaut",
+      "schema": {
+        "$ref": "http://localhost:4000/api/item-schemas/protectonaut"
+      }
+    },
+    {
+      "rel": "update",
+      "method": "PUT",
+      "href": "http://localhost:4000/api/protectonaut/{id}"
+    },
+    {
+      "rel": "delete",
+      "method": "DELETE",
+      "href": "http://localhost:4000/api/protectonaut/{id}"
+    },
+    {
+      "rel": "parent",
+      "href": "http://localhost:4000/api/protectonaut"
+    }
+  ],
+  "$schema": "http://json-schema.org/draft-04/hyper-schema#"
+}

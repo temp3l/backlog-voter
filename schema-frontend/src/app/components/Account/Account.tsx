@@ -4,9 +4,7 @@ import { reset } from "../../../utils/auth2";
 import Spinner from "../Spinner/Spinner";
 import styled from "styled-components";
 
-const BoxShadow = styled.div`
-  box-shadow: 10px 5px 5px black;
-`;
+
 const host = window.location.hostname;
 function Account(props: any) {
   const { session, tokens, roles, teams, removeToken } = props;
