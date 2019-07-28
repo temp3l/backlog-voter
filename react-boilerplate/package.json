@@ -55,7 +55,6 @@
       "git add --force"
     ],
     "*.json": [
-      "prettier --write",
       "git add --force"
     ]
   },

@@ -2,6 +2,8 @@ const path = require('path');
 const express = require('express');
 const serveIndex = require('serve-index');
 const fs = require('fs');
+const $RefParser = require('json-schema-ref-parser');
+
 const yaml = require('node-yaml');
 const walker = require('@cloudflare/json-schema-walker'); // schemaWalk
 const transform = require('@cloudflare/json-schema-transform');
@@ -12,44 +14,16 @@ const loader = require('@cloudflare/json-schema-ref-loader');
 const hyper = require('@cloudflare/json-hyper-schema'); // extractLdos, extractLdo, resolveUri
 const vocabulary = walker.vocabularies;
 const fns = { walker, transform, hyper, deref: { loader } };
-
-const schemaPath = path.resolve(process.cwd(), 'schemas');
-
-const schemas = [
-  'http://localhost:4000/api/item-schemas/protectonaut',
-  'http://localhost:4000/api/collection-schemas/protectonaut',
-  'file://refs.json',
-  'http://localhost:80/refs.json'
-];
-const uri = './schemas/schema.json';
 const lib = require('../../lib/lib')
-const sample = JSON.parse( fs.readFileSync(uri.replace('file://','')) );
+
+const uri = './schemas/schema.json';
+const sample = JSON.parse( fs.readFileSync(uri) );
 const refs = JSON.parse(fs.readFileSync('./schemas/refs.json', 'utf-8'))
 
-
 // @cloudflare/json-schema-apidoc-loader
-/*
-  mergeCfRecurse: [Function: mergeCfRecurse],
-  makeCfRecurseWalker: [Function: makeCfRecurseWalker],
-  pruneDefinitions: [Function: pruneDefinitions],
-  removeLinksAndDefs: [Function: removeLinksAndDefs],
-  getCollapseAllOfCallback: [Function: getCollapseAllOfCallback],
-  collapseSchemas: [Function: collapseSchemas],
-  rollUpExamples: [Function: rollUpExamples],
-  getCurlExampleCallback: [Function: getCurlExampleCallback],
-  processApiDocSchema: [Function: processApiDocSchema],
-  AutoExtensionDereferencer: [Function: AutoExtensionDereferencer],
-*/
-    
-
-module.exports = function addProdMiddlewares(app, options) {
-  app.set('json spaces', 2);
-  const publicPath = options.publicPath || '/';
-  const outputPath = options.outputPath || path.resolve(process.cwd(), 'build');
-
-  // processApiDocSchema  - expects the document to be dereferenced alrady!
-  const transformed = transform.processApiDocSchema(refs,
-    { baseUri: 'http://localhost:3000/deref/',
+const globalHeaderSchema = (schema) => {
+   const transformed = transform.processApiDocSchema(schema,
+    { baseUri: 'http://localhost:4000/api/',
       globalHeaderSchema: {
         example: {
           Accept: 'application/json',
@@ -57,20 +31,50 @@ module.exports = function addProdMiddlewares(app, options) {
         },
       },
     });
+   return transformed
+}
+
+
+module.exports = function addProdMiddlewares(app, options) {
+  app.set('json spaces', 2);
+  const publicPath = options.publicPath || '/';
+  const outputPath = options.outputPath || path.join(process.cwd(), 'build');
+  console.log(options)
+  // processApiDocSchema  - expects the document to be dereferenced alrady!
   // console.log(JSON.stringify(transformed,null,2));
   // const pruned = transform.pruneDefinitions(refs)
   // console.log(pruned);
 
+
+app.get('/dist/*', async (req,res) => {
+  // console.log(req.params);
+  const _tpath = [ ...req.params[0].split('/').filter(s => s !== 'favicon.ico')]
+  if(!_tpath.length) { return res.send('chooose file') }
+  console.log(_tpath)
+  const fileName = _tpath.pop();
+  const _folder = path.join([ './schemas/',..._tpath ].join('/'));
+  const filePath = path.join([_folder, fileName].join('/'))
+
+
+  const links = globalHeaderSchema({links:[  
+    { "rel": "add",        "href":"service.io/foo", method: "post" }, 
+    { "rel": "delete",     "href":"service.io/foo", method: "post" }, 
+    { "rel": "previous",   "href": "http://localhost:4000/api/protectonaut?filter[limit]={limit}&filter[offset]={previousOffset}{&paginateQs*}"},
+    { "rel": "next", href: "http://localhost:4000/api/protectonaut?filter[limit]={limit}&filter[offset]={nextOffset}{&paginateQs*}"},
+  ]});
+  
+  const ret = await lib.deref(filePath); // local lookup, then fetch
+  
+  
+  let foo = Object.assign({filePath}, ret, links )
+    res.send(foo)
+});
+
+
   app.get('/fns', (req, res) =>
-    res.json(
-      Object.assign(
-        {},
+    res.json(Object.assign({},
         { fns: Object.keys(fns).map(v => ({ [v]: Object.keys(fns[v]) })) },
-        {
-          voc: Object.keys(vocabulary).map(v => ({
-            [v]: Object.keys(vocabulary[v]),
-          })),
-        },
+        { voc: Object.keys(vocabulary).map(v => ({ [v]: Object.keys(vocabulary[v]) })) },
       ),
     ),
   );
@@ -83,24 +87,47 @@ module.exports = function addProdMiddlewares(app, options) {
     res.json({ fn, method, schema });
   });
 
+
+
   app.get('/deref/:schema', async (req, res) => {
     console.log(req.params);
-    const schemaPath = path.resolve('./schemas/', req.params.schema);
-    /*
-    lib.deref(path.resolve('./schemas/', req.params.schema)).then(dereferenced => {
-      console.log( typeof( dereferenced));
-      res.json({huhu:dereferenced})
-    }).catch(e => {
-      res.send(e.message)
-    });*/
+    const schemaPath = path.join('./schemas/', req.params.schema);
     try {
       const dereferenced = await lib.deref(schemaPath);
+      // let test = hyper.joinUri(dereferenced)
+      // console.log(parser.$refs.paths());
       res.json(dereferenced)
     }catch(e){
       console.log(e)
-      res.send(e.message)
+      res.status(e.status).send(e.message)
     }
-    
+     
+
+  });
+  app.use('/schemos', express.static('./schemas'), serveIndex('./schemas', { icons: true }), );
+
+  app.get('/schemo/:path', (req, res) =>
+    res.sendFile(path.join(process.cwd(), './schemas/', req.params.path)),
+  );
+
+  app.get('/voodoo', (req, res) => {
+    res.json({ t: transform.pruneDefinitions(sample) });
+  });
+};
+
+/*
+
+walker.schemaWalk(schema, (data, path) => console.log(data.type, path), null, vocabulary); // // schema, preFunc, postFunc, vocabulary
+
+
+// console.log( deref('http://localhost:3000/schema.json') )
+
+
+1. json-ref-parser
+2. apiDoc
+
+
+ */
     /*
     const transformed = transform.processApiDocSchema(req.params.schema, {
       baseUri: 'http://localhost:4000/api/',
@@ -113,42 +140,3 @@ module.exports = function addProdMiddlewares(app, options) {
     });
     res.json(transformed);
     */
-  });
-  app.use(
-    '/schemos',
-    express.static('./schemas'),
-    serveIndex('./schemas', { icons: true }),
-  );
-
-  app.get('/schemo/:path', (req, res) =>
-    res.sendFile(path.resolve(process.cwd(), './schemas/', req.params.path)),
-  );
-
-  app.get('/voodoo', (req, res) => {
-    res.json({ t: transformer.pruneDefinitions(sample) });
-  });
-};
-
-/*
-const schemas = [ 'http://localhost:4000/api/item-schemas/protectonaut', 'http://localhost:4000/api/collection-schemas/protectonaut']
-
-walker.schemaWalk(schema, (data, path) => console.log(data.type, path), null, vocabulary); // // schema, preFunc, postFunc, vocabulary
-
-
-
-const async () => {
-  return deref(schemas[0]);  
-}
-
-
-console.log(JSON.stringify(transformed, null, 4));
-
-// console.log( deref('http://localhost:3000/schema.json') )
-let test = hyper.resolveUri(schema)
-
-
-1. json-ref-parser
-2. apiDoc
-
-
- */

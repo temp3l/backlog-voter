@@ -5,7 +5,6 @@ const $RefParser = require('json-schema-ref-parser');
 // mergeCfRecurse, makeCfRecurseWalker, pruneDefinitions, removeLinksAndDefs,
 // getCollapseAllOfCallback, collapseSchemas, rollUpExamples, getCurlExampleCallback,
 // processApiDocSchema, getCurlsExampleCallback, processApiDocSchema, AutoExtensionDereferencer, vocabularies
-
 const schemas = [
   'http://localhost:4000/api/item-schemas/protectonaut',
   'http://localhost:4000/api/collection-schemas/protectonaut',
@@ -35,19 +34,18 @@ const options = {
     circular: false, // Don't allow circular $refs
   },
 };
-
 const re = new RegExp("^(http|https)://", "i");
+
 const resolveLocal = (uri) => {
   let resolved = false
+  if( re.test(uri) === true ) return false
   try {
-    console.log('local lookup for: ', uri);
-    if( re.test(uri) === true ) return false
+    // console.log('local lookup for: ', uri);
     const localPath = uri.replace('file://', '');
-    resolved = JSON.parse( fs.readFileSync( path.resolve('./schemas/', localPath), 'utf-8') );
-    console.log('\n\n resolved local');
+    resolved = JSON.parse( fs.readFileSync( path.join('./schemas/', localPath), 'utf-8') );
   }
   catch (e){
-    if(e) console.log('local lookup failed: ', e.message);
+    //if(e) console.log('local lookup failed: ',  e.message);
     return false
   }
 
@@ -57,20 +55,18 @@ const resolveLocal = (uri) => {
 // .bundle() vs. .dereference()  =>  no circular references
 const deref = async (uri) => {
   const localContent = resolveLocal(uri);
-  let dereferenced;
+  let error;
+  let $parser = new $RefParser()
   try {
-      dereferenced = await $RefParser.bundle(localContent || uri);
+      await $parser.bundle(localContent || uri);
+      console.log('schema fileSystem ');
     }
     catch(err) {
-      console.error(err);
-      throw err
+      error = err;
   }
-
-  console.log(dereferenced['$id']);
-  return dereferenced
+  
+  return { error,paths: $parser.$refs.paths(), $parser,  }
 }
-// const schema = schemas[2];
-//deref(schema)
 
 module.exports = {
   deref,

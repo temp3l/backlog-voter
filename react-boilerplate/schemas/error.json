@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "$id": "http://localhost:3000/deref/refs.json",
 
   "type": "object",
@@ -30,12 +30,11 @@
       "$ref": "dom_address/address.json"
     },
     "place": {
-      "$ref": "./yaml/pagination.yaml"
+      "$ref": "../../yaml/pagination.yaml"
     },
    
     "color": {
-      "$description": "/thing/properties/colors/black-as-the-night",
-      "$ref": "#/definitions"
+      "$ref": "#/definitions/thing/properties/colors/black-as-the-night"
     }
   },
   "definitions": {

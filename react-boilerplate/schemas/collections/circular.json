@@ -3,7 +3,7 @@
     "items": {
         "oneOf": [
             {"type": "string"},
-            {"$ref": "#"}
+            {"$ref": "#f"}
         ]
     }
 }
