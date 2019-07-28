@@ -55,7 +55,7 @@ const resolveLocal = (uri) => {
 // .bundle() vs. .dereference()  =>  no circular references
 const deref = async (uri) => {
   const localContent = resolveLocal(uri);
-  let error;
+  let error=null;
   let $parser = new $RefParser()
   try {
       await $parser.bundle(localContent || uri);
@@ -65,7 +65,7 @@ const deref = async (uri) => {
       error = err;
   }
   
-  return { error,paths: $parser.$refs.paths(), $parser,  }
+  return {  paths: $parser.$refs.paths(), $parser,  }
 }
 
 module.exports = {

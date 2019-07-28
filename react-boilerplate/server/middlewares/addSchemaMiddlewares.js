@@ -2,8 +2,6 @@ const path = require('path');
 const express = require('express');
 const serveIndex = require('serve-index');
 const fs = require('fs');
-const $RefParser = require('json-schema-ref-parser');
-
 const yaml = require('node-yaml');
 const walker = require('@cloudflare/json-schema-walker'); // schemaWalk
 const transform = require('@cloudflare/json-schema-transform');
@@ -60,13 +58,12 @@ app.get('/dist/*', async (req,res) => {
     { "rel": "add",        "href":"service.io/foo", method: "post" }, 
     { "rel": "delete",     "href":"service.io/foo", method: "post" }, 
     { "rel": "previous",   "href": "http://localhost:4000/api/protectonaut?filter[limit]={limit}&filter[offset]={previousOffset}{&paginateQs*}"},
-    { "rel": "next", href: "http://localhost:4000/api/protectonaut?filter[limit]={limit}&filter[offset]={nextOffset}{&paginateQs*}"},
+    { "rel": "next", href: "/protectonaut?filter[limit]={limit}&filter[offset]={nextOffset}{&paginateQs*}"},
   ]});
   
   const ret = await lib.deref(filePath); // local lookup, then fetch
   
-  
-  let foo = Object.assign({filePath}, ret, links )
+  let foo = Object.assign({}, ret, links )
     res.send(foo)
 });
 
