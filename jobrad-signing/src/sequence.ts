@@ -12,6 +12,7 @@ import {
 
 const SequenceActions = RestBindings.SequenceActions;
 
+// A Sequence is a stateless grouping of Actions that control how a Server responds to requests.
 export class MySequence implements SequenceHandler {
   constructor(
     @inject(SequenceActions.FIND_ROUTE) protected findRoute: FindRoute,
@@ -27,8 +28,10 @@ export class MySequence implements SequenceHandler {
       const route = this.findRoute(request);
       const args = await this.parseParams(request, route);
       const result = await this.invoke(route, args);
+      // console.log({response, result});
       this.send(response, result);
     } catch (err) {
+      //setTimeout(() => this.reject(context, err), 3000);
       this.reject(context, err);
     }
   }

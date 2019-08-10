@@ -1,4 +1,4 @@
-// https://opensource.zalando.com/restful-api-guidelines/#http-status-codes-and-errors
+import {ResponseObject} from 'openapi3-ts';
 
 export const validationErrorModel = {
   type: 'object',
@@ -32,7 +32,7 @@ export const validationErrorModel = {
             properties: {
               path: {
                 type: 'string',
-                example: '/jsonpointer',
+                example: '/properties/vendor',
               },
               code: {
                 type: 'string',
@@ -59,7 +59,7 @@ export const validationErrorModel = {
   },
 };
 
-export const errorModel = {
+export const genericErrorModel = {
   type: 'object',
   description: 'An error occured',
   properties: {
@@ -75,7 +75,7 @@ export const errorModel = {
       type: 'string',
       description:
         'A short, summary of the problem type. Written in english and readable\nfor engineers (usually not suited for non technical stakeholders and\nnot localized); example: Service Unavailable\n',
-      example: 'Invalid JSON data',
+      example: 'An error occured',
     },
     status: {
       type: 'integer',
@@ -85,21 +85,98 @@ export const errorModel = {
       minimum: 100,
       maximum: 600,
       exclusiveMaximum: true,
-      example: 422,
+      example: 503,
     },
     detail: {
       type: 'string',
       description:
         'A human readable explanation specific to this occurrence of the\nproblem.\n',
-      example: 'The provided data cannot be processed!',
+      example: 'Connection to database timed out',
     },
     instance: {
       type: 'string',
       format: 'uri',
       description:
         'An absolute URI that identifies the specific occurrence of the problem.\nIt may or may not yield further information if dereferenced.\n',
-      example: 'https://json-schema.org/latest/json-schema-validation.html',
+      example: 'https://wiki.assona.io/?search=genericError',
     },
-    validationErrors: validationErrorModel,
   },
 };
+
+export const VALIDATION_ERROR_RESPONSE: ResponseObject = {
+  description: 'Error Response',
+  content: {
+    'application/problem+json': {
+      schema: validationErrorModel,
+    },
+  },
+};
+
+export const GENERIC_ERROR_RESPONSE: ResponseObject = {
+  description: 'Error Response',
+  content: {
+    'application/problem+json': {
+      schema: genericErrorModel,
+    },
+  },
+};
+/*
+const sampleErrors = [
+  {
+    statusCode: 400,
+    name: 'BadRequestError',
+    message: 'Request body is required',
+    code: 'MISSING_REQUIRED_PARAMETER',
+  },
+  {
+    "statusCode": 422,
+    "name": "ValidationError",
+    "message": "The `Contract` instance is not valid. Details: `test` is not defined in the model (value: undefined).",
+    "details": {
+      "context": "Contract",
+      "codes": {
+        "test": [
+          "unknown-property"
+        ]
+      },
+      "messages": {
+        "test": [
+          "is not defined in the model"
+        ]
+      }
+    }
+  },
+  {
+    statusCode: 400,
+    name: 'SyntaxError',
+    message: 'Unexpected token a in JSON at position 1',
+  },
+  {
+    error: {
+      statusCode: 422,
+      name: 'UnprocessableEntityError',
+      message:
+        'The request body is invalid. See error object `details` property for more info.',
+      code: 'VALIDATION_FAILED',
+      details: [
+        {
+          path: '',
+          code: 'required',
+          message: "should have required property 'vendor'",
+          info: {
+            missingProperty: 'vendor',
+          },
+        },
+        {
+          path: '',
+          code: 'required',
+          message: "should have required property 'type'",
+          info: {
+            missingProperty: 'type',
+          },
+        },
+      ],
+    },
+  },
+];
+*/

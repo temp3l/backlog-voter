@@ -1,14 +1,14 @@
-import {DefaultCrudRepository} from '@loopback/repository';
-import {Contract, ContractRelations} from '../models';
-import {MemoryDataSource} from '../datasources';
-import {inject} from '@loopback/core';
+import {DefaultCrudRepository, juggler} from '@loopback/repository';
+import {Contract} from '../models';
+import {inject} from '@loopback/context';
 
 export class ContractRepository extends DefaultCrudRepository<
   Contract,
-  typeof Contract.prototype.contractId,
-  ContractRelations
+  typeof Contract.prototype.contractId
 > {
-  constructor(@inject('datasources.memory') dataSource: MemoryDataSource) {
-    super(Contract, dataSource);
+  constructor(
+    @inject('datasources.memory') protected datasource: juggler.DataSource,
+  ) {
+    super(Contract, datasource);
   }
 }

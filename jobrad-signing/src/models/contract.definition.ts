@@ -1,10 +1,21 @@
-export const contractDefinition = {
-  name: 'ContractSchema',
-  required: ['id', 'vendor', 'type', 'contractId'],
+import {RequestBodyObject} from 'openapi3-ts';
+
+export const contractRequestModel = {
+  type: 'object',
+  //required: ['vendor', 'price', 'done'],
   properties: {
-    contractId: {type: 'string', id: true, required: true},
+    price: {type: 'string', required: true},
     vendor: {type: 'string'},
-    type: {type: 'string', enum: ['bike', 'twike', 'dreik']},
-    test: {type: 'string'},
+    type: {type: 'string', enum: ['bike', 'twike', 'dreik'], default: 'bike'},
+    done: {type: 'string'},
+  },
+};
+
+export const CONTRACT_REQUEST: RequestBodyObject = {
+  description: 'Request Schema',
+  content: {
+    'application/json': {
+      schema: {$ref: contractRequestModel},
+    },
   },
 };

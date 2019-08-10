@@ -5,10 +5,11 @@ import {
   RestExplorerComponent,
 } from '@loopback/rest-explorer';
 import {RepositoryMixin} from '@loopback/repository';
-import {RestApplication} from '@loopback/rest';
+import {RestApplication, RestBindings} from '@loopback/rest';
 import {ServiceMixin} from '@loopback/service-proxy';
 import * as path from 'path';
 import {MySequence} from './sequence';
+import {Mem2DataSource} from './datasources/mem2.datasource';
 
 // Information from package.json
 
@@ -27,11 +28,11 @@ export class JobradSigningApplication extends BootMixin(
 ) {
   constructor(options: ApplicationConfig = {}) {
     super(Object.assign({}, options, {rest: {port: 3000, host: '0.0.0.0'}}));
+    this.setupDataSources();
 
     this.setUpBindings();
 
-    // Set up the custom sequence
-    this.sequence(MySequence);
+    this.sequence(MySequence); // Set up the custom sequence
 
     // Set up default home page
     this.static('/', path.join(__dirname, '../public'));
@@ -54,8 +55,12 @@ export class JobradSigningApplication extends BootMixin(
     };
   }
 
+  setupDataSources() {
+    this.bind('dataSources.memory').to(Mem2DataSource);
+  }
   setUpBindings(): void {
     // Bind package.json to the application context
     this.bind(PackageKey).to(pkg);
+    this.bind(RestBindings.ERROR_WRITER_OPTIONS).to({debug: true});
   }
 }

@@ -1,19 +1,49 @@
 import {Entity, model, property} from '@loopback/repository';
-//import {contractDefinition} from './contract.definition';
-import {getJsonSchema} from '@loopback/repository-json-schema';
 
-@model() //
+@model({
+  settings: {
+    indexes: {
+      uniqueContractId: {keys: {contractId: 1}, options: {unique: true}},
+    },
+  },
+})
 export class Contract extends Entity {
-  @property({id: true, required: true}) contractId: string;
-  @property({required: true}) vendor: string;
-  @property({required: true}) type: string;
-  @property.array(String)
-  arr: string[]; // explicitly passing in type information-orjust-array
+  @property({
+    type: 'number',
+    id: true,
+  })
+  contractId?: number;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  vendor: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  price: string;
+
+  @property({
+    type: 'boolean',
+    required: true,
+  })
+  done: boolean;
+
+  @property({
+    type: 'string',
+    required: true,
+    default: '0113454688',
+  })
+  phone: string;
+
+  constructor(data?: Partial<Contract>) {
+    super(data);
+  }
 }
 
-export const ContractSchema = getJsonSchema(Contract);
-
-console.log(ContractSchema);
 export interface ContractRelations {
   // describe navigational properties here
 }

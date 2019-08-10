@@ -1,6 +1,6 @@
 {
-  "name": "mongo",
+  "name": "mem2",
   "connector": "memory",
   "localStorage": "",
-  "file": "data/db.json"
+  "file": "data/db2.json"
 }
