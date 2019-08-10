@@ -65,7 +65,7 @@ const deref = async (uri) => {
       error = err;
   }
   
-  return {  paths: $parser.$refs.paths(), $parser,  }
+  return { error, paths: $parser.$refs.paths(), $parser,  }
 }
 
 module.exports = {
