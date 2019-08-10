@@ -1,0 +1,72 @@
+{
+  "window.zoomLevel": 0,
+  "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.wordWrapColumn": 110,
+  "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "search.exclude": {
+      "**/.trash": true
+  },
+  "files.exclude": {
+      "./disz": true,
+      ".dockerignore": true,
+      ".mocharc.json": true,
+      ".yo-rc.json": true,
+      "**/.classpath": true,
+      "**/.editorconfig": true,
+      "**/.factorypath": true,
+      "**/.gitignore": true,
+      "**/.jshintignore": true,
+      "**/.jshintrc": true,
+      "**/.npmignore": true,
+      "**/.project": true,
+      "**/.settings": true,
+      "**/.trash": true,
+      "**/dist": true,
+      "**/react-app-env.d.ts": true,
+      "**/serviceWorker.ts": true,
+      "**/yarn-error.log": true,
+      "Dockerfile": true,
+      "package-lock.json": true,
+      "tsconfig.tsbuildinfo": true,
+      "**/yarn.lock": true,
+      "**/package-lock.json": true,
+      "lerna.json": true,
+      "commitlint.config.js": true,
+      "appveyor.yml": true,
+      ".travis.yml": true,
+      ".renovaterc.json": true,
+      ".eslintignore": true,
+      ".eslintrc.js": true,
+      ".gitignore": true,
+      "**/tsconfig.build.tsbuildinfo": true,
+      "**/tsconfig.build.json": true,
+      "**/__tests__": true,
+      ".nodemonignore": true,
+      ".prettierrc": true,
+      ".prettierignore": true,
+      ".npmrc": true,
+      "DEVELOPING.md": true,
+  },
+  "[css]": {
+      "editor.defaultFormatter": "vscode.css-language-features",
+  },
+  "html.format.wrapLineLength": 180,
+  "editor.wrappingIndent": "none",
+  "editor.minimap.enabled": true,
+  "files.insertFinalNewline": true,
+  "javascript.format.placeOpenBraceOnNewLineForFunctions": true,
+  "editor.suggestSelection": "first",
+  "explorer.confirmDelete": true,
+  "tslint.jsEnable": true,
+  "javascript.implicitProjectConfig.experimentalDecorators": true
+}
