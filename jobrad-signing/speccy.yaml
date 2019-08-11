@@ -1,0 +1,22 @@
+# Convert JSON Schema-proper to OpenAPI-flavoured Schema Objects
+jsonSchema: false
+quiet: false
+# Default stdout = 1
+verbose: 3
+# Rules specific to the lint command
+lint:
+  # rules files to load
+  rules:
+  - strict
+  #- ./some/local/rules.yaml
+  #- https://example.org/my-rules.yaml
+  # rules to skip
+  # skip:
+  #- info-contact
+# Rules specific to the resolve command
+resolve:
+  output: data/spec.yaml
+
+#  Rules specific to the serve command
+serve:
+  port: 8000

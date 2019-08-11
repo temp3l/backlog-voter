@@ -1,4 +1,4 @@
-export default ={
+{
 	"openapi": "3.0.2",
 	"info": {
 		"title": "Assona",
@@ -14,10 +14,10 @@ export default ={
 			"url": "https://www.apache.org/licenses/LICENSE-2.0.html"
 		},
 		"x-audience": "company-internal",
-		"description": "\nIhr kompetenter Partner für Spezialversicherungen\n<img src=\"https://www.assona.com/themes/assona/images/logo_assona.png\" style=\"right:0;top:0;position:absolute; width:100px\"/>\n\n#### Documentazione\n- la descrizione dei dati, eg. *Cartografia catastale in scala 1:2000*\n- la copertura geografica\n- la data di creazione e/o pubblicazione e/o ultima modifica dei dati\n- i contatti dell'ente che li pubblica, eg. *Agenzia delle Entrate Direzione Centrale Catasto* con la relativa email\n<img src=\"https://cdn.ppolyzos.com/wp-content/uploads/2017/10/jwt-support-swagger-aspnet-core.png\" style=\"float:right;width:200px\"/>\n"
+		"description": "Ihr kompetenter Partner für Spezialversicherungen\n<img src=\"https://www.assona.com/themes/assona/images/logo_assona.png\" style=\"float:right; width:100px, top:100px\"/>\n\n#### Documentazione\n- la descrizione dei dati, eg. *Cartografia catastale in scala 1:2000*\n- la copertura geografica\n- la data di creazione e/o pubblicazione e/o ultima modifica dei dati\n- i contatti dell'ente che li pubblica, eg. *Agenzia delle Entrate Direzione Centrale Catasto* con la relativa email\n<img src=\"https://cdn.ppolyzos.com/wp-content/uploads/2017/10/jwt-support-swagger-aspnet-core.png\" style=\"float:right;width:200px\"/>\n"
 	},
 	"servers": [{
-		"url": "http://10.50.2.103:3000"
+		"url": "http://localhost:3000"
 	}],
 	"tags": [{
 		"name": "contract",
@@ -47,7 +47,7 @@ export default ={
 				"tags": ["StatusController"],
 				"responses": {
 					"200": {
-						"description": "A list of datasources.\n",
+						"description": "A list of datasources.",
 						"headers": {
 							"X-RateLimit-Limit": {
 								"$ref": "#/components/headers/X-RateLimit-Limit"
@@ -81,6 +81,9 @@ export default ={
 					"404": {
 						"$ref": "#/components/responses/404NotFound"
 					},
+					"422": {
+						"$ref": "#/components/responses/422SchemaError"
+					},
 					"429": {
 						"$ref": "#/components/responses/429TooManyRequests"
 					},
@@ -96,10 +99,6 @@ export default ={
 	},
 	"components": {
 		"securitySchemes": {
-			"BasicAuth": {
-				"type": "http",
-				"scheme": "basic"
-			},
 			"OAuth2": {
 				"type": "oauth2",
 				"flows": {
@@ -619,8 +618,8 @@ export default ={
 					}
 				}
 			},
-			"AssonaErrorResponse": {
-				"description": "The request body is invalid.",
+			"422SchemaError": {
+				"description": "Schema validation failed.",
 				"content": {
 					"application/problem+json": {
 						"schema": {

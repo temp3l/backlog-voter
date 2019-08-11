@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   $ref: './common/info.yaml'
 servers:
-  - url: http://10.50.2.103:3000
+  - url: http://localhost:3000
 tags:
   $ref: './common/tags.yaml'
 paths:
@@ -15,8 +15,7 @@ paths:
       tags: [StatusController]
       responses:
         '200':
-          description: |
-            A list of datasources.
+          description: A list of datasources.
           headers:
             X-RateLimit-Limit:
               $ref: '#/components/headers/X-RateLimit-Limit'
@@ -50,8 +49,6 @@ paths:
 
 components:
   securitySchemes:
-    BasicAuth:
-      $ref: './common/security.yaml#/BasicAuth'
     OAuth2:
       $ref: './common/security.yaml#/OAuth2'
 
@@ -91,7 +88,6 @@ components:
             missingProperty:
               type: string
               example: vendor
-
     AssonaError:
       description: The request body is invalid.
       type: object
@@ -149,7 +145,7 @@ components:
     default:
       $ref: 'https://raw.githubusercontent.com/teamdigitale/openapi/0.0.2/docs/responses/v3.yaml#/default'
     422SchemaError:
-      description: The request body is invalid.
+      description: Schema validation failed.
       content:
         application/problem+json:
           schema:

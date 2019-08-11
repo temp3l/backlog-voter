@@ -44,6 +44,7 @@ https://loopback.io/doc/en/lb4/Interceptors.html
 
 // https://loopback.io/doc/en/lb4/apidocs.rest.validaterequestbody.html
 
+// https://strongloop.com/strongblog/loopback4-openapi-cli/
 
 export declare function validateRequestBody(
   body: RequestBody, requestBodySpec?: RequestBodyObject,
@@ -187,7 +188,8 @@ http://localhost:3000/boxes/5d4f78367eb7502ad082078c
 
 http://localhost:3000/containers/5d4f6983952fa71bd843be88/boxes
 
-http://localhost:3000/containers?filter={"include": [{"relation": "boxes", "scope": {"fields": ["id"]}}], "where": {"id": "1"}}
+http://localhost:3000/containers?filter={"includeurl: "/contracts?filter[%22contracts.contractId%22]=12",
+": [{"relation": "boxes", "scope": {"fields": ["id"]}}], "where": {"id": "1"}}
 
 ```json
 {

@@ -29,7 +29,6 @@ export class JobradSigningApplication extends BootMixin(
         nested: true,
       },
     };
-    //app.controller(MyController);
   }
 
   setupDataSources() {
