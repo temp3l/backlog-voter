@@ -88,12 +88,4 @@ export class ContractController {
     const foo = this.contractRepository.create(contract);
     return foo;
   }
-
-  @post('/path')
-  create(
-    @requestBody({description: 'Contract item'})
-    model: Contract,
-  ) {
-    console.log(model);
-  }
 }

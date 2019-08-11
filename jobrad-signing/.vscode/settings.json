@@ -1,9 +1,9 @@
 {
-  "editor.rulers": [280],
+  "editor.rulers": [180],
   "editor.tabCompletion": "on",
   "editor.tabSize": 2,
 
-  "editor.trimAutoWhitespace": false,
+  "editor.trimAutoWhitespace": true,
   "editor.formatOnSave": true,
 
   "eslint.autoFixOnSave": true,
