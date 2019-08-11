@@ -1,0 +1,63 @@
+Headers:
+  type: object
+    X-RateLimit-Limit:
+      type: integer
+      description: Request limit per hour.
+    X-RateLimit-Remaining:
+      type: integer
+      description: The number of requests left for the time window.
+    X-RateLimit-Reset:
+      type: string
+      format: date-time
+      description: The UTC date/time at which the current rate limit window resets
+
+  Idempotency-Key:
+    description: |
+      The idempotency key is a free identifier created by the client to
+      identify a request. It is used by the service to identify subsequent
+      retries of the same request and ensure idempotent behavior by sending
+      the same response without executing the request a second time.
+
+      Clients should be careful as any subsequent requests with the same key
+      may return the same response without further check. Therefore, it is
+      recommended to use an UUID version 4 (random) or any other random
+      string with enough entropy to avoid collisions.
+
+      Idempotency keys expire after 24 hours. Clients are responsible to stay
+      within this limits, if they require idempotent behavior.
+
+    type: string
+    format: uuid
+    example: '7da7a728-f910-11e6-942a-68f728c1ba70'
+
+  Cache-Control:
+    description: |
+      The RFC 7234 Cache-Control header field is providing directives to
+      control how proxies and clients are allowed to cache responses results
+      for performance. Clients and proxies are free to not support caching of
+      results, however if they do, they must obey all directives mentioned in
+      [RFC-7234 Section 5.2.2](https://tools.ietf.org/html/rfc7234) to the
+      word.
+
+      In case of caching, the directive provides the scope of the cache
+      entry, i.e. only for the original user (private) or shared between all
+      users (public), the lifetime of the cache entry in seconds (max-age),
+      and the strategy how to handle a stale cache entry (must-revalidate).
+      Please note, that the lifetime and validation directives for shared
+      caches are different (s-maxage, proxy-revalidate).
+
+    type: string
+    required: false
+    example: 'private, must-revalidate, max-age=300'
+
+  Vary:
+    description: |
+      The RFC 7231 Vary header field in a response defines which parts of
+      a request message, aside the target URL and HTTP method, might have
+      influenced the response. A client or proxy cache must respect this
+      information, to ensure that it delivers the correct cache entry (see
+      [RFC-7231 Section
+      7.1.4](https://tools.ietf.org/html/rfc7231#section-7.1.4)).
+
+    type: string
+    example: 'accept-encoding, accept-language'

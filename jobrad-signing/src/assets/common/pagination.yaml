@@ -1,4 +1,5 @@
-ResponsePage:
+# draft - 0
+Pagination:
   type: object
   properties:
     self:
@@ -21,16 +22,3 @@ ResponsePage:
       description: Pagination link pointing to the last page.
       type: string
       format: uri
-
-     query:
-       description: >
-         Object containing the query filters applied to the collection resource.
-       type: object
-       properties: ...
-
-     items:
-       description: Array of collection items.
-       type: array
-       required: false
-       items:
-         type: ...

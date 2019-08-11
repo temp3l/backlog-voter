@@ -1,0 +1,30 @@
+description: a (natural or legal) person that gets addressed
+type: object
+properties:
+  salutation:
+    description: |
+      a salutation and/or title used for personal contacts to some
+      addressee; not to be confused with the gender information!
+    type: string
+    example: Mr
+  first_name:
+    description: |
+      given name(s) or first name(s) of a person; may also include the
+      middle names.
+    type: string
+    example: Hans Dieter
+  last_name:
+    description: |
+      family name(s) or surname(s) of a person
+    type: string
+    example: Mustermann
+  business_name:
+    description: |
+      company name of the business organization. Used when a business is
+      the actual addressee; for personal shipments to office addresses, use
+      `care_of` instead.
+    type: string
+    example: Consulting Services GmbH
+required:
+  - first_name
+  - last_name

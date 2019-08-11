@@ -1,0 +1,26 @@
+# https://opensource.zalando.com/restful-api-guidelines/#216
+Greeting:
+  description: A message together with translations in several languages.
+  type: object
+  properties:
+    message_key:
+      type: string
+      description: The message key.
+    translations:
+      description: The translations of this message into several languages.
+        The keys are [IETF BCP-47 language tags](https://tools.ietf.org/html/bcp47).
+      type: object
+      additionalProperties:
+        type: string
+        description: the translation of this message into the language identified by the key.
+# An actual JSON object described by this might then look like this:
+
+# { "message_key": "color",
+#   "translations": {
+#     "de": "Farbe",
+#     "en-US": "color",
+#     "en-GB": "colour",
+#     "eo": "koloro",
+#     "nl": "kleur"
+#   }
+# }

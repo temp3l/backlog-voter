@@ -11,12 +11,10 @@ GeneralEvent: #https://opensource.zalando.com/restful-api-guidelines/#230
     - metadata
   properties:
     metadata:
-        $ref: '#/definitions/EventMetadata'
+      $ref: '#/EventMetadata'
 
-
-
-
-EventType:  #https://opensource.zalando.com/restful-api-guidelines/#197
+#https://opensource.zalando.com/restful-api-guidelines/#197
+EventType:
   description: |
     An event type defines the schema and its runtime properties. The required
     fields are the minimum set the creator of an event type is expected to
@@ -85,15 +83,15 @@ EventType:  #https://opensource.zalando.com/restful-api-guidelines/#197
           example: '1996-12-19T16:39:57-08:00'
         type:
           description: |
-             The schema language of schema definition. Currently only
-             json_schema (JSON Schema v04) syntax is defined, but in the
-             future there could be others.
+            The schema language of schema definition. Currently only
+            json_schema (JSON Schema v04) syntax is defined, but in the
+            future there could be others.
           type: string
           x-extensible-enum:
             - json_schema
         schema:
           description: |
-              The schema as string in the syntax defined in the field type.
+            The schema as string in the syntax defined in the field type.
           type: string
       required:
         - type
@@ -138,7 +136,7 @@ EventType:  #https://opensource.zalando.com/restful-api-guidelines/#197
           case of a data change event) objects. It must point to a field of type
           string or number/integer (as for those the ordering is obvious), and must be
           present in the schema.
-        example: "data.order_change_counter"
+        example: 'data.order_change_counter'
     ordering_instance_ids:
       type: array
       description: |
@@ -159,7 +157,7 @@ EventType:  #https://opensource.zalando.com/restful-api-guidelines/#197
           leaf element of the whole event object, including the contained metadata and
           data (in case of a data change event) objects, and it must be present in the
           schema.
-       example: "data.order_number"
+      example: 'data.order_number'
     created_at:
       description: When this event type was created.
       type: string
@@ -168,3 +166,63 @@ EventType:  #https://opensource.zalando.com/restful-api-guidelines/#197
       description: When this event type was last updated.
       type: string
       pattern: date-time
+
+# https://opensource.zalando.com/restful-api-guidelines/#198
+EventMetadata:
+  type: object
+  description: |
+    Carries metadata for an Event along with common fields. The required
+    fields are those expected to be sent by the producer, other fields may be
+    added by intermediaries such as publish/subscribe broker.
+  required:
+    - eid
+    - occurred_at
+  properties:
+    eid:
+      description: Identifier of this event.
+      type: string
+      format: uuid
+      example: '105a76d8-db49-4144-ace7-e683e8f4ba46'
+    event_type:
+      description: The name of the EventType of this Event.
+      type: string
+      example: 'example.important-business-event'
+    occurred_at:
+      description: When the event was created according to the producer.
+      type: string
+      format: date-time
+      example: '1996-12-19T16:39:57-08:00'
+    received_at:
+      description: |
+        When the event was seen by an intermediary such as a broker.
+      type: string
+      readOnly: true
+      format: date-time
+      example: '1996-12-19T16:39:57-08:00'
+    version:
+      description: |
+        Version of the schema used for validating this event. This may be
+        enriched upon reception by intermediaries. This string uses semantic
+        versioning.
+      type: string
+      readOnly: true
+    parent_eids:
+      description: |
+        Event identifiers of the Event that caused the generation of
+        this Event. Set by the producer.
+      type: array
+      items:
+        type: string
+        format: uuid
+      example: '105a76d8-db49-4144-ace7-e683e8f4ba46'
+    flow_id:
+      description: |
+        A flow-id for this event (corresponds to the X-Flow-Id HTTP header).
+      type: string
+      example: 'JAh6xH4OQhCJ9PutIV_RYw'
+    partition:
+      description: |
+        Indicates the partition assigned to this Event. Used for systems
+        where an event type's events can be sub-divided into partitions.
+      type: string
+      example: '0'

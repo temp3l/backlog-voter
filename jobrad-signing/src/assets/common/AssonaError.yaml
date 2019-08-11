@@ -1,0 +1,24 @@
+AssonaError:
+  content:
+    application/problem+json:
+      schema:
+        properties:
+          description: UnprocessableEntityError
+  # type: 'object'
+  # properties:
+  #   path:
+  #     type: string
+  #     example: /properties/vendor
+  #   code:
+  #     type: string
+  #     example: required
+  #   message:
+  #     type: string
+  #     example: should have required property 'vendor'
+  #   info:
+  #     type: object
+  #     properties:
+  #       missingProperty:
+  #         description: The request body is invalid.
+  #         type: string
+  #         example: vendor

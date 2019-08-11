@@ -11,6 +11,7 @@
     "node": ">=8.9"
   },
   "scripts": {
+    "apilint": "nodemon --watch src/assets/ --exec \"speccy lint src/assets/openapi-jobrad.yaml\" -e yaml",
     "start": "tsc-watch -b --onSuccess \"node .\"",
     "debug": "tsc-watch -b --onSuccess \"node --inspect .\"",
     "build": "lb-tsc",
