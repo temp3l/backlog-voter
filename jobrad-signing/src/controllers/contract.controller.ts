@@ -1,11 +1,4 @@
-import {
-  Request,
-  RestBindings,
-  get,
-  post,
-  ResponseObject,
-  requestBody,
-} from '@loopback/rest';
+import {Request, RestBindings, get, post, ResponseObject, requestBody} from '@loopback/rest';
 import {inject} from '@loopback/context';
 import {Contract, GENERIC_ERROR_RESPONSE} from '../models';
 import {ContractRepository} from '../repositories';
@@ -55,12 +48,12 @@ export class ContractController {
 
   @get('/contracts', {
     responses: {
-      default: GENERIC_ERROR_RESPONSE,
       200: CONTRACT_RESPONSE,
+      204: {description: 'Success'},
+      default: GENERIC_ERROR_RESPONSE,
     },
   })
   async list(): Promise<ContractResponse> {
-    //if (limit > 100) limit = 100; // @param.query.number('limit') limit = 3,
     return {
       message: 'Assona, Ihr kompetenter Partner für Spezialversicherungen',
       date: new Date(),

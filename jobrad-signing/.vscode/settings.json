@@ -36,6 +36,8 @@
     "**/tsconfig.build.json": true,
     "**/__tests__": true,
     ".nodemonignore": true,
+    "**/*.bak":true,
+    "**/baaak":true
   },
 
 }

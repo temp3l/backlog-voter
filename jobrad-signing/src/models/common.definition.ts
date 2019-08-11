@@ -1,4 +1,5 @@
 import {ResponseObject} from 'openapi3-ts';
+import {RequestBodyObject} from 'openapi3-ts';
 
 export const validationErrorModel = {
   type: 'object',
@@ -89,8 +90,7 @@ export const genericErrorModel = {
     },
     detail: {
       type: 'string',
-      description:
-        'A human readable explanation specific to this occurrence of the\nproblem.\n',
+      description: 'A human readable explanation specific to this occurrence of the\nproblem.\n',
       example: 'Connection to database timed out',
     },
     instance: {
@@ -120,8 +120,8 @@ export const GENERIC_ERROR_RESPONSE: ResponseObject = {
     },
   },
 };
-/*
-const sampleErrors = [
+
+export const sampleErrors = [
   {
     statusCode: 400,
     name: 'BadRequestError',
@@ -129,22 +129,19 @@ const sampleErrors = [
     code: 'MISSING_REQUIRED_PARAMETER',
   },
   {
-    "statusCode": 422,
-    "name": "ValidationError",
-    "message": "The `Contract` instance is not valid. Details: `test` is not defined in the model (value: undefined).",
-    "details": {
-      "context": "Contract",
-      "codes": {
-        "test": [
-          "unknown-property"
-        ]
+    statusCode: 422,
+    name: 'ValidationError',
+    message:
+      'The `Contract` instance is not valid. Details: `test` is not defined in the model (value: undefined).',
+    details: {
+      context: 'Contract',
+      codes: {
+        test: ['unknown-property'],
       },
-      "messages": {
-        "test": [
-          "is not defined in the model"
-        ]
-      }
-    }
+      messages: {
+        test: ['is not defined in the model'],
+      },
+    },
   },
   {
     statusCode: 400,
@@ -155,8 +152,7 @@ const sampleErrors = [
     error: {
       statusCode: 422,
       name: 'UnprocessableEntityError',
-      message:
-        'The request body is invalid. See error object `details` property for more info.',
+      message: 'The request body is invalid. See error object `details` property for more info.',
       code: 'VALIDATION_FAILED',
       details: [
         {
@@ -179,4 +175,22 @@ const sampleErrors = [
     },
   },
 ];
-*/
+
+export const contractRequestModel = {
+  type: 'object',
+  properties: {
+    price: {type: 'string', required: true},
+    vendor: {type: 'string'},
+    type: {type: 'string', enum: ['bike', 'twike', 'dreik'], default: 'bike'},
+    done: {type: 'string'},
+  },
+};
+
+export const CONTRACT_REQUEST: RequestBodyObject = {
+  description: 'Request Schema',
+  content: {
+    'application/json': {
+      schema: {$ref: contractRequestModel},
+    },
+  },
+};

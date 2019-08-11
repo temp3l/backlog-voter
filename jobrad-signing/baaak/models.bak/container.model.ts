@@ -1,5 +1,5 @@
 import {Entity, model, property, hasMany} from '@loopback/repository';
-import {Box} from './box.model';
+import {Box, BoxWithRelations} from './box.model';
 
 @model()
 export class Container extends Entity {
@@ -15,7 +15,7 @@ export class Container extends Entity {
 }
 
 export interface ContainerRelations {
-  // describe navigational properties here
+  boxes?: BoxWithRelations[];
 }
 
 export type ContainerWithRelations = Container & ContainerRelations;

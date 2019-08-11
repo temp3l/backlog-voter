@@ -1,4 +1,6 @@
 import {Entity, model, property} from '@loopback/repository';
+//import {getJsonSchema} from '@loopback/repository-json-schema';
+// console.log(JSON.stringify(getJsonSchema(Box, {includeRelations: true})));
 
 @model({
   settings: {
@@ -43,6 +45,7 @@ export class Contract extends Entity {
     super(data);
   }
 }
+// console.log(JSON.stringify(getJsonSchema(Contract, {includeRelations: true}), null, 3));
 
 export interface ContractRelations {
   // describe navigational properties here

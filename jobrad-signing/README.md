@@ -1,9 +1,8 @@
-# jobrad-signing
+# https://github.com/strongloop/loopback-next/issues/3450
 
-0. datasource
-1. Add model
-1. Add a repository
-1. Add a controller
+# https://github.com/strongloop/loopback-next/issues/3482
+
+- datasource, model, repository, controller
 
 ## Must: Use a Common Money Object [173]
 
@@ -25,4 +24,61 @@
 
 ## https://opensource.zalando.com/restful-api-guidelines/#146
 
-https://opensource.zalando.com/restful-api-guidelines/#171
+## https://opensource.zalando.com/restful-api-guidelines/#171
+
+## https://loopback.io/doc/en/lb3/Include-filter.html
+
+## Creating REST Routes
+
+There are three distinct approaches for defining your REST Routes:
+
+- With an OpenAPI specification object
+- Using partial OpenAPI spec fragments with the Route constructor
+- Using route decorators on controller methods
+
+## Parameters
+
+- body
+- form data
+- query string
+- header
+- path (url)
+
+### container with boxes:
+
+http://localhost:3000/containers/5d4f697f952fa71bd843be83
+
+http://localhost:3000/containers?filter={%22include%22:%20[{%22relation%22:%20%22boxes%22}]}
+
+### include boxes
+
+http://localhost:3000/containers?filter={"include": [{"relation": "boxes"}]}
+http://localhost:3000/containers?filter={"where": {"id": "1"},"include": [{"relation": "boxes"}] }
+
+### singleBox
+
+http://localhost:3000/boxes?filter={"where": {"id": "5d4f78367eb7502ad082078c"}}
+http://localhost:3000/boxes/5d4f78367eb7502ad082078c
+
+http://localhost:3000/containers/5d4f6983952fa71bd843be88/boxes
+
+http://localhost:3000/containers?filter={"include": [{"relation": "boxes", "scope": {"fields": ["id"]}}], "where": {"id": "1"}}
+
+```json
+{
+  "include": [
+    {
+      "relation": "boxes",
+      "scope": {
+        "where": {"size": "242424"},
+        "limit": 1
+      }
+    }
+  ],
+  "where": {
+    "id": "2"
+  }
+}
+```
+
+http://localhost:3000/containers?filter={ "include": [{"relation": "boxes", "scope": { "where": {"size": "242424"}}}],"where": {"id": "2"}}
