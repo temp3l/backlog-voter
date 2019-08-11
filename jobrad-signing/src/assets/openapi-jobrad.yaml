@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   $ref: './common/info.yaml'
 servers:
-  - url: http://petstore.swagger.io/api
+  - url: http://10.50.2.103:3000
 tags:
   $ref: './common/tags.yaml'
 paths:
@@ -37,6 +37,8 @@ paths:
 
         '400':
           $ref: '#/components/responses/400BadRequest'
+        '422':
+          $ref: '#/components/responses/422SchemaError'
         '404':
           $ref: '#/components/responses/404NotFound'
         '429':
@@ -146,12 +148,14 @@ components:
       $ref: 'https://raw.githubusercontent.com/teamdigitale/openapi/0.0.2/docs/responses/v3.yaml#/503ServiceUnavailable'
     default:
       $ref: 'https://raw.githubusercontent.com/teamdigitale/openapi/0.0.2/docs/responses/v3.yaml#/default'
-    AssonaErrorResponse:
+    422SchemaError:
       description: The request body is invalid.
       content:
-        application/json:
+        application/problem+json:
           schema:
             $ref: '#/components/schemas/AssonaError'
+#
+
 #
 
 ################ AJV Schema-Sample

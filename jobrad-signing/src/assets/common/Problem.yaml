@@ -22,6 +22,7 @@
               code:
                 type: string
                 example: VALIDATION_FAILED
+
               details:
                 type: array
                 items:

@@ -32,7 +32,10 @@
 
 ## Creating REST Routes
 
-`Interceptors`!!!!!!!
+`https://strongloop.com/strongblog/loopback4-openapi-cli/`
+
+**Interceptors!!!!!!!**
+
 https://loopback.io/doc/en/lb4/Interceptors.html
 
 ```jsx
