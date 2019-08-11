@@ -1,20 +1,14 @@
 import {Entity, model, property} from '@loopback/repository';
-//import {getJsonSchema} from '@loopback/repository-json-schema';
-// console.log(JSON.stringify(getJsonSchema(Box, {includeRelations: true})));
 
 @model({
-  settings: {
-    indexes: {
-      uniqueContractId: {keys: {contractId: 1}, options: {unique: true}},
-    },
-  },
+  // settings: {indexes: {uniqueId: {keys: {contractId: 1}, options: {unique: true}}}},
 })
 export class Contract extends Entity {
   @property({
-    type: 'number',
+    type: 'string',
     id: true,
   })
-  contractId?: number;
+  contractId?: string;
 
   @property({
     type: 'string',
@@ -45,7 +39,7 @@ export class Contract extends Entity {
     super(data);
   }
 }
-// console.log(JSON.stringify(getJsonSchema(Contract, {includeRelations: true}), null, 3));
+//console.log(JSON.stringify(getJsonSchema(Contract, {includeRelations: true}), null, 3));
 
 export interface ContractRelations {
   // describe navigational properties here

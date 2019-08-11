@@ -1,8 +1,0 @@
-# https://github.com/zalando/restful-api-guidelines/blob/3f49e6ed17f17e89e2d583c1667bb9dac12e396d/chapters/meta-information.adoc
-
-openapi: 3.0.1
-info:
-  x-audience: company-internal
-  title: Parcel Helper Service API
-  description: API for <...>
-  version: 1.2.4

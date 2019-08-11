@@ -1,3 +1,5 @@
+- https://loopback.io/doc/en/lb4/Loopback-component-authorization.html
+
 # https://github.com/strongloop/loopback-next/issues/3450
 
 # https://github.com/strongloop/loopback-next/issues/3482
@@ -30,7 +32,27 @@
 
 ## Creating REST Routes
 
-There are three distinct approaches for defining your REST Routes:
+`Interceptors`!!!!!!!
+https://loopback.io/doc/en/lb4/Interceptors.html
+
+```jsx
+// global APP-wide interception
+// https://loopback.io/doc/en/lb4/Defining-the-API-using-design-first-approach.html
+
+// https://loopback.io/doc/en/lb4/apidocs.rest.validaterequestbody.html
+
+
+export declare function validateRequestBody(
+  body: RequestBody, requestBodySpec?: RequestBodyObject,
+  globalSchemas?: SchemasObject,  options?: RequestBodyValidationOptions): void;
+
+app
+  .bind('caching-interceptor')
+  .toProvider(CachingInterceptorProvider)
+  .apply(asInterceptor);
+```
+
+# There are three distinct approaches for defining your REST Routes:
 
 - With an OpenAPI specification object
 - Using partial OpenAPI spec fragments with the Route constructor
@@ -43,6 +65,106 @@ There are three distinct approaches for defining your REST Routes:
 - query string
 - header
 - path (url)
+
+# Route to Controller
+
+- **this.route('get', '/greet', spec, MyController, 'greet');**
+
+```jsx
+
+!!! OperationObject
+https://loopback.io/doc/en/lb4/Defining-the-API-using-design-first-approach.html
+https://loopback.io/doc/en/lb4/Defining-the-API-using-design-first-approach.html
+const spec = {
+  parameters: [{name: 'name', schema: {type: 'string'}, in: 'query'}],
+  responses: {
+    '200': {
+      description: 'greeting text',
+      content: {
+        'application/json': {
+          schema: {type: 'string'},
+        },
+      },
+    },
+  },
+};
+```
+
+```jsx
+class MyController {
+  @get('/greet', spec)
+  greet(name: string) {
+    return `hello ${name}`;
+  }
+}
+```
+
+# Specifying Controller APIs
+
+```jsx
+this.api({
+  openapi: '3.0.0',
+  info: {
+    title: 'Hello World App',
+    version: '1.0.0',
+  },
+  paths: {
+    '/greet': {
+      get: {
+        'x-operation-name': 'greet',
+        'x-controller-name': 'MyController',
+        parameters: [{name: 'name', schema: {type: 'string'}, in: 'query'}],
+        responses: {
+          '200': {
+            description: 'greeting text',
+            content: {
+              'application/json': {
+                schema: {type: 'string'},
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+});
+this.controller(MyController);
+```
+
+```jsx
+@api({
+  openapi: '3.0.0',
+  info: {
+    title: 'Hello World App',
+    version: '1.0.0',
+  },
+  paths: {
+    '/greet': {
+      get: {
+        'x-operation-name': 'greet',
+        'x-controller-name': 'MyController',
+        parameters: [{name: 'name', schema: {type: 'string'}, in: 'query'}],
+        responses: {
+          '200': {
+            description: 'greeting text',
+            content: {
+              'application/json': {
+                schema: {type: 'string'},
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+})
+class MyController {
+  greet(name: string) {
+    return `hello ${name}`;
+  }
+}
+app.controller(MyController);
+```
 
 ### container with boxes:
 

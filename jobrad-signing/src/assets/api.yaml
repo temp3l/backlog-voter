@@ -1,0 +1,14 @@
+# Meta schema
+/info/x-audience:
+  type: string
+  x-extensible-enum:
+    - component-internal
+    - business-unit-internal
+    - company-internal
+    - external-partner
+    - external-public
+  description: |
+    Intended target audience of the API. Relevant for standards around
+    quality of design and documentation, reviews, discoverability,
+    changeability, and permission granting.
+  # https://github.com/zalando/restful-api-guidelines/blob/3f49e6ed17f17e89e2d583c1667bb9dac12e396d/chapters/meta-information.adoc

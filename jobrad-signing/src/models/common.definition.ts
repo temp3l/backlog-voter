@@ -1,7 +1,16 @@
-import {ResponseObject} from 'openapi3-ts';
-import {RequestBodyObject} from 'openapi3-ts';
+import {ResponseObject, RequestBodyObject} from 'openapi3-ts';
 
-export const validationErrorModel = {
+export const contractSchema = {
+  type: 'object',
+  properties: {
+    price: {type: 'string', required: true},
+    vendor: {type: 'string'},
+    type: {type: 'string', enum: ['bike', 'twike', 'dreik'], default: 'bike'},
+    done: {type: 'string'},
+  },
+};
+
+export const validationErrorSchema = {
   type: 'object',
   description: 'Schema Validation failed',
   properties: {
@@ -60,7 +69,7 @@ export const validationErrorModel = {
   },
 };
 
-export const genericErrorModel = {
+export const genericErrorSchema = {
   type: 'object',
   description: 'An error occured',
   properties: {
@@ -107,7 +116,7 @@ export const VALIDATION_ERROR_RESPONSE: ResponseObject = {
   description: 'Error Response',
   content: {
     'application/problem+json': {
-      schema: validationErrorModel,
+      schema: validationErrorSchema,
     },
   },
 };
@@ -116,11 +125,20 @@ export const GENERIC_ERROR_RESPONSE: ResponseObject = {
   description: 'Error Response',
   content: {
     'application/problem+json': {
-      schema: genericErrorModel,
+      schema: genericErrorSchema,
     },
   },
 };
 
+export const CONTRACT_REQUEST: RequestBodyObject = {
+  description: 'Request Schema',
+  content: {
+    'application/json': {
+      schema: genericErrorSchema,
+    },
+  },
+};
+/*
 export const sampleErrors = [
   {
     statusCode: 400,
@@ -175,22 +193,4 @@ export const sampleErrors = [
     },
   },
 ];
-
-export const contractRequestModel = {
-  type: 'object',
-  properties: {
-    price: {type: 'string', required: true},
-    vendor: {type: 'string'},
-    type: {type: 'string', enum: ['bike', 'twike', 'dreik'], default: 'bike'},
-    done: {type: 'string'},
-  },
-};
-
-export const CONTRACT_REQUEST: RequestBodyObject = {
-  description: 'Request Schema',
-  content: {
-    'application/json': {
-      schema: {$ref: contractRequestModel},
-    },
-  },
-};
+*/
