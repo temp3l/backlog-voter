@@ -10,7 +10,7 @@ const swaggerJSDoc = require('swagger-jsdoc');
 
 const foo = async() => {
 
-  const spec = await loader.loadSpec('./src/assets/openapi-jobrad.yaml',{
+  const spec = await loader.loadSpec('./src/assets/sourceapi.yaml',{
     resolve: true,
     verbose:1,
 
