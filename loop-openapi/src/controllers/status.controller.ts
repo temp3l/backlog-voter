@@ -1,7 +1,6 @@
 import {Request, RestBindings, get, ResponseObject} from '@loopback/rest';
 import {inject} from '@loopback/context';
 import {GENERIC_ERROR_RESPONSE, VALIDATION_ERROR_RESPONSE} from '../models';
-import {healtHTML} from '../assets/html';
 
 const STATUS_RESPONSE: ResponseObject = {
   description: 'Success Response',
@@ -39,7 +38,7 @@ export class StatusController {
 
   @get('/status', {
     summary: 'API-Health-Check',
-    description: healtHTML,
+    description: "healtHTML",
     responses: {
       200: STATUS_RESPONSE,
       422: VALIDATION_ERROR_RESPONSE,
