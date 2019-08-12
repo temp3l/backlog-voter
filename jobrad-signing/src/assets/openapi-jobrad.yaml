@@ -1,4 +1,7 @@
 openapi: 3.0.2
+
+# https://github.com/teamdigitale/api-openapi-samples
+# https://github.com/teamdigitale/api-openapi-samples/blob/master/openapi-v3/metadata.yaml
 info:
   $ref: './common/info.yaml'
 servers:

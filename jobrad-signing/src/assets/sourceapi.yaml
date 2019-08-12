@@ -1,0 +1,43 @@
+openapi: 3.0.0
+
+info:
+  $ref: './def.yaml#/info'
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: 'Health'
+    description: 'Everything about my Health'
+    externalDocs:
+      description: 'Find out more'
+      url: 'http://assona.io'
+
+paths:
+  /status:
+    get:
+      summary: API-Health-Check
+      tags: [  'Health' ]
+      operationId: getStatus
+      x-controller-name: StatusController
+      x-operation-name: getStatus
+      responses:
+        '200':
+          description: API-Health status.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: './def.yaml#/schemas/Person'
+                - $ref: '#/components/schemas/Health'
+        '4XX':
+          $ref: './def.yaml#/responses/4XX'
+        '5XX':
+          $ref: './def.yaml#/responses/5XX'
+        'default':
+          $ref: './def.yaml#/responses/default'
+
+components:
+  schemas:
+    Health:
+      properties:
+        message:
+          type: string
