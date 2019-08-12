@@ -12,7 +12,7 @@
   },
   "scripts": {
     "speccy": "nodemon --watch src/assets/ --exec \"speccy lint src/assets/sourceapi.yaml && speccy resolve src/assets/sourceapi.yaml\" -e yaml",
-    "serve-spec": "nodemon --watch src/assets/ --exec \"speccy lint src/assets/sourceapi.yaml && speccy resolve src/assets/sourceapi.yaml\" -e yaml",
+    "serve": "nodemon --watch src/assets/ --exec \"speccy serve src/assets/sourceapi.yaml\" -e yaml",
     "start": "tsc-watch -b --onSuccess \"node .\"",
     "debug": "tsc-watch -b --onSuccess \"node --inspect .\"",
     "build": "lb-tsc",
