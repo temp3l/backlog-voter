@@ -1,7 +1,7 @@
 {
-  "name": "jobrad-signing",
+  "name": "loop-openapi",
   "version": "1.0.0",
-  "description": "jobrad-signing",
+  "description": "loop-openapi",
   "keywords": [
     "loopback-application",
     "loopback"
