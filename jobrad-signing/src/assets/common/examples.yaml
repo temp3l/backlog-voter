@@ -1,7 +1,0 @@
-post_jobrad_contract:
-  value:
-    id: 1
-    name: new object
-    price: 3445
-    color: blue
-  summary: A sample object

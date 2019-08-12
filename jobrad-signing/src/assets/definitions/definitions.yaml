@@ -1,6 +1,6 @@
-#  2019-05-30T17:50:41
+# https://raw.githubusercontent.com/teamdigitale/openapi/master/docs/definitions.yaml
 # https://httpstatuses.com/403
-
+# SAMPLES https://github.com/teamdigitale/api-openapi-samples.git
 info:
   version: 2.0.0
   title: SourceAPI
@@ -17,22 +17,67 @@ info:
   license:
     name: Apache 2.0
     url: https://mettler.org/licenses/LICENSE-2.0.html
-  termsOfService: http://mettler.org/terms/
+
+  # termsOfService: http://mettler.org/terms/
 
   description: |
     <img src="https://cdn.ppolyzos.com/wp-content/uploads/2017/10/jwt-support-swagger-aspnet-core.png" style="float:right;width:200px"/>
 
     ### API-Topics
-      * API Health
-      * foo & bar
-
-    #### it-Docs
 
     - la descrizione dei dati, eg. *Cartografia catastale in scala 1:2000*
-    - la copertura geografica
-    - la data di creazione e/o pubblicazione e/o ultima modifica dei dati
-    - i contatti dell'ente che li pubblica, eg. *Agenzia delle Entrate Direzione Centrale Catasto* con la relativa email
+    - i cs ontatti dell'ente che li pubblica, eg. *Agenzia delle Entrate
+
+    `curl "https://localhost:3000?limit=5" -u "$user:password"`
+
 headers:
+  Idempotency-Key:
+    description: |
+      The idempotency key is a free identifier created by the client to
+      identify a request. It is used by the service to identify subsequent
+      retries of the same request and ensure idempotent behavior by sending
+      the same response without executing the request a second time.
+
+      Clients should be careful as any subsequent requests with the same key
+      may return the same response without further check. Therefore, it is
+      recommended to use an UUID version 4 (random) or any other random
+      string with enough entropy to avoid collisions.
+
+      Idempotency keys expire after 24 hours. Clients are responsible to stay
+      within this limits, if they require idempotent behavior.
+    type: string
+    format: uuid
+    example: '7da7a728-f910-11e6-942a-68f728c1ba70'
+  Cache-Control:
+    description: |
+      The RFC 7234 Cache-Control header field is providing directives to
+      control how proxies and clients are allowed to cache responses results
+      for performance. Clients and proxies are free to not support caching of
+      results, however if they do, they must obey all directives mentioned in
+      [RFC-7234 Section 5.2.2](https://tools.ietf.org/html/rfc7234) to the
+      word.
+
+      In case of caching, the directive provides the scope of the cache
+      entry, i.e. only for the original user (private) or shared between all
+      users (public), the lifetime of the cache entry in seconds (max-age),
+      and the strategy how to handle a stale cache entry (must-revalidate).
+      Please note, that the lifetime and validation directives for shared
+      caches are different (s-maxage, proxy-revalidate).
+
+    type: string
+    required: false
+    example: 'private, must-revalidate, max-age=300'
+  Vary:
+    description: |
+      The RFC 7231 Vary header field in a response defines which parts of
+      a request message, aside the target URL and HTTP method, might have
+      influenced the response. A client or proxy cache must respect this
+      information, to ensure that it delivers the correct cache entry (see
+      [RFC-7231 Section
+      7.1.4](https://tools.ietf.org/html/rfc7231#section-7.1.4)).
+
+    type: string
+    example: 'accept-encoding, accept-language'
   Retry-After:
     description: |-
       Retry contacting the endpoint *at least* after seconds.
@@ -56,6 +101,16 @@ headers:
       format: int32
       type: integer
 parameters:
+  limitParam:
+    in: query
+    name: limit
+    required: false
+    schema:
+      type: integer
+      minimum: 1
+      maximum: 50
+      default: 20
+    description: The numbers of items to return.
   Etag:
     description: |
       The RFC7232 ETag header field in a response provides the current entity-
@@ -171,7 +226,27 @@ responses:
     content:
       application/problem+json:
         schema:
-          $ref: '#/schemas/Problem'
+          type: object
+          properties:
+            ValidationError:
+              description: AJV Validation Error
+              type: object
+              properties:
+                path:
+                  type: string
+                  example: /properties/vendor
+                code:
+                  type: string
+                  example: required
+                message:
+                  type: string
+                  example: should have required property 'vendor'
+                info:
+                  type: object
+                  properties:
+                    missingProperty:
+                      type: string
+                      example: vendor
   '429':
     description: Too many requests
     content:
@@ -322,3 +397,7 @@ securitySchemes:
           read: Grants read access
           write: Grants write access
           admin: Grants access to admin operations
+examples:
+  jsonObject:
+    summary: A sample object
+    externalValue: 'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v2.0/json/petstore-expanded.json'

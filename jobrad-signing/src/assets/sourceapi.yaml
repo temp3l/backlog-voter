@@ -19,15 +19,38 @@ paths:
       operationId: getStatus
       x-controller-name: StatusController
       x-operation-name: getStatus
+      description: |
+        ## Avaddilability, Latency, API-Status
+          * Debug interface for Salespartner integration
+          * To be Integrated with Monitoring-Solutions No rate-limiting!
+        ## Request-Debugging
+          * Request-Body will be echo'ed after successful validation <i>(if any)</i>
+          * Meaningful validation errors in JSON-Format
+      parameters:
+        - $ref: './def.yaml#/parameters/limit'
+        - $ref: './def.yaml#/parameters/sort'
+        - $ref: './def.yaml#/parameters/offset'
+        - $ref: './def.yaml#/parameters/q'
+        - $ref: './def.yaml#/parameters/Etag'
+        - $ref: './def.yaml#/parameters/citizen'
+        - $ref: './def.yaml#/parameters/IfNoneMatch'
+        - $ref: './def.yaml#/parameters/IfMatch'
       responses:
         '200':
-          description: API-Health status.
+          description: OK
           content:
             application/json:
               schema:
-                oneOf:
-                - $ref: './def.yaml#/schemas/Person'
-                - $ref: '#/components/schemas/Health'
+                $ref: './def.yaml#/schemas/Person'
+
+          links:
+            GetUserByUserId:   # <---- arbitrary name for the link
+              operationId: getUser # operationRef: '#/paths/~1users~1{userId}/get'
+              parameters:
+                userId: '$response.body#/id'
+              description: >
+                The `id` value returned in the response can be used as
+                the `userId` parameter in `GET /users/{userId}`.
         '4XX':
           $ref: './def.yaml#/responses/4XX'
         '5XX':
@@ -40,4 +63,41 @@ components:
     Health:
       properties:
         message:
-          type: string
+          type: object
+          properties:
+            id:
+              type: string
+    Person:
+      $ref: './def.yaml#/schemas/Person'
+
+# Links are defined in the links section of each response:
+# Consider the “create user” operation:       {"name": "Alex","age": 27}
+# which returns the ID of the created user:   {"id": 305}
+# GET /users/305
+# PATCH /users/305
+# DELETE /users/305
+# {"metadata": { "previous": null, "next": "Q1MjAwNz", "count": 10 },
+# GET /items?cursor=Q1MjAwNz&limit=100
+
+############ spec:
+# links:
+#   GetUserByUserId:   # <---- arbitrary name for the link
+#     operationId: getUser # operationRef: '#/paths/~1users~1{userId}/get'
+#     parameters:
+#       userId: '$response.body#/id'
+#     description: >
+#       The `id` value returned in the response can be used as
+#       the `userId` parameter in `GET /users/{userId}`.
+############
+# create path: /users/{userId}
+
+# - $ref: './def.yaml#/parameters/q'
+# - $ref: './def.yaml#/parameters/Etag'
+# - $ref: './def.yaml#/parameters/citizen'
+# - $ref: './def.yaml#/parameters/IfNoneMatch'
+# - $ref: './def.yaml#/parameters/IfMatch'
+
+# oneOf:
+#   - $ref: './def.yaml#/schemas/Person'
+#   - $ref: './common/tree_node.yaml#/tree_node'
+#   - $ref: '#/components/schemas/Health'

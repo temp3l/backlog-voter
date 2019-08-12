@@ -1,3 +1,0 @@
-components:
-  responses:
-    $ref: 'https://raw.githubusercontent.com/teamdigitale/openapi/0.0.2/docs/responses/v3.yaml'

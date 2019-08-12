@@ -2,7 +2,7 @@
 jsonSchema: false
 quiet: false
 # Default stdout = 1
-verbose: 3
+verbose: 1
 # Rules specific to the lint command
 lint:
   # rules files to load
