@@ -76,8 +76,7 @@ export class ContractController {
     },
   })
   async addItem(
-    @requestBody({description: 'Contract item'}) contract: Contract,
-  ): Promise<Contract> {
+    @requestBody({description: 'Contract item'}) contract: Contract, ): Promise<Contract> {
     const foo = this.contractRepository.create(contract);
     return foo;
   }
