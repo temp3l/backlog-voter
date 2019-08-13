@@ -1,6 +1,8 @@
 # https://raw.githubusercontent.com/teamdigitale/openapi/master/docs/definitions.yaml
 # https://httpstatuses.com/403
 # SAMPLES https://github.com/teamdigitale/api-openapi-samples.git
+# https://strongloop.com/strongblog/loopback4-openapi-cli/
+# https://strongloop.com/strongblog/upgrade-from-swagger-to-openapi-3/
 info:
   version: 2.0.0
   title: SourceAPI

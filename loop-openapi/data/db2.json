@@ -1,6 +1,6 @@
 {
   "ids": {
-    "Contract": 55
+    "Contract": 60
   },
   "models": {
     "Contract": {
@@ -46,7 +46,8 @@
       "52": "{\"vendor\":\"string\",\"price\":\"string\",\"done\":true,\"phone\":\"string\",\"contractId\":\"52\"}",
       "53": "{\"vendor\":\"string\",\"price\":\"string\",\"done\":true,\"phone\":\"string\",\"contractId\":\"53\"}",
       "54": "{\"vendor\":\"string\",\"price\":\"string\",\"done\":true,\"phone\":\"string\",\"contractId\":\"54\"}",
-      "string": "{\"contractId\":\"string\",\"vendor\":\"string\",\"price\":\"string\",\"done\":true,\"phone\":\"string\"}"
+      "string": "{\"contractId\":\"string\",\"vendor\":\"string\",\"price\":\"string\",\"done\":true,\"phone\":\"string\"}",
+      "asdasdas": "{\"contractId\":\"asdasdas\",\"vendor\":\"string\",\"price\":\"string\",\"done\":true,\"phone\":\"string\"}"
     }
   }
 }
