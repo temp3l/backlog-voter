@@ -51,13 +51,30 @@ paths:
               description: >
                 The `id` value returned in the response can be used as
                 the `userId` parameter in `GET /users/{userId}`.
+        # '4XX':
+        #   $ref: './def.yaml#/responses/4XX'
+        # '5XX':
+        #   $ref: './def.yaml#/responses/5XX'
+        # 'default':
+        #   $ref: './def.yaml#/responses/default'
+        '400':
+          $ref: './def.yaml#/responses/400'
+        '401':
+          $ref: './def.yaml#/responses/401'
+        '403':
+          $ref: './def.yaml#/responses/403'
+        '404':
+          $ref: './def.yaml#/responses/404'
+        '422':
+          $ref: './def.yaml#/responses/422'
+        '429':
+          $ref: './def.yaml#/responses/429'
+        '503':
+          $ref: './def.yaml#/responses/503'
         '4XX':
           $ref: './def.yaml#/responses/4XX'
         '5XX':
           $ref: './def.yaml#/responses/5XX'
-        'default':
-          $ref: './def.yaml#/responses/default'
-
 components:
   schemas:
     Health:
