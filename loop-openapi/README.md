@@ -1,8 +1,12 @@
+# tech
+
+- JSON-Schema-Editor https://json-editor.github.io/json-editor/
+
 - https://loopback.io/doc/en/lb4/Loopback-component-authorization.html
 
-# https://github.com/strongloop/loopback-next/issues/3450
+## https://github.com/strongloop/loopback-next/issues/3450
 
-# https://github.com/strongloop/loopback-next/issues/3482
+## https://github.com/strongloop/loopback-next/issues/3482
 
 - datasource, model, repository, controller
 
@@ -24,9 +28,13 @@
 
 ## alle properties valid ? https://opensource.zalando.com/restful-api-guidelines/#json-guidelines
 
-## https://opensource.zalando.com/restful-api-guidelines/#146
+## Should: Limit number of Resource types [146]
+
+- https://opensource.zalando.com/restful-api-guidelines/#146
 
 ## https://opensource.zalando.com/restful-api-guidelines/#171
+
+- Must: Define Format for Type Number and Integer [171]
 
 ## https://loopback.io/doc/en/lb3/Include-filter.html
 
