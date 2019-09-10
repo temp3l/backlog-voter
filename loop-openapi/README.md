@@ -1,4 +1,6 @@
-# tech
+- https://json-schema.org/understanding-json-schema/reference/regular_expressions.html
+
+## tech
 
 - JSON-Schema-Editor https://json-editor.github.io/json-editor/
 
