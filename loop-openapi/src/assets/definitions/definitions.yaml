@@ -3,6 +3,8 @@
 # SAMPLES https://github.com/teamdigitale/api-openapi-samples.git
 # https://strongloop.com/strongblog/loopback4-openapi-cli/
 # https://strongloop.com/strongblog/upgrade-from-swagger-to-openapi-3/
+# https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v3.0/api-with-examples.yaml
+
 info:
   version: 2.0.0
   title: SourceAPI
@@ -31,7 +33,6 @@ info:
     - i cs ontatti dell'ente che li pubblica, eg. *Agenzia delle Entrate
 
     `curl "https://localhost:3000?limit=5" -u "$user:password"`
-
 headers:
   Idempotency-Key:
     description: |
@@ -368,6 +369,17 @@ schemas:
         format: uri
         type: string
     type: object
+  Error:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
   TaxCode:
     description: Il codice fiscale.
     example: RSSMRA75L01H501A
@@ -375,6 +387,30 @@ schemas:
       url: https://w3id.org/italia/onto/CPV/taxCode
     pattern: /^(?:(?:[B-DF-HJ-NP-TV-Z]|[AEIOU])[AEIOU][AEIOUX]|[B-DF-HJ-NP-TV-Z]{2}[A-Z]){2}[\dLMNP-V]{2}(?:[A-EHLMPR-T](?:[04LQ][1-9MNP-V]|[1256LMRS][\dLMNP-V])|[DHPS][37PT][0L]|[ACELMRT][37PT][01LM])(?:[A-MZ][1-9MNP-V][\dLMNP-V]{2}|[A-M][0L](?:[1-9MNP-V][\dLMNP-V]|[0L][1-9MNP-V]))[A-Z]$/i
     type: string
+  dataSetList:
+      type: object
+      properties:
+        total:
+          type: integer
+        apis:
+          type: array
+          items:
+            type: object
+            properties:
+              apiKey:
+                type: string
+                description: To be used as a dataset parameter value
+              apiVersionNumber:
+                type: string
+                description: To be used as a version parameter value
+              apiUrl:
+                type: string
+                format: uriref
+                description: "The URL describing the dataset's fields"
+              apiDocumentationUrl:
+                type: string
+                format: uriref
+                description: A URL to the API console for each API
 securitySchemes:
   BasicAuth:
     type: http
@@ -425,3 +461,42 @@ examples:
 #   $ref: './def.yaml#/responses/4XX'
 # '5XX':
 #   $ref: './def.yaml#/responses/5XX'
+
+
+# responses:
+#   '200':
+#     description: |-
+#       200 response
+#     content:
+#       application/json:
+#         examples:
+#           foo:
+#             value: {
+#               "versions": [
+#                   {
+#                       "status": "CURRENT",
+#                       "updated": "2011-01-21T11:33:21Z",
+#                       "id": "v2.0",
+#                       "links": [
+#                           {
+#                               "href": "http://127.0.0.1:8774/v2/",
+#                               "rel": "self"
+#                           }
+#                       ]
+#                   },
+#                   {
+#                       "status": "EXPERIMENTAL",
+#                       "updated": "2013-07-23T11:33:21Z",
+#                       "id": "v3.0",
+#                       "links": [
+#                           {
+#                               "href": "http://127.0.0.1:8774/v3/",
+#                               "rel": "self"
+#                           }
+#                       ]
+#                   }
+#               ]
+#             }
+
+
+

@@ -39,5 +39,6 @@
     "**/*.bak":true,
     "**/baaak":true
   },
+  "git.ignoreLimitWarning": true,
 
 }

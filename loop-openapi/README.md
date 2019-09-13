@@ -1,21 +1,136 @@
-- https://json-schema.org/understanding-json-schema/reference/regular_expressions.html
+# https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven
+# Harvest, Yield, and Scalable Tolerant Systems
+# https://reactjs.org/docs/thinking-in-react.html
 
-## tech
+## SSOT - The Path to Standardization
 
-- JSON-Schema-Editor https://json-editor.github.io/json-editor/
+- Specification
+- - Describes existing data 'guided'
+- Validation
+- - Quality ensurance
+- - Automated testing
+- Documentation
+- - human- and machine- readable ?
+  ---
+
+### Benefits
+
+- Premium Clients
+- ...
+- 100% sync
+
+<ul>
+  <Appear>
+    <li>Docs</li>
+    <li>Clients (WebForms)</li>
+    <li>EndPoints</li>
+    <li>Services</li>
+    <li>Store</li>
+    <li>UnitTest</li>
+    <li>IntegrationsTest</li>
+  </Appear>
+</ul>
+
+
+### Assona-API as a Product
+
+- consistent design patterns + re-usability
+- API-ToolChain
+- Mocking + Stubbing + Templating => Agile
+- - Auth
+- - DB
+- - Validation
+- - Premium-Mocks / Examples
+- - Integration
+- avoid case specific APIs!!!
+
+
+---
+
+## Thinking in React
+
+- https://reactjs.org/docs/thinking-in-react.html
+https://reactjs.org/docs/thinking-in-react.html
+
+### Step 1: Break The UI Into A Component Hierarchy
+
+- FilterableProductTable
+- - SearchBar
+- - ProductTable
+- - - ProductCategoryRow
+- - - ProductRow
+
+### Step 2: Build A Static Version in React
+
+### Step 3: Identify The Minimal (but complete) Representation Of UI State
+
+1. Is it passed in from a parent via props? If so, it probably isn’t state.
+2. Does it remain unchanged over time? If so, it probably isn’t state.
+3. Can you compute it based on any other state or props in your component?
+- - If so, it isn’t state.
+
+### Step 4: Identify Where Your State Should Live
+
+### Step 5: Add Inverse Data Flow
+
+---
+
+# Gatsby
+
+- Page Template
+- http://bradfrost.com/wp-content/uploads/2013/06/template1.jpg
+- http://bradfrost.com/blog/post/atomic-web-design/
+
+my-blog
+├── content
+│   ├── assets
+│   │   └── avatar.png
+│   └── posts
+│       ├── hello-world.mdx
+│       └── my-second-post.mdx
+├── src
+│   └── gatsby-theme-blog
+│       ├── components
+│       │   └── bio-content.js
+│       └── gatsby-plugin-theme-ui
+│           └── colors.js
+├── gatsby-config.js
+└── package.json
+
+# Blog
+
+.
+├── gatsby-config.js
+├── package.json
+└── src
+    ├── html.jsx
+    ├── pages
+    │   ├── index.jsx
+    │   └── posts
+    │       ├── 01-01-2017
+    │       │   └── index.md
+    │       ├── 01-02-2017
+    │       │   └── index.md
+    │       └── 01-03-2017
+    │           └── index.md
+    ├── templates
+        └── post.jsx
+
+
+
+
+
+---
+
+
 
 - https://loopback.io/doc/en/lb4/Loopback-component-authorization.html
-
-## https://github.com/strongloop/loopback-next/issues/3450
-
-## https://github.com/strongloop/loopback-next/issues/3482
-
+- https://github.com/strongloop/loopback-next/issues/3450
+- https://github.com/strongloop/loopback-next/issues/3482
 - datasource, model, repository, controller
 
-## Must: Use a Common Money Object [173]
-
 - https://opensource.zalando.com/restful-api-guidelines/#common-data-types
-
+* {MUST}: Use a Common Money Object [173]
 * {MUST}: Use Problem JSON [176] application/problem+json
 * {MUST} Provide API Audience
 * {MUST} Write APIs in U.S. English
@@ -30,13 +145,9 @@
 
 ## alle properties valid ? https://opensource.zalando.com/restful-api-guidelines/#json-guidelines
 
-## Should: Limit number of Resource types [146]
-
-- https://opensource.zalando.com/restful-api-guidelines/#146
+## https://opensource.zalando.com/restful-api-guidelines/#146
 
 ## https://opensource.zalando.com/restful-api-guidelines/#171
-
-- Must: Define Format for Type Number and Integer [171]
 
 ## https://loopback.io/doc/en/lb3/Include-filter.html
 
@@ -105,10 +216,10 @@ const spec = {
 ```
 
 ```jsx
-class MyController {
-  @get('/greet', spec)
-  greet(name: string) {
-    return `hello ${name}`;
+class ContractController {
+  @post('/contracts', spec)
+  contract(contract: JobradContract) {
+    return ${contract};
   }
 }
 ```

@@ -1,5 +1,4 @@
 openapi: 3.0.0
-
 info:
   $ref: './def.yaml#/info'
 servers:
@@ -10,17 +9,126 @@ tags:
     externalDocs:
       description: 'Find out more'
       url: 'http://assona.io'
-
+  - name: metadata
+    description: Find out about the data sets
 paths:
-  /status:
+
+  '/datasets':
+    get:
+      tags:
+        - metadata
+      operationId: list-data-sets
+      summary: List available data sets
+      responses:
+        '200':
+          description: Returns a list of data sets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dataSetList'
+              example:
+                {
+                  "total": 2,
+                  "apis": [
+                    {
+                      "apiKey": "oa_citations",
+                      "apiVersionNumber": "v1",
+                      "apiUrl": "https://developer.uspto.gov/ds-api/oa_citations/v1/fields",
+                      "apiDocumentationUrl": "https://developer.uspto.gov/ds-api-docs/index.html?url=https://developer.uspto.gov/ds-api/swagger/docs/oa_citations.json"
+                    },
+                    {
+                      "apiKey": "cancer_moonshot",
+                      "apiVersionNumber": "v1",
+                      "apiUrl": "https://developer.uspto.gov/ds-api/cancer_moonshot/v1/fields",
+                      "apiDocumentationUrl": "https://developer.uspto.gov/ds-api-docs/index.html?url=https://developer.uspto.gov/ds-api/swagger/docs/cancer_moonshot.json"
+                    }
+                  ]
+                }
+
+  /{dataset}/{version}/records:
+    post:
+      tags:
+        - search
+      summary: >-
+        Provides search capability for the data set with the given search
+        criteria.
+      description: >-
+        This API is based on Solr/Lucense Search. The data is indexed using
+        SOLR. This GET API returns the list of all the searchable field names
+        that are in the Solr Index. Please see the 'fields' attribute which
+        returns an array of field names. Each field or a combination of fields
+        can be searched using the Solr/Lucene Syntax. Please refer
+        https://lucene.apache.org/core/3_6_2/queryparsersyntax.html#Overview for
+        the query syntax. List of field names that are searchable can be
+        determined using above GET api.
+      operationId: perform-search
+      parameters:
+        - name: version
+          in: path
+          description: Version of the dataset.
+          required: true
+          schema:
+            type: string
+            default: v1
+        - name: dataset
+          in: path
+          description: 'Name of the dataset. In this case, the default value is oa_citations'
+          required: true
+          schema:
+            type: string
+            default: oa_citations
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties:
+                    type: object
+        '404':
+          description: No matching record found for the given criteria.
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                criteria:
+                  description: >-
+                    Uses Lucene Query Syntax in the format of
+                    propertyName:value, propertyName:[num1 TO num2] and date
+                    range format: propertyName:[yyyyMMdd TO yyyyMMdd]. In the
+                    response please see the 'docs' element which has the list of
+                    record objects. Each record structure would consist of all
+                    the fields and their corresponding values.
+                  type: string
+                  default: '*:*'
+                start:
+                  description: Starting record number. Default value is 0.
+                  type: integer
+                  default: 0
+                rows:
+                  description: >-
+                    Specify number of rows to be returned. If you run the search
+                    with default values, in the response you will see 'numFound'
+                    attribute which will tell the number of records available in
+                    the dataset.
+                  type: integer
+                  default: 100
+              required:
+                - criteria
+  /health:
     get:
       summary: API-Health-Check
       tags: [  'Health' ]
-      operationId: getStatus
-      x-controller-name: StatusController
-      x-operation-name: getStatus
+      operationId: getHealth
+      x-controller-name: HealthController
+      x-operation-name: getHealth
       description: |
-        ## Avaddilability, Latency, API-Status
+        ## Avaddilability, Latency, API-Health
           * Debug interface for Salespartner integration
           * To be Integrated with Monitoring-Solutions No rate-limiting!
         ## Request-Debugging
@@ -28,13 +136,13 @@ paths:
           * Meaningful validation errors in JSON-Format
       parameters:
         - $ref: './def.yaml#/parameters/limit'
-        - $ref: './def.yaml#/parameters/sort'
-        - $ref: './def.yaml#/parameters/offset'
-        - $ref: './def.yaml#/parameters/q'
-        - $ref: './def.yaml#/parameters/Etag'
-        - $ref: './def.yaml#/parameters/citizen'
-        - $ref: './def.yaml#/parameters/IfNoneMatch'
-        - $ref: './def.yaml#/parameters/IfMatch'
+        # - $ref: './def.yaml#/parameters/sort'
+        # - $ref: './def.yaml#/parameters/offset'
+        # - $ref: './def.yaml#/parameters/q'
+        # - $ref: './def.yaml#/parameters/Etag'
+        # - $ref: './def.yaml#/parameters/citizen'
+        # - $ref: './def.yaml#/parameters/IfNoneMatch'
+        # - $ref: './def.yaml#/parameters/IfMatch'
       responses:
         '200':
           description: OK
@@ -42,7 +150,6 @@ paths:
             application/json:
               schema:
                 $ref: './def.yaml#/schemas/Person'
-
           links:
             GetUserByUserId:   # <---- arbitrary name for the link
               operationId: getUser # operationRef: '#/paths/~1users~1{userId}/get'
@@ -51,12 +158,6 @@ paths:
               description: >
                 The `id` value returned in the response can be used as
                 the `userId` parameter in `GET /users/{userId}`.
-        # '4XX':
-        #   $ref: './def.yaml#/responses/4XX'
-        # '5XX':
-        #   $ref: './def.yaml#/responses/5XX'
-        # 'default':
-        #   $ref: './def.yaml#/responses/default'
         '400':
           $ref: './def.yaml#/responses/400'
         '401':
@@ -75,6 +176,8 @@ paths:
           $ref: './def.yaml#/responses/4XX'
         '5XX':
           $ref: './def.yaml#/responses/5XX'
+
+
 components:
   schemas:
     Health:
@@ -86,6 +189,33 @@ components:
               type: string
     Person:
       $ref: './def.yaml#/schemas/Person'
+    dataSetList:
+      type: object
+      properties:
+        total:
+          type: integer
+        apis:
+          type: array
+          items:
+            type: object
+            properties:
+              apiKey:
+                type: string
+                description: To be used as a dataset parameter value
+              apiVersionNumber:
+                type: string
+                description: To be used as a version parameter value
+              apiUrl:
+                type: string
+                format: uriref
+                description: "The URL describing the dataset's fields"
+              apiDocumentationUrl:
+                type: string
+                format: uriref
+                description: A URL to the API console for each API
+
+
+
 
 # Links are defined in the links section of each response:
 # Consider the “create user” operation:       {"name": "Alex","age": 27}
@@ -107,7 +237,6 @@ components:
 #       the `userId` parameter in `GET /users/{userId}`.
 ############
 # create path: /users/{userId}
-
 # - $ref: './def.yaml#/parameters/q'
 # - $ref: './def.yaml#/parameters/Etag'
 # - $ref: './def.yaml#/parameters/citizen'
