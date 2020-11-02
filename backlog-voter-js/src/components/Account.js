@@ -84,7 +84,7 @@ function Account(props) {
                   </tr>
                 </thead>
                 <tbody>
-                  {tokens.map((token, i) => {
+                  {tokens?.map((token, i) => {
                     return (
                       <tr key={token.id}>
                         <td>

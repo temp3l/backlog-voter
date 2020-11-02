@@ -31,8 +31,12 @@ function Root() {
     console.log("Root-Effects");
     const fetchData = async () => {
       try {
-        const { data } = await api("/users/info?id=" + token.userId);
-        const { payload } = data;
+        //const { data } = await api("/users/info?id=" + token.userId);
+        const { data } = await api("/users/" + token.userId);
+        const payload = data;
+
+        console.log(payload);
+
         const { username, email, id } = payload;
         setTokens(payload.accessTokens);
         setRoles(payload.roles);

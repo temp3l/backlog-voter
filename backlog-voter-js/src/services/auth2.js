@@ -20,6 +20,6 @@ export const reset = event => {
   clearToken();
   window.location.replace('/login');
 };
-export const isAdmin = roles =>  roles.filter(role => role.name === "admin").length > 0;
+export const isAdmin = roles =>  roles?.filter(role => role.name === "admin").length > 0;
 export const saveUser = (user) => localStorage.setItem('user', JSON.stringify(user));
 export const loadUser = () => JSON.parse(localStorage.getItem('user'));
