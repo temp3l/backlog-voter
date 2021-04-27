@@ -27,7 +27,7 @@
     "loopback-jsonschema": "^5.0.8",
     "nodemailer": "^6.3.0",
     "nodemailer-mandrill-transport": "^1.2.0",
-    "redis": "^2.8.0",
+    "redis": "^3.1.1",
     "serve-favicon": "^2.0.1",
     "sharp": "^0.22.1",
     "strong-error-handler": "^3.2.0",
