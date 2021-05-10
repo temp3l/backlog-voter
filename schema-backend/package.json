@@ -13,7 +13,7 @@
     "cors": "^2.8.1",
     "faker": "^4.1.0",
     "helmet": "^3.20.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "loopback": "^3.0.0",
     "loopback-boot": "^2.4.0",
     "loopback-component-passport": "^3.11.0",
